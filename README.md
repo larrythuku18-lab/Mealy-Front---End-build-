@@ -1,16 +1,95 @@
-# React + Vite
+<div align="center">
+    <h1>Mealy</h1>
+</div>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<br />
 
-Currently, two official plugins are available:
+Mealy is a food ordering application that allows customers to browse available food and place orders, while giving food vendors a clear view of what their customers want to eat.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Tech stack
 
-## React Compiler
+- React + JavaScript + CSS + Vite Front-end
+- <!-- Add back-end technology -->
+- <!-- Add database -->
+- <!-- Add other services or APIs -->
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
 
-## Expanding the ESLint configuration
+- **Food Ordering**: Customers can browse available food and place orders
+- **Order Management**: Customers can view and manage their orders
+- **Vendor Dashboard**: Food vendors can view incoming customer orders
+- **Menu Management**: Vendors can manage the food available to customers
+- **Order Details**: Vendors can see the items and quantities requested by each customer
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Getting Started
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/larrythuku18-lab/Mealy-Front---End-build-.git
+
+cd Mealy-Front---End-build-
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
+```
+
+The application will be available at the URL provided by Vite in the terminal.
+
+### Build
+
+```bash
+npm run build
+```
+
+### Preview production build
+
+```bash
+npm run preview
+```
+
+## Application Flow
+
+### Customer
+
+1. Browse the available food
+2. Select the food they want
+3. Specify quantities and other required details
+4. Place an order
+5. View their order and its status
+
+### Food Vendor
+
+1. View incoming customer orders
+2. See which food items customers have requested
+3. Review order quantities and customer information
+4. Manage the status of orders
+
+## Project Structure
+
+```text
+.
+├── README.md                    # Project documentation
+├── package.json                 # Project dependencies and npm scripts
+├── vite.config.ts               # Vite configuration
+├── tsconfig.json                # TypeScript configuration
+├── index.html                   # HTML entry point
+└── src/                         # Front-end source code
+    ├── main.tsx                 # React application entry point
+    ├── App.tsx                  # Root application component
+    ├── index.css                # Global application styles
+    ├── components/              # Reusable React components
+    ├── pages/                   # Application pages
+    ├── assets/                  # Static assets such as images and icons
+    └── ...
+```
+
+## Notes
+
+- The customer interface is responsible for browsing food and submitting orders.
+- The vendor interface is responsible for viewing and managing incoming orders.
+- API endpoints and backend details should be added once the backend implementation is available.
