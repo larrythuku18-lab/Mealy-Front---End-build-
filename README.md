@@ -1,5 +1,5 @@
 <div align="center">
-    <h1>Mealy</h1>
+    <h1>Mealy Front-end</h1>
 </div>
 
 <br />
@@ -8,10 +8,9 @@ Mealy is a food ordering application that allows customers to browse available f
 
 ## Tech stack
 
-- React + JavaScript + CSS + Vite Front-end
-- <!-- Add back-end technology -->
-- <!-- Add database -->
-- <!-- Add other services or APIs -->
+- React + JavaScript
+- CSS
+- Vite Front-end
 
 ## Features
 
