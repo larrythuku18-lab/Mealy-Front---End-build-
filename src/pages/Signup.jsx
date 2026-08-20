@@ -1,5 +1,11 @@
+import SignupCard from "../components/SignupCard/SignupCard";
+
 function Signup() {
-  return <></>;
+  return (
+    <section>
+      <SignupCard />
+    </section>
+  );
 }
 
 export default Signup;
