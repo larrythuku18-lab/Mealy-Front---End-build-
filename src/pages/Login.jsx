@@ -2,7 +2,7 @@ import LoginCard from "../components/LoginCard/LoginCard";
 
 function Login() {
   return (
-    <section>
+    <section className="auth-page">
       <LoginCard />;
     </section>
   );
