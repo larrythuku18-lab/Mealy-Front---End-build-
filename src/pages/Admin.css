@@ -133,3 +133,92 @@
   background: #fee2e2;
   color: #dc2626;
 }
+
+/* Daily options form */
+.daily-option-form {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: var(--shadow-card);
+}
+
+.daily-option-form h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--color-text);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-grid-full {
+  grid-column: 1 / -1;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.form-actions .btn-cancel,
+.form-actions .btn-save {
+  width: auto;
+}
+
+/* Table actions */
+.col-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.action-btn {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  background: transparent;
+  transition: background 0.15s;
+}
+
+.action-edit {
+  color: var(--color-text);
+}
+
+.action-edit:hover {
+  background: var(--color-surface-muted);
+}
+
+.action-delete {
+  color: #dc2626;
+  border-color: #fca5a5;
+}
+
+.action-delete:hover {
+  background: #fef2f2;
+}
+
+.table-empty {
+  padding: 32px 20px;
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 14px;
+  border-top: 1px solid var(--color-border);
+}
+
+@media (max-width: 600px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}

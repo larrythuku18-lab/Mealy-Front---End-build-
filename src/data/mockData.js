@@ -40,6 +40,46 @@ export const dailyOptions = [
     price: 2000,
     image: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop",
   },
+  {
+    id: "d5",
+    name: "Pilau Special",
+    description:
+      "Fragrant spiced pilau rice paired with tender goat meat and kachumbari.",
+    price: 1300,
+    image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&h=300&fit=crop",
+  },
+  {
+    id: "d6",
+    name: "Nyama Choma Platter",
+    description:
+      "Charcoal-grilled beef ribs served with ugali, sukuma wiki, and chimichurri.",
+    price: 1800,
+    image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=400&h=300&fit=crop",
+  },
+  {
+    id: "d7",
+    name: "Fish & Chips",
+    description:
+      "Beer-battered tilapia fillets with hand-cut chips and tangy tartar sauce.",
+    price: 1100,
+    image: "https://images.unsplash.com/photo-1534604973900-c43cb1d5f5ad?w=400&h=300&fit=crop",
+  },
+  {
+    id: "d8",
+    name: "Butter Chicken",
+    description:
+      "Creamy tomato-based chicken curry served with garlic naan and basmati rice.",
+    price: 1400,
+    image: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=400&h=300&fit=crop",
+  },
+  {
+    id: "d9",
+    name: "Mandazi & Chai",
+    description:
+      "Freshly fried Swahili mandazi served with spiced masala chai tea.",
+    price: 450,
+    image: "https://images.unsplash.com/photo-1558303097-261811f0d163?w=400&h=300&fit=crop",
+  },
 ];
 
 export const meals = [

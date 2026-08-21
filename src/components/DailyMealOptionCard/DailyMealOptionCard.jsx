@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { dailyOptions } from "../../data/mockData";
+import { useDailyOptions } from "../../contexts/DailyOptionsContext";
 import "./DailyMealOptionCard.css";
 
-function DailyMealOptionCard({ onSelectionChange }) {
+function DailyMealOptionCard() {
+  const { options: dailyOptions } = useDailyOptions();
   const [selections, setSelections] = useState({});
 
   const handleAdd = (optionId) => {
