@@ -85,9 +85,6 @@
 .daily-option .meal-description {
   font-size: 13px;
   color: var(--color-text-muted);
-  height: 40px;
-  overflow: hidden;
-  text-overflow: ellipsis;
   margin: 0;
   line-height: 1.4;
 }

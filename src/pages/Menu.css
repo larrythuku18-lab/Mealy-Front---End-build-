@@ -148,9 +148,6 @@
   color: var(--color-text-muted);
   margin: 0;
   line-height: 1.4;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .meal-row-right {

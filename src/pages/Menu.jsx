@@ -1,8 +1,7 @@
 import { useState } from "react";
 import Navbar from "../components/Navbar/Navbar";
 import DailyMealOptionCard from "../components/DailyMealOptionCard/DailyMealOptionCard";
-import OrderHistoryCard from "../components/OrderHistoryCard/OrderHistoryCard";
-import { meals, categories, currentUser, initialOrders } from "../data/mockData";
+import { meals, categories, currentUser } from "../data/mockData";
 import "./Menu.css";
 
 function Menu() {
@@ -78,15 +77,6 @@ function Menu() {
               <p>No meals available in this category.</p>
             </div>
           )}
-        </section>
-
-        <section className="order-history">
-          <h2>Recent Orders</h2>
-          <div className="orders-list">
-            {initialOrders.map((order) => (
-              <OrderHistoryCard key={order.id} order={order} />
-            ))}
-          </div>
         </section>
       </main>
     </div>
