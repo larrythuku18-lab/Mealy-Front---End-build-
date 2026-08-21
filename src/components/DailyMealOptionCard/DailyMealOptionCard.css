@@ -1,0 +1,92 @@
+.daily-options {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.daily-options h2 {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.daily-options-grid {
+  display: flex;
+  gap: 24px;
+}
+
+.daily-option {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.daily-option.selected {
+  border: 2px solid var(--color-text);
+}
+
+.daily-option .image-placeholder {
+  background: var(--color-surface-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  height: 140px;
+}
+
+.daily-option .meal-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.daily-option .meal-description {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  height: 54px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+.daily-option .meal-price {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.daily-option .add-meal-btn {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  color: var(--color-text);
+  background: transparent;
+  cursor: pointer;
+}
+
+.quantity-stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.quantity-stepper button {
+  background: var(--color-surface-hover);
+  border: none;
+  border-radius: var(--radius-md);
+  width: 37px;
+  height: 37px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+  cursor: pointer;
+}
