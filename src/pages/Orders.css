@@ -1,0 +1,43 @@
+.orders-page {
+  flex: 1;
+}
+
+.orders-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+.orders-header {
+  margin-bottom: 32px;
+}
+
+.orders-header h1 {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.orders-header p {
+  font-size: 15px;
+  color: var(--color-text-muted);
+  margin: 4px 0 0;
+}
+
+.orders-section {
+  margin-bottom: 32px;
+}
+
+.orders-section h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0 0 16px;
+}
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

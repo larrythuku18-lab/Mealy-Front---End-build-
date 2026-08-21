@@ -1,0 +1,180 @@
+.order-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.order-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-id {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--color-text);
+}
+
+.order-date {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  margin-left: 12px;
+}
+
+.order-status {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  text-transform: capitalize;
+}
+
+.order-status--confirmed {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.order-status--preparing {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.order-status--in_transit {
+  background: #d1fae5;
+  color: #047857;
+}
+
+.order-status--delivered {
+  background: #e0e7ff;
+  color: #4338ca;
+}
+
+.order-progress {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+}
+
+.progress-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+}
+
+.progress-step:not(:last-child)::after {
+  content: "";
+  flex: 1;
+  height: 2px;
+  background: var(--color-border);
+  margin: 0 -4px;
+  align-self: flex-start;
+  margin-top: 7px;
+}
+
+.progress-step.completed:not(:last-child)::after {
+  background: var(--color-text);
+}
+
+.progress-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-border);
+  border: 2px solid var(--color-surface);
+  z-index: 1;
+}
+
+.progress-step.completed .progress-dot {
+  background: var(--color-text);
+}
+
+.progress-step.current .progress-dot {
+  background: var(--color-text);
+  box-shadow: 0 0 0 4px rgba(17, 24, 39, 0.15);
+}
+
+.progress-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.progress-step.completed .progress-label,
+.progress-step.current .progress-label {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.order-card-items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-top: 1px solid var(--color-border);
+  padding-top: 16px;
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.order-item-img {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+}
+
+.order-item-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.order-item-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.order-item-qty {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.order-item-price {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.order-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--color-border);
+  padding-top: 12px;
+}
+
+.order-total-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.order-total {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--color-text);
+}

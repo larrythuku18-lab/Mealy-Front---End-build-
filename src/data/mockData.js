@@ -1,0 +1,143 @@
+export const categories = [
+  { id: 1, name: "All", icon: "🍽️" },
+  { id: 2, name: "Breakfast", icon: "🥞" },
+  { id: 3, name: "Lunch", icon: "🥗" },
+  { id: 4, name: "Dinner", icon: "🍝" },
+  { id: 5, name: "Snacks", icon: "🍿" },
+  { id: 6, name: "Drinks", icon: "🥤" },
+];
+
+export const meals = [
+  {
+    id: 1,
+    name: "Pancake Stack",
+    description: "Fluffy pancakes with maple syrup and fresh berries",
+    price: 8.5,
+    category: "Breakfast",
+    image: "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400",
+    available: true,
+  },
+  {
+    id: 2,
+    name: "Caesar Salad",
+    description: "Romaine lettuce, parmesan, croutons, and Caesar dressing",
+    price: 10.0,
+    category: "Lunch",
+    image: "https://images.unsplash.com/photo-1546793665-c74683f339c1?w=400",
+    available: true,
+  },
+  {
+    id: 3,
+    name: "Grilled Chicken Pasta",
+    description: "Penne pasta with grilled chicken in Alfredo sauce",
+    price: 14.0,
+    category: "Dinner",
+    image: "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400",
+    available: true,
+  },
+  {
+    id: 4,
+    name: "Avocado Toast",
+    description: "Sourdough toast topped with smashed avocado and poached egg",
+    price: 9.0,
+    category: "Breakfast",
+    image: "https://images.unsplash.com/photo-1541519227354-08fa5d50c44d?w=400",
+    available: true,
+  },
+  {
+    id: 5,
+    name: "Berry Smoothie",
+    description: "Mixed berries blended with yogurt and honey",
+    price: 6.5,
+    category: "Drinks",
+    image: "https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=400",
+    available: true,
+  },
+  {
+    id: 6,
+    name: "Grilled Salmon",
+    description: "Atlantic salmon with lemon butter and roasted vegetables",
+    price: 18.0,
+    category: "Dinner",
+    image: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400",
+    available: true,
+  },
+  {
+    id: 7,
+    name: "Chicken Wrap",
+    description: "Grilled chicken, veggies, and hummus in a whole wheat wrap",
+    price: 11.0,
+    category: "Lunch",
+    image: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400",
+    available: true,
+  },
+  {
+    id: 8,
+    name: "Energy Bites",
+    description: "Oat and peanut butter energy balls with dark chocolate chips",
+    price: 5.0,
+    category: "Snacks",
+    image: "https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?w=400",
+    available: true,
+  },
+  {
+    id: 9,
+    name: "Iced Lemon Tea",
+    description: "Refreshing iced tea with fresh lemon and mint",
+    price: 4.0,
+    category: "Drinks",
+    image: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400",
+    available: true,
+  },
+  {
+    id: 10,
+    name: "Mushroom Omelette",
+    description: "Three-egg omelette with sautéed mushrooms and cheese",
+    price: 9.5,
+    category: "Breakfast",
+    image: "https://images.unsplash.com/photo-1510693206972-df098062cb71?w=400",
+    available: true,
+  },
+];
+
+export const initialOrders = [
+  {
+    id: "ORD-001",
+    meals: [
+      { ...meals[0], quantity: 2 },
+      { ...meals[4], quantity: 1 },
+    ],
+    status: "delivered",
+    date: "2026-08-19",
+    total: 23.5,
+  },
+  {
+    id: "ORD-002",
+    meals: [
+      { ...meals[2], quantity: 1 },
+      { ...meals[8], quantity: 2 },
+    ],
+    status: "in_transit",
+    date: "2026-08-21",
+    total: 22.0,
+  },
+  {
+    id: "ORD-003",
+    meals: [
+      { ...meals[1], quantity: 1 },
+    ],
+    status: "preparing",
+    date: "2026-08-21",
+    total: 10.0,
+  },
+];
+
+export const currentUser = {
+  id: 1,
+  name: "John Doe",
+  email: "john@example.com",
+  phone: "+1 234 567 890",
+  role: "user",
+  joinedDate: "2026-07-15",
+  address: "123 Main St, Nairobi",
+};
