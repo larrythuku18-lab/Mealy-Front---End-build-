@@ -7,33 +7,55 @@ function Navbar({ user }) {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <nav className="navbar">
-      <div className="navbar-inner">
-        <Link to="/" className="brand">
-          <div className="brand-mark">M</div>
-          <span className="brand-name">Mealy</span>
+    <nav className="nav">
+      <Link to="/" className="brand">
+        <div className="brand-mark">M</div>
+        <span className="brand-name">Mealy</span>
+      </Link>
+
+      <div className="nav-links">
+        <Link
+          to="/"
+          className={`nav-link ${isActive("/") ? "selected" : ""}`}
+        >
+          Daily Menu
         </Link>
+        <Link
+          to="/orders"
+          className={`nav-link ${isActive("/orders") ? "selected" : ""}`}
+        >
+          My Orders
+        </Link>
+        <Link
+          to="/profile"
+          className={`nav-link ${isActive("/profile") ? "selected" : ""}`}
+        >
+          Profile
+        </Link>
+        {user?.role === "admin" && (
+          <Link
+            to="/admin"
+            className={`nav-link ${isActive("/admin") ? "selected" : ""}`}
+          >
+            Admin
+          </Link>
+        )}
+      </div>
 
-        <div className="navbar-links">
-          <Link to="/" className={`navbar-link ${isActive("/") ? "active" : ""}`}>
-            Menu
-          </Link>
-          <Link to="/orders" className={`navbar-link ${isActive("/orders") ? "active" : ""}`}>
-            My Orders
-          </Link>
-          <Link to="/profile" className={`navbar-link ${isActive("/profile") ? "active" : ""}`}>
-            Profile
-          </Link>
-          {user?.role === "admin" && (
-            <Link to="/admin" className={`navbar-link ${isActive("/admin") ? "active" : ""}`}>
-              Admin
-            </Link>
-          )}
-        </div>
-
-        <div className="navbar-user">
-          <span className="navbar-user-name">{user?.name || "Guest"}</span>
-        </div>
+      <div className="user-profile">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          aria-hidden="true"
+          width="22"
+          height="22"
+        >
+          <circle cx="12" cy="8" r="4" />
+          <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+        </svg>
+        <span>{user?.name || "Guest"}</span>
       </div>
     </nav>
   );

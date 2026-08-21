@@ -7,6 +7,41 @@ export const categories = [
   { id: 6, name: "Drinks", icon: "🥤" },
 ];
 
+export const dailyOptions = [
+  {
+    id: "d1",
+    name: "Beef with Rice",
+    description:
+      "Tender beef slices served over brown jasmine rice with steamed broccoli.",
+    price: 1050,
+    image: "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&h=300&fit=crop",
+  },
+  {
+    id: "d2",
+    name: "Chicken with Fries",
+    description:
+      "Grilled chicken breast accompanied by sweet potato fries and herb aioli.",
+    price: 1050,
+    image: "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=400&h=300&fit=crop",
+  },
+  {
+    id: "d3",
+    name: "Veggie Pasta",
+    description:
+      "Whole wheat penne with fresh cherry tomatoes, basil, and light parmesan.",
+    price: 1200,
+    image: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=400&h=300&fit=crop",
+  },
+  {
+    id: "d4",
+    name: "Salmon Teriyaki",
+    description:
+      "Salmon fillet glazed with teriyaki sauce, served with roasted bok choy.",
+    price: 2000,
+    image: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop",
+  },
+];
+
 export const meals = [
   {
     id: 1,
@@ -14,7 +49,7 @@ export const meals = [
     description: "Fluffy pancakes with maple syrup and fresh berries",
     price: 850,
     category: "Breakfast",
-    image: "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400",
+    image: "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&h=300&fit=crop",
     available: true,
   },
   {
@@ -23,7 +58,7 @@ export const meals = [
     description: "Romaine lettuce, parmesan, croutons, and Caesar dressing",
     price: 1000,
     category: "Lunch",
-    image: "https://images.unsplash.com/photo-1546793665-c74683f339c1?w=400",
+    image: "https://images.unsplash.com/photo-1546793665-c74683f339c1?w=400&h=300&fit=crop",
     available: true,
   },
   {
@@ -32,7 +67,7 @@ export const meals = [
     description: "Penne pasta with grilled chicken in Alfredo sauce",
     price: 1400,
     category: "Dinner",
-    image: "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400",
+    image: "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400&h=300&fit=crop",
     available: true,
   },
   {
@@ -41,7 +76,7 @@ export const meals = [
     description: "Sourdough toast topped with smashed avocado and poached egg",
     price: 900,
     category: "Breakfast",
-    image: "https://images.unsplash.com/photo-1541519227354-08fa5d50c44d?w=400",
+    image: "https://images.unsplash.com/photo-1541519227354-08fa5d50c44d?w=400&h=300&fit=crop",
     available: true,
   },
   {
@@ -50,7 +85,7 @@ export const meals = [
     description: "Mixed berries blended with yogurt and honey",
     price: 650,
     category: "Drinks",
-    image: "https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=400",
+    image: "https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=400&h=300&fit=crop",
     available: true,
   },
   {
@@ -59,7 +94,7 @@ export const meals = [
     description: "Atlantic salmon with lemon butter and roasted vegetables",
     price: 1800,
     category: "Dinner",
-    image: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400",
+    image: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop",
     available: true,
   },
   {
@@ -68,7 +103,7 @@ export const meals = [
     description: "Grilled chicken, veggies, and hummus in a whole wheat wrap",
     price: 1100,
     category: "Lunch",
-    image: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400",
+    image: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400&h=300&fit=crop",
     available: true,
   },
   {
@@ -77,7 +112,7 @@ export const meals = [
     description: "Oat and peanut butter energy balls with dark chocolate chips",
     price: 500,
     category: "Snacks",
-    image: "https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?w=400",
+    image: "https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?w=400&h=300&fit=crop",
     available: true,
   },
   {
@@ -86,7 +121,7 @@ export const meals = [
     description: "Refreshing iced tea with fresh lemon and mint",
     price: 400,
     category: "Drinks",
-    image: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400",
+    image: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&h=300&fit=crop",
     available: true,
   },
   {
@@ -95,7 +130,7 @@ export const meals = [
     description: "Three-egg omelette with sautéed mushrooms and cheese",
     price: 950,
     category: "Breakfast",
-    image: "https://images.unsplash.com/photo-1510693206972-df098062cb71?w=400",
+    image: "https://images.unsplash.com/photo-1510693206972-df098062cb71?w=400&h=300&fit=crop",
     available: true,
   },
 ];
@@ -136,8 +171,8 @@ export const currentUser = {
   id: 1,
   name: "",
   email: "john@example.com",
-  phone: "+1 234 567 890",
+  phone: "+254 700 000 000",
   role: "user",
   joinedDate: "2026-07-15",
-  address: "123 Main St, Nairobi",
+  address: "Nairobi, Kenya",
 };
