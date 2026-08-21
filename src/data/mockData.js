@@ -1,10 +1,10 @@
 export const categories = [
-  { id: 1, name: "All", icon: "🍽️" },
-  { id: 2, name: "Breakfast", icon: "🥞" },
-  { id: 3, name: "Lunch", icon: "🥗" },
-  { id: 4, name: "Dinner", icon: "🍝" },
-  { id: 5, name: "Snacks", icon: "🍿" },
-  { id: 6, name: "Drinks", icon: "🥤" },
+  { id: 1, name: "All" },
+  { id: 2, name: "Breakfast" },
+  { id: 3, name: "Lunch" },
+  { id: 4, name: "Dinner" },
+  { id: 5, name: "Snacks" },
+  { id: 6, name: "Drinks" },
 ];
 
 export const dailyOptions = [

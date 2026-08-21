@@ -41,40 +41,39 @@ function Menu() {
                 className={`category-btn ${activeCategory === cat.name ? "active" : ""}`}
                 onClick={() => setActiveCategory(cat.name)}
               >
-                <span className="category-icon">{cat.icon}</span>
-                <span>{cat.name}</span>
+                {cat.name}
               </button>
             ))}
           </div>
 
-          <div className="meal-grid">
-            {filteredMeals.map((meal) => (
-              <div key={meal.id} className="meal-card">
-                <div className="meal-card-image">
-                  <img src={meal.image} alt={meal.name} />
-                  {!meal.available && (
-                    <div className="meal-card-overlay">Unavailable</div>
-                  )}
-                </div>
-                <div className="meal-card-body">
-                  <h3 className="meal-card-name">{meal.name}</h3>
-                  <p className="meal-card-desc">{meal.description}</p>
-                  <div className="meal-card-footer">
-                    <span className="meal-card-price">
+          {filteredMeals.length > 0 ? (
+            <div className="meal-list">
+              {filteredMeals.map((meal) => (
+                <div key={meal.id} className="meal-row">
+                  <div className="meal-row-img">
+                    <img src={meal.image} alt={meal.name} />
+                  </div>
+                  <div className="meal-row-info">
+                    <div className="meal-row-top">
+                      <span className="meal-row-name">{meal.name}</span>
+                      <span className="category-tag">{meal.category}</span>
+                    </div>
+                    <p className="meal-row-desc">{meal.description}</p>
+                  </div>
+                  <div className="meal-row-right">
+                    <span className="meal-row-price">
                       KSh {meal.price.toLocaleString()}
                     </span>
-                    {meal.available && (
-                      <button className="btn-primary btn-primary--inline">
-                        + Add
-                      </button>
+                    {meal.available ? (
+                      <button className="btn-add">+ Add</button>
+                    ) : (
+                      <span className="unavailable-label">Unavailable</span>
                     )}
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-
-          {filteredMeals.length === 0 && (
+              ))}
+            </div>
+          ) : (
             <div className="empty-state">
               <p>No meals available in this category.</p>
             </div>
