@@ -14,7 +14,7 @@ function DailyMealOptionCard({ meal, onAddToOrder }) {
           <span className="meal-card-category">{meal.category}</span>
         </div>
         <div className="meal-card-footer">
-          <span className="meal-card-price">${meal.price.toFixed(2)}</span>
+          <span className="meal-card-price">KSh {meal.price.toFixed(2)}</span>
           {meal.available && (
             <button className="btn-primary btn-primary--inline" onClick={() => onAddToOrder(meal)}>
               + Add

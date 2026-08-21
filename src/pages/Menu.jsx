@@ -67,7 +67,7 @@ function Menu() {
           <div className="cart-float">
             <span className="cart-count">{cartCount} item(s)</span>
             <span className="cart-total">
-              ${cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2)}
+              KSh {cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2)}
             </span>
             <button className="btn-primary btn-primary--inline">Order Now</button>
           </div>

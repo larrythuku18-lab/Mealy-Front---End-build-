@@ -51,7 +51,7 @@ function Admin() {
                 <div key={meal.id} className="table-row">
                   <span className="col-name">{meal.name}</span>
                   <span className="col-category">{meal.category}</span>
-                  <span className="col-price">${meal.price.toFixed(2)}</span>
+                  <span className="col-price">KSh {meal.price.toFixed(2)}</span>
                   <span className={`col-status ${meal.available ? "active" : "inactive"}`}>
                     {meal.available ? "Available" : "Unavailable"}
                   </span>

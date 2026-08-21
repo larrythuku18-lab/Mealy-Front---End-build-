@@ -47,7 +47,7 @@ function OrderHistoryCard({ order }) {
               <span className="order-item-qty">Qty: {meal.quantity}</span>
             </div>
             <span className="order-item-price">
-              ${(meal.price * meal.quantity).toFixed(2)}
+              KSh {(meal.price * meal.quantity).toFixed(2)}
             </span>
           </div>
         ))}
@@ -55,7 +55,7 @@ function OrderHistoryCard({ order }) {
 
       <div className="order-card-footer">
         <span className="order-total-label">Total</span>
-        <span className="order-total">${order.total.toFixed(2)}</span>
+        <span className="order-total">KSh {order.total.toFixed(2)}</span>
       </div>
     </div>
   );

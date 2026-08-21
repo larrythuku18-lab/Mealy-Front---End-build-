@@ -46,7 +46,7 @@ function SignupCard() {
             label="Full Name"
             type="text"
             id="full-name"
-            placeholder="John Doe"
+            placeholder="e.g. Jane Smith"
             value={form.fullName}
             onChange={handleChange}
           />

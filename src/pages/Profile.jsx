@@ -36,7 +36,7 @@ function Profile() {
 
           <div className="profile-card">
             <div className="profile-avatar">
-              <span>{currentUser.name.charAt(0)}</span>
+              <span>{currentUser.name ? currentUser.name.charAt(0) : "?"}</span>
             </div>
 
             {!isEditing ? (
