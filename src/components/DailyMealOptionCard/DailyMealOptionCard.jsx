@@ -37,7 +37,15 @@ function DailyMealOptionCard() {
               aioli.
             </p>
           </div>
-          <div style={{ display: "flex", gap: "10px", width: "100%" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              gap: "10px",
+              width: "100%",
+            }}
+          >
             <span className="meal-price">Kes. 1,050</span>
             <button type="button" className="add-meal-btn">
               Add Meal
@@ -54,7 +62,15 @@ function DailyMealOptionCard() {
               parmesan.
             </p>
           </div>
-          <div style={{ display: "flex", gap: "10px", width: "100%" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              gap: "10px",
+              width: "100%",
+            }}
+          >
             <span className="meal-price">Kes. 1,200</span>
             <button type="button" className="add-meal-btn">
               Add Meal
@@ -71,7 +87,15 @@ function DailyMealOptionCard() {
               choy.
             </p>
           </div>
-          <div style={{ display: "flex", gap: "10px", width: "100%" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              gap: "10px",
+              width: "100%",
+            }}
+          >
             <span className="meal-price">Kes. 2,000</span>
             <button type="button" className="add-meal-btn">
               Add Meal
