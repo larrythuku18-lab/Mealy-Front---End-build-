@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { meals, categories } from "../../data/mockData";
 import "./FullMenu.css";
+import MealOptionCard from "../MealOptionCard/MealOptionCard";
 
 function FullMenu() {
   const [activeCategory, setActiveCategory] = useState("All");
+  const [selections, setSelections] = useState({});
 
   const filteredMeals =
     activeCategory === "All"
       ? meals
-      : meals.filter((meal) => meal.category === activeCategory);
+      : meals.filter((meal) => meal.category.includes(activeCategory));
 
   return (
     <section className="full-menu">
@@ -28,28 +30,12 @@ function FullMenu() {
       {filteredMeals.length > 0 ? (
         <div className="meal-list">
           {filteredMeals.map((meal) => (
-            <div key={meal.id} className="meal-row">
-              <div className="meal-row-img">
-                <img src={meal.image} alt={meal.name} />
-              </div>
-              <div className="meal-row-info">
-                <div className="meal-row-top">
-                  <span className="meal-row-name">{meal.name}</span>
-                  <span className="category-tag">{meal.category}</span>
-                </div>
-                <p className="meal-row-desc">{meal.description}</p>
-              </div>
-              <div className="meal-row-right">
-                <span className="meal-row-price">
-                  KSh {meal.price.toLocaleString()}
-                </span>
-                {meal.available ? (
-                  <button className="btn-add">+ Add</button>
-                ) : (
-                  <span className="unavailable-label">Unavailable</span>
-                )}
-              </div>
-            </div>
+            <MealOptionCard
+              key={meal.id}
+              option={meal}
+              qty={selections[meal.id] || 0}
+              setSelections={setSelections}
+            />
           ))}
         </div>
       ) : (

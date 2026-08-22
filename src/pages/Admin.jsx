@@ -230,7 +230,7 @@ function Admin() {
               {meals.map((meal) => (
                 <div key={meal.id} className="table-row">
                   <span className="col-name">{meal.name}</span>
-                  <span className="col-category">{meal.category}</span>
+                  <span className="col-category">{meal.category.join(", ")}</span>
                   <span className="col-price">
                     KSh {meal.price.toLocaleString()}
                   </span>
