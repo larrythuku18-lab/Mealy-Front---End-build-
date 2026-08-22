@@ -14,7 +14,8 @@ export const dailyOptions = [
     description:
       "Tender beef slices served over brown jasmine rice with steamed broccoli.",
     price: 1050,
-    image: "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&h=300&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&h=300&fit=crop",
   },
   {
     id: "d2",
@@ -22,7 +23,8 @@ export const dailyOptions = [
     description:
       "Grilled chicken breast accompanied by sweet potato fries and herb aioli.",
     price: 1050,
-    image: "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=400&h=300&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=400&h=300&fit=crop",
   },
   {
     id: "d3",
@@ -30,7 +32,8 @@ export const dailyOptions = [
     description:
       "Whole wheat penne with fresh cherry tomatoes, basil, and light parmesan.",
     price: 1200,
-    image: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=400&h=300&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=400&h=300&fit=crop",
   },
   {
     id: "d4",
@@ -38,7 +41,8 @@ export const dailyOptions = [
     description:
       "Salmon fillet glazed with teriyaki sauce, served with roasted bok choy.",
     price: 2000,
-    image: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop",
   },
   {
     id: "d5",
@@ -46,7 +50,8 @@ export const dailyOptions = [
     description:
       "Fragrant spiced pilau rice paired with tender goat meat and kachumbari.",
     price: 1300,
-    image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&h=300&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&h=300&fit=crop",
   },
   {
     id: "d6",
@@ -54,7 +59,8 @@ export const dailyOptions = [
     description:
       "Charcoal-grilled beef ribs served with ugali, sukuma wiki, and chimichurri.",
     price: 1800,
-    image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=400&h=300&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1544025162-d76694265947?w=400&h=300&fit=crop",
   },
   {
     id: "d7",
@@ -62,7 +68,8 @@ export const dailyOptions = [
     description:
       "Beer-battered tilapia fillets with hand-cut chips and tangy tartar sauce.",
     price: 1100,
-    image: "https://images.unsplash.com/photo-1534604973900-c43cb1d5f5ad?w=400&h=300&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?q=80&w=400&h=300&fit=crop",
   },
   {
     id: "d8",
@@ -70,7 +77,8 @@ export const dailyOptions = [
     description:
       "Creamy tomato-based chicken curry served with garlic naan and basmati rice.",
     price: 1400,
-    image: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=400&h=300&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=400&h=300&fit=crop",
   },
   {
     id: "d9",
@@ -78,7 +86,8 @@ export const dailyOptions = [
     description:
       "Freshly fried Swahili mandazi served with spiced masala chai tea.",
     price: 450,
-    image: "https://images.unsplash.com/photo-1558303097-261811f0d163?w=400&h=300&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1567922045116-2a00fae2ed03?q=80&w=400&h=300&fit=crop",
   },
 ];
 
@@ -89,7 +98,8 @@ export const meals = [
     description: "Fluffy pancakes with maple syrup and fresh berries",
     price: 850,
     category: "Breakfast",
-    image: "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&h=300&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&h=300&fit=crop",
     available: true,
   },
   {
@@ -98,7 +108,8 @@ export const meals = [
     description: "Romaine lettuce, parmesan, croutons, and Caesar dressing",
     price: 1000,
     category: "Lunch",
-    image: "https://images.unsplash.com/photo-1546793665-c74683f339c1?w=400&h=300&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1546793665-c74683f339c1?w=400&h=300&fit=crop",
     available: true,
   },
   {
@@ -107,7 +118,8 @@ export const meals = [
     description: "Penne pasta with grilled chicken in Alfredo sauce",
     price: 1400,
     category: "Dinner",
-    image: "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400&h=300&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400&h=300&fit=crop",
     available: true,
   },
   {
@@ -116,7 +128,8 @@ export const meals = [
     description: "Sourdough toast topped with smashed avocado and poached egg",
     price: 900,
     category: "Breakfast",
-    image: "https://images.unsplash.com/photo-1541519227354-08fa5d50c44d?w=400&h=300&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1541519227354-08fa5d50c44d?w=400&h=300&fit=crop",
     available: true,
   },
   {
@@ -125,7 +138,8 @@ export const meals = [
     description: "Mixed berries blended with yogurt and honey",
     price: 650,
     category: "Drinks",
-    image: "https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=400&h=300&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=400&h=300&fit=crop",
     available: true,
   },
   {
@@ -134,7 +148,8 @@ export const meals = [
     description: "Atlantic salmon with lemon butter and roasted vegetables",
     price: 1800,
     category: "Dinner",
-    image: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop",
     available: true,
   },
   {
@@ -143,7 +158,8 @@ export const meals = [
     description: "Grilled chicken, veggies, and hummus in a whole wheat wrap",
     price: 1100,
     category: "Lunch",
-    image: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400&h=300&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400&h=300&fit=crop",
     available: true,
   },
   {
@@ -152,7 +168,8 @@ export const meals = [
     description: "Oat and peanut butter energy balls with dark chocolate chips",
     price: 500,
     category: "Snacks",
-    image: "https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?w=400&h=300&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?w=400&h=300&fit=crop",
     available: true,
   },
   {
@@ -161,7 +178,8 @@ export const meals = [
     description: "Refreshing iced tea with fresh lemon and mint",
     price: 400,
     category: "Drinks",
-    image: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&h=300&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&h=300&fit=crop",
     available: true,
   },
   {
@@ -170,7 +188,8 @@ export const meals = [
     description: "Three-egg omelette with sautéed mushrooms and cheese",
     price: 950,
     category: "Breakfast",
-    image: "https://images.unsplash.com/photo-1510693206972-df098062cb71?w=400&h=300&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1510693206972-df098062cb71?w=400&h=300&fit=crop",
     available: true,
   },
 ];
@@ -198,9 +217,7 @@ export const initialOrders = [
   },
   {
     id: "ORD-003",
-    meals: [
-      { ...meals[1], quantity: 1 },
-    ],
+    meals: [{ ...meals[1], quantity: 1 }],
     status: "preparing",
     date: "2026-08-21",
     total: 1000,
