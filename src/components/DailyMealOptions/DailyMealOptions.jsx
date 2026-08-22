@@ -14,7 +14,6 @@ function DailyMealOptions() {
 
   return (
     <section className="daily-options">
-      <h2>Daily Options</h2>
       <div className="daily-options-grid">
         {dailyOptions.map((option) => {
           const qty = selections[option.id] || 0;

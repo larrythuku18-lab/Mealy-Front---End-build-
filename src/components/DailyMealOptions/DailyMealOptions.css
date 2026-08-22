@@ -25,12 +25,6 @@
   }
 }
 
-.daily-options h2 {
-  font-size: 18px;
-  font-weight: 700;
-  margin: 0;
-}
-
 .daily-options-grid {
   display: flex;
   gap: 16px;
