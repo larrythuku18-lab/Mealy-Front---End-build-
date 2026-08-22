@@ -1,0 +1,137 @@
+.orders-page {
+  flex: 1;
+}
+
+.orders-container {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+.orders-header {
+  margin-bottom: 28px;
+}
+
+.orders-header h1 {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.orders-header p {
+  font-size: 15px;
+  color: var(--color-text-muted);
+  margin: 4px 0 0;
+}
+
+/* Stats row */
+.orders-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.o-stat-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  box-shadow: var(--shadow-card);
+}
+
+.o-stat-number {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--color-text);
+}
+
+.o-stat-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+/* Sections */
+.orders-section {
+  margin-bottom: 32px;
+}
+
+.orders-section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.orders-section-header h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.orders-section-count {
+  background: var(--color-surface-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  padding: 2px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Empty state */
+.orders-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 64px 24px;
+  text-align: center;
+}
+
+.orders-empty-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--color-surface-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-placeholder);
+}
+
+.orders-empty h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.orders-empty p {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .orders-container {
+    padding: 20px 16px;
+  }
+
+  .orders-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

@@ -1,0 +1,200 @@
+.order-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Header */
+.order-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.order-card-id-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.order-id {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.order-date {
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+.status-badge {
+  border-radius: var(--radius-md);
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status-badge--confirmed {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.status-badge--preparing {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.status-badge--in_transit {
+  background: #d1fae5;
+  color: #047857;
+}
+
+.status-badge--delivered {
+  background: #e0e7ff;
+  color: #4338ca;
+}
+
+/* Progress bar */
+.order-progress-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.progress-track {
+  height: 4px;
+  background: var(--color-surface-muted);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--color-text);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.progress-steps {
+  display: flex;
+  justify-content: space-between;
+}
+
+.progress-step {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-text-placeholder);
+}
+
+.progress-step.active {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+/* Items */
+.order-card-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-top: 1px solid var(--color-border);
+  padding-top: 14px;
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.order-item-img {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.order-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+  min-width: 0;
+}
+
+.order-item-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.order-item-qty {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.order-item-price {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Footer */
+.order-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--color-border);
+  padding-top: 14px;
+}
+
+.order-items-count {
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+.order-footer-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.order-total-label {
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+.order-total {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--color-text);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .order-card {
+    padding: 16px;
+  }
+
+  .order-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .progress-steps {
+    font-size: 10px;
+  }
+}

@@ -1,6 +1,24 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import InputPrimary from "../ui/InputPrimary";
+import BtnPrimary from "../ui/BtnPrimary";
 import "./LoginCard.css";
 
 function LoginCard() {
+  const navigate = useNavigate();
+  const [form, setForm] = useState({ email: "", password: "" });
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // TODO: integrate with backend auth API
+    console.log("Login:", form);
+    navigate("/");
+  };
+
   return (
     <div className="auth-card">
       <div className="brand">
@@ -13,32 +31,27 @@ function LoginCard() {
         <p>Log in to manage or order your meals.</p>
       </div>
 
-      <form className="auth-form">
+      <form className="auth-form" onSubmit={handleSubmit}>
         <div className="input-container">
-          <div className="input-primary">
-            <label htmlFor="email">Email Address</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="john@example.com"
-            />
-          </div>
-
-          <div className="input-primary">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              placeholder="••••••••"
-            />
-          </div>
+          <InputPrimary
+            label="Email Address"
+            type="email"
+            id="email"
+            placeholder="john@example.com"
+            value={form.email}
+            onChange={handleChange}
+          />
+          <InputPrimary
+            label="Password"
+            type="password"
+            id="password"
+            placeholder="••••••••"
+            value={form.password}
+            onChange={handleChange}
+          />
         </div>
 
-        <button type="submit" className="btn-primary">
-          Log In
-        </button>
+        <BtnPrimary type="submit">Log In</BtnPrimary>
       </form>
 
       <div className="auth-footer">
