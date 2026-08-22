@@ -1,0 +1,51 @@
+import { useState } from "react";
+import { useDailyOptions } from "../../contexts/DailyOptionsContext";
+import "./DailyMealOptions.css";
+import DailyMealOptionCard from "../DailyMealOptionCard/DailyMealOptionCard";
+
+function DailyMealOptions() {
+  const { options: dailyOptions } = useDailyOptions();
+  const [selections, setSelections] = useState({}); // Track card selection state
+
+  const selectedCount = Object.values(selections).reduce((a, b) => a + b, 0);
+  const selectedTotal = dailyOptions
+    .filter((o) => selections[o.id])
+    .reduce((sum, o) => sum + o.price * selections[o.id], 0);
+
+  return (
+    <section className="daily-options">
+      <h2>Daily Options</h2>
+      <div className="daily-options-grid">
+        {dailyOptions.map((option) => {
+          const qty = selections[option.id] || 0;
+          return (
+            <DailyMealOptionCard
+              key={option.id}
+              option={option}
+              qty={qty}
+              setSelections={setSelections}
+            />
+          );
+        })}
+      </div>
+
+      {selectedCount > 0 && (
+        <div className="cart-float">
+          <div className="cart-float-info">
+            <span className="cart-float-count">
+              {selectedCount} item{selectedCount > 1 ? "s" : ""}
+            </span>
+            <span className="cart-float-total">
+              KSh {selectedTotal.toLocaleString()}
+            </span>
+          </div>
+          <button className="btn-primary btn-primary--inline cart-float-btn">
+            Place Order
+          </button>
+        </div>
+      )}
+    </section>
+  );
+}
+
+export default DailyMealOptions;
