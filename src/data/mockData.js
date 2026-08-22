@@ -16,7 +16,7 @@ export const dailyOptions = [
     price: 1050,
     rating: 4.5,
     image:
-      "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&h=300&fit=crop",
+      "https://i.pinimg.com/736x/fc/a4/03/fca4039903d2b6f0b4a553d33c85e513.jpg",
   },
   {
     id: "d2",
@@ -26,7 +26,7 @@ export const dailyOptions = [
     price: 1050,
     rating: 4.5,
     image:
-      "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=400&h=300&fit=crop",
+      "https://i.pinimg.com/736x/a7/aa/ce/a7aace04c023adb95039697c0a1f4528.jpg",
   },
   {
     id: "d3",
@@ -36,7 +36,7 @@ export const dailyOptions = [
     price: 1200,
     rating: 4.1,
     image:
-      "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&h=300&fit=crop",
   },
   {
     id: "d4",
@@ -46,7 +46,7 @@ export const dailyOptions = [
     price: 2000,
     rating: 4.6,
     image:
-      "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop",
+      "https://i.pinimg.com/736x/53/2f/79/532f79cad4cbc4632ebb841a119af048.jpg",
   },
   {
     id: "d5",
@@ -56,7 +56,7 @@ export const dailyOptions = [
     price: 1300,
     rating: 3.9,
     image:
-      "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&h=300&fit=crop",
+      "https://i.pinimg.com/736x/45/b6/db/45b6db250dd2b0b8928b09af7c72cac3.jpg",
   },
   {
     id: "d6",
@@ -76,7 +76,7 @@ export const dailyOptions = [
     price: 1100,
     rating: 3.6,
     image:
-      "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?q=80&w=400&h=300&fit=crop",
+      "https://i.pinimg.com/1200x/20/31/2b/20312b036bb9fb978032f75bddcc3656.jpg",
   },
   {
     id: "d8",
@@ -86,17 +86,17 @@ export const dailyOptions = [
     price: 1400,
     rating: 4.8,
     image:
-      "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=400&h=300&fit=crop",
+      "https://i.pinimg.com/736x/91/33/4f/91334f98a2a4535c4a7c0afb76b9543a.jpg",
   },
   {
     id: "d9",
-    name: "Mandazi & Chai",
+    name: "Masala Chai",
     description:
       "Freshly fried Swahili mandazi served with spiced masala chai tea.",
     price: 450,
     rating: 5.0,
     image:
-      "https://images.unsplash.com/photo-1567922045116-2a00fae2ed03?q=80&w=400&h=300&fit=crop",
+      "https://i.pinimg.com/736x/7c/64/c0/7c64c0e4b90852dbc01883044ea4186d.jpg",
   },
 ];
 
@@ -120,7 +120,7 @@ export const meals = [
     rating: 4.1,
     category: ["Lunch"],
     image:
-      "https://images.unsplash.com/photo-1546793665-c74683f339c1?w=400&h=300&fit=crop",
+      "https://i.pinimg.com/736x/41/b3/ac/41b3ac8e22d2c01e5db2e091ee69e080.jpg",
     available: true,
   },
   {
@@ -142,7 +142,7 @@ export const meals = [
     rating: 4.4,
     category: ["Breakfast"],
     image:
-      "https://images.unsplash.com/photo-1541519227354-08fa5d50c44d?w=400&h=300&fit=crop",
+      "https://i.pinimg.com/1200x/b9/39/37/b939375d57c80384cfeed1868628c5c3.jpg",
     available: true,
   },
   {
@@ -164,7 +164,7 @@ export const meals = [
     rating: 4.8,
     category: ["Dinner"],
     image:
-      "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop",
+      "https://i.pinimg.com/736x/d0/5f/2e/d05f2ea7519ec2180967b8b773f63a1f.jpg",
     available: true,
   },
   {
@@ -180,17 +180,6 @@ export const meals = [
   },
   {
     id: 8,
-    name: "Energy Bites",
-    description: "Oat and peanut butter energy balls with dark chocolate chips",
-    price: 500,
-    rating: 4.2,
-    category: ["Snacks"],
-    image:
-      "https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?w=400&h=300&fit=crop",
-    available: true,
-  },
-  {
-    id: 9,
     name: "Iced Lemon Tea",
     description: "Refreshing iced tea with fresh lemon and mint",
     price: 400,
@@ -201,7 +190,7 @@ export const meals = [
     available: true,
   },
   {
-    id: 10,
+    id: 9,
     name: "Mushroom Omelette",
     description: "Three-egg omelette with sautéed mushrooms and cheese",
     price: 950,
@@ -212,7 +201,7 @@ export const meals = [
     available: true,
   },
   {
-    id: 11,
+    id: 10,
     name: "Chapati & Beans Stew",
     description: "Soft layered chapati served with delicious coconut bean stew",
     price: 850,
@@ -223,9 +212,10 @@ export const meals = [
     available: true,
   },
   {
-    id: 12,
+    id: 11,
     name: "Garlic Masala Fries",
-    description: "Crispy fries tossed in a spicy, tangy tomato-based masala sauce",
+    description:
+      "Crispy fries tossed in a spicy, tangy tomato-based masala sauce",
     price: 900,
     rating: 4.5,
     category: ["Snacks"],
@@ -234,31 +224,10 @@ export const meals = [
     available: true,
   },
   {
-    id: 13,
-    name: "Ugali Beef & Sukuma",
-    description: "Classic white cornmeal ugali, wet fry beef, and sautéed collard greens",
-    price: 950,
-    rating: 4.9,
-    category: ["Lunch", "Dinner"],
-    image:
-      "https://i.pinimg.com/1200x/96/bc/ff/96bcffce7474cff690efe3b050d7fc64.jpg",
-    available: true,
-  },
-  {
-    id: 14,
-    name: "Githeri Special",
-    description: "Traditional boiled mixture of maize and beans fried with onions and potatoes",
-    price: 850,
-    rating: 4.0,
-    category: ["Lunch"],
-    image:
-      "https://i.pinimg.com/1200x/92/6c/d1/926cd19341c445f127849e5c7800d4bb.jpg",
-    available: true,
-  },
-  {
-    id: 15,
+    id: 12,
     name: "Coconut Curry Tilapia",
-    description: "Deep-fried fresh lake tilapia simmered in tomato and onion stew, served with ugali",
+    description:
+      "Deep-fried fresh lake tilapia simmered in tomato and onion stew, served with ugali",
     price: 1100,
     rating: 4.7,
     category: ["Dinner", "Lunch"],
@@ -267,9 +236,10 @@ export const meals = [
     available: true,
   },
   {
-    id: 16,
+    id: 13,
     name: "Sesame Chicken & Fries",
-    description: "Free-range local chicken stew served with mashed potatoes, corn, and greens mash",
+    description:
+      "Free-range local chicken stew served with mashed potatoes, corn, and greens mash",
     price: 1800,
     rating: 4.8,
     category: ["Dinner"],
@@ -278,9 +248,10 @@ export const meals = [
     available: true,
   },
   {
-    id: 17,
+    id: 14,
     name: "Beef Samosas (3pcs)",
-    description: "Crispy triangular pastries filled with spiced minced beef and green onions",
+    description:
+      "Crispy triangular pastries filled with spiced minced beef and green onions",
     price: 850,
     rating: 4.6,
     category: ["Snacks"],
@@ -289,9 +260,10 @@ export const meals = [
     available: true,
   },
   {
-    id: 18,
+    id: 15,
     name: "Viazi Karai",
-    description: "Coated deep-fried spicy potatoes served with local tamarind chutney",
+    description:
+      "Coated deep-fried spicy potatoes served with local tamarind chutney",
     price: 900,
     rating: 4.4,
     category: ["Snacks"],
@@ -300,9 +272,10 @@ export const meals = [
     available: true,
   },
   {
-    id: 19,
+    id: 16,
     name: "Dawa Cocktail",
-    description: "Famous Kenyan drink made of vodka, honey, lime, and crushed ice",
+    description:
+      "Famous Kenyan drink made of vodka, honey, lime, and crushed ice",
     price: 950,
     rating: 4.7,
     category: ["Drinks"],
@@ -311,7 +284,7 @@ export const meals = [
     available: true,
   },
   {
-    id: 20,
+    id: 17,
     name: "Plain Fries",
     description: "Classic crispy golden salted potato french fries",
     price: 850,
@@ -322,7 +295,7 @@ export const meals = [
     available: true,
   },
   {
-    id: 21,
+    id: 18,
     name: "Kericho Gold Tea",
     description: "Brewed milk tea made from premium Kenyan tea leaves",
     price: 850,
