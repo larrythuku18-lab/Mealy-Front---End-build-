@@ -1,0 +1,75 @@
+.todays-orders {
+  border: 1.5px dashed #7fb8f5;
+  border-radius: 10px;
+  padding: 1.25rem;
+  background: #fff;
+}
+
+.todays-orders h2 {
+  margin: 0 0 1rem;
+  font-size: 1.05rem;
+}
+
+.todays-orders__error {
+  color: #d64545;
+}
+
+.todays-orders__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.todays-orders__table th {
+  text-align: left;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: #999;
+  text-transform: uppercase;
+  padding: 0.5rem 0.4rem;
+  border-bottom: 1px solid #eee;
+}
+
+.todays-orders__table td {
+  padding: 0.65rem 0.4rem;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.todays-orders__customer {
+  font-weight: 600;
+}
+
+.todays-orders__time {
+  color: #888;
+}
+
+.todays-orders__price-col {
+  text-align: right;
+  font-weight: 600;
+}
+
+.todays-orders__table tfoot td {
+  border-bottom: none;
+  border-top: 1px solid #eee;
+  padding-top: 0.75rem;
+  font-weight: 700;
+}
+
+.todays-orders__total-revenue {
+  font-size: 0.95rem;
+}
+
+@media (max-width: 560px) {
+  .todays-orders__table thead {
+    display: none;
+  }
+
+  .todays-orders__table tr {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .todays-orders__price-col {
+    text-align: left;
+  }
+}

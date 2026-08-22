@@ -1,63 +1,33 @@
-import { Link, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import "./Navbar.css";
 
-function Navbar({ user }) {
-  const location = useLocation();
-
-  const isActive = (path) => location.pathname === path;
+function Navbar() {
+  const { user } = useAuth();
 
   return (
-    <nav className="nav">
-      <Link to="/" className="brand">
-        <div className="brand-mark">M</div>
-        <span className="brand-name">Mealy</span>
-      </Link>
+    <header className="navbar">
+      <div className="navbar__brand">
+        <span className="navbar__logo">M</span>
+        Mealy
+      </div>
 
-      <div className="nav-links">
-        <Link
-          to="/"
-          className={`nav-link ${isActive("/") ? "selected" : ""}`}
-        >
+      <nav className="navbar__links">
+        <NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")}>
           Daily Menu
-        </Link>
-        <Link
-          to="/orders"
-          className={`nav-link ${isActive("/orders") ? "selected" : ""}`}
-        >
-          My Orders
-        </Link>
-        <Link
-          to="/profile"
-          className={`nav-link ${isActive("/profile") ? "selected" : ""}`}
-        >
-          Profile
-        </Link>
+        </NavLink>
         {user?.role === "admin" && (
-          <Link
-            to="/admin"
-            className={`nav-link ${isActive("/admin") ? "selected" : ""}`}
-          >
-            Admin
-          </Link>
+          <NavLink to="/admin" className={({ isActive }) => (isActive ? "active" : "")}>
+            Admin Panel
+          </NavLink>
         )}
-      </div>
+      </nav>
 
-      <div className="user-profile">
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          aria-hidden="true"
-          width="22"
-          height="22"
-        >
-          <circle cx="12" cy="8" r="4" />
-          <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
-        </svg>
-        <span>{user?.name || "Guest"}</span>
+      <div className="navbar__user">
+        <span className="navbar__user-icon">&#9679;</span>
+        {user?.name ?? "Guest"}
       </div>
-    </nav>
+    </header>
   );
 }
 

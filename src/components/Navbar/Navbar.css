@@ -1,78 +1,71 @@
-.nav {
-  background: var(--color-surface);
-  border-bottom: 1px solid var(--color-border);
-  height: 60px;
-  padding: 0 40px;
+.navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  background: #0d0d0d;
+  color: #fff;
+  padding: 0.9rem 1.5rem;
 }
 
-.nav .brand {
-  text-decoration: none;
-}
-
-.nav-links {
+.navbar__brand {
   display: flex;
-  gap: 24px;
   align-items: center;
-}
-
-.nav-link {
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--color-text-muted);
-  text-decoration: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  padding: 4px 0;
-  transition: color 0.15s;
-}
-
-.nav-link:hover {
-  color: var(--color-text);
-}
-
-.nav-link.selected {
+  gap: 0.5rem;
   font-weight: 700;
-  color: var(--color-text);
+  font-size: 1.05rem;
 }
 
-.nav-link.selected::after {
-  content: "";
-  width: 16px;
-  height: 2px;
-  background: var(--color-text);
+.navbar__logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  font-size: 0.8rem;
 }
 
-.user-profile {
+.navbar__links {
+  display: flex;
+  gap: 1.75rem;
+}
+
+.navbar__links a {
+  color: #bbb;
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding-bottom: 4px;
+}
+
+.navbar__links a.active {
+  color: #fff;
+  font-weight: 600;
+  border-bottom: 2px solid #fff;
+}
+
+.navbar__user {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--color-text-muted);
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  color: #ddd;
 }
 
-.user-profile svg {
-  color: var(--color-text-muted);
+.navbar__user-icon {
+  font-size: 0.6rem;
+  border: 1px solid #666;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media (max-width: 600px) {
-  .nav {
-    padding: 0 16px;
-  }
-
-  .nav-links {
-    gap: 12px;
-  }
-
-  .nav-link {
-    font-size: 13px;
+  .navbar {
+    flex-wrap: wrap;
+    gap: 0.75rem;
   }
 }
