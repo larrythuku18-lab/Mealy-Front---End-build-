@@ -104,12 +104,6 @@ body {
   cursor: pointer;
 }
 
-section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .auth-page {
   min-height: 100vh;
   display: flex;
@@ -202,31 +196,4 @@ section {
 
 .input-primary input::placeholder {
   color: var(--color-text-placeholder);
-}
-
-.menu-main {
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-}
-
-.menu-header {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.menu-header .eyebrow {
-  font-size: 14px;
-  font-weight: 600;
-  text-transform: uppercase;
-  color: var(--color-text-placeholder);
-}
-
-.menu-header h1 {
-  font-size: 28px;
-  font-weight: 800;
-  color: var(--color-text);
-  margin: 0;
 }
