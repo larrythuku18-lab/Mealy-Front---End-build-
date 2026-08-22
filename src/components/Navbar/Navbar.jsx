@@ -14,10 +14,7 @@ function Navbar({ user }) {
       </Link>
 
       <div className="nav-links">
-        <Link
-          to="/"
-          className={`nav-link ${isActive("/") ? "selected" : ""}`}
-        >
+        <Link to="/" className={`nav-link ${isActive("/") ? "selected" : ""}`}>
           Daily Menu
         </Link>
         <Link
@@ -25,12 +22,6 @@ function Navbar({ user }) {
           className={`nav-link ${isActive("/orders") ? "selected" : ""}`}
         >
           My Orders
-        </Link>
-        <Link
-          to="/profile"
-          className={`nav-link ${isActive("/profile") ? "selected" : ""}`}
-        >
-          Profile
         </Link>
         {user?.role === "admin" && (
           <Link
@@ -42,7 +33,10 @@ function Navbar({ user }) {
         )}
       </div>
 
-      <div className="user-profile">
+      <Link
+        to="/profile"
+        className={`user-profile ${isActive("/profile") ? "selected" : ""}`}
+      >
         <svg
           viewBox="0 0 24 24"
           fill="none"
@@ -56,7 +50,7 @@ function Navbar({ user }) {
           <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
         </svg>
         <span>{user?.name || "Guest"}</span>
-      </div>
+      </Link>
     </nav>
   );
 }
