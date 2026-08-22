@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDailyOptions } from "../../contexts/DailyOptionsContext";
 import "./DailyMealOptions.css";
-import DailyMealOptionCard from "../DailyMealOptionCard/DailyMealOptionCard";
+import MealOptionCard from "../MealOptionCard/MealOptionCard";
 
 function DailyMealOptions() {
   const { options: dailyOptions } = useDailyOptions();
@@ -19,7 +19,7 @@ function DailyMealOptions() {
         {dailyOptions.map((option) => {
           const qty = selections[option.id] || 0;
           return (
-            <DailyMealOptionCard
+            <MealOptionCard
               key={option.id}
               option={option}
               qty={qty}

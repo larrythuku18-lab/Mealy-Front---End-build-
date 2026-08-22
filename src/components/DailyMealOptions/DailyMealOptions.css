@@ -3,6 +3,26 @@
   flex-direction: column;
   gap: 16px;
   width: 100%;
+  position: relative;
+}
+
+.daily-options::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -40px;
+  width: 120px;
+  height: 100%;
+  background: linear-gradient(to right, transparent, var(--color-bg));
+  pointer-events: none;
+  z-index: 1;
+}
+
+@media (max-width: 600px) {
+  .daily-options::after {
+    right: -16px;
+    width: 48px;
+  }
 }
 
 .daily-options h2 {

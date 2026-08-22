@@ -1,7 +1,7 @@
 .daily-option {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-2xl);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -9,7 +9,7 @@
     border-color 0.15s,
     box-shadow 0.15s;
   min-width: 220px;
-  max-width: 260px;
+  max-width: 280px;
   flex-shrink: 0;
   scroll-snap-align: start;
 }
@@ -23,9 +23,11 @@
 }
 
 .daily-option-image {
-  height: 140px;
+  height: 160px;
   overflow: hidden;
   background: var(--color-surface-muted);
+  margin: 8px;
+  border-radius: var(--radius-xl);
 }
 
 .daily-option-image img {
@@ -35,7 +37,7 @@
 }
 
 .daily-option-body {
-  padding: 16px;
+  padding: 12px;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -57,11 +59,17 @@
 }
 
 .daily-option-footer {
-  padding: 0 16px 16px;
+  padding: 0 12px 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
+}
+
+.daily-option-footer-l {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .daily-option .meal-price {
@@ -70,9 +78,20 @@
   color: var(--color-text);
 }
 
+.daily-option .meal-rating {
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+}
+
+.daily-option .meal-rating p {
+  font-size: 12px;
+  margin: 0;
+}
+
 .daily-option .add-meal-btn {
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   padding: 8px 16px;
   font-size: 13px;
   font-weight: 600;
