@@ -3,6 +3,7 @@ import { meals, categories } from "../../data/mockData";
 import "./FullMenu.css";
 import MealOptionCard from "../MealOptionCard/MealOptionCard";
 import { ChevronDown } from "lucide-react";
+import InputPrimary from "../ui/InputPrimary";
 
 function FullMenu() {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -49,7 +50,12 @@ function FullMenu() {
           </div>
         </div>
         <div className="search-bar">
-          <input placeholder="Search meals..." />
+          <InputPrimary
+            labelExists={false}
+            title="Search meals"
+            id="search-meals"
+            placeholder="Search meals..."
+          />
           <button>Search</button>
         </div>
       </div>

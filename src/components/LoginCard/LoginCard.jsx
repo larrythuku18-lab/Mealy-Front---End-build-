@@ -36,6 +36,7 @@ function LoginCard() {
         <div className="input-container">
           <InputPrimary
             label="Email Address"
+            title="Enter login email"
             type="email"
             id="email"
             placeholder="john@example.com"
@@ -44,6 +45,7 @@ function LoginCard() {
           />
           <InputPrimary
             label="Password"
+            title="Enter login password"
             type="password"
             id="password"
             placeholder="••••••••"

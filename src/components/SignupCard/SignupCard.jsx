@@ -45,6 +45,7 @@ function SignupCard() {
         <div className="input-container">
           <InputPrimary
             label="Full Name"
+            title="Enter full name"
             type="text"
             id="full-name"
             placeholder="e.g. Jane Smith"
@@ -53,6 +54,7 @@ function SignupCard() {
           />
           <InputPrimary
             label="Email Address"
+            title="Enter signup email"
             type="email"
             id="email"
             placeholder="john@example.com"
@@ -61,6 +63,7 @@ function SignupCard() {
           />
           <InputPrimary
             label="Password"
+            title="Enter signup password"
             type="password"
             id="password"
             placeholder="••••••••"
@@ -69,6 +72,7 @@ function SignupCard() {
           />
           <InputPrimary
             label="Confirm Password"
+            title="Confirm signup password"
             type="password"
             id="confirm-password"
             placeholder="••••••••"
