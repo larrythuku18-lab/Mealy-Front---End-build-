@@ -15,16 +15,22 @@ function FullMenu() {
   return (
     <section className="full-menu">
       <h2>Full Menu</h2>
-      <div className="category-bar">
-        {categories.map((cat) => (
-          <button
-            key={cat.id}
-            className={`category-btn ${activeCategory === cat.name ? "active" : ""}`}
-            onClick={() => setActiveCategory(cat.name)}
-          >
-            {cat.name}
-          </button>
-        ))}
+      <div>
+        <div className="category-bar">
+          {categories.map((cat) => (
+            <button
+              key={cat.id}
+              className={`category-btn ${activeCategory === cat.name ? "active" : ""}`}
+              onClick={() => setActiveCategory(cat.name)}
+            >
+              {cat.name}
+            </button>
+          ))}
+        </div>
+        <div className="search-bar">
+          <input placeholder="Search meals..." />
+          <button>Search</button>
+        </div>
       </div>
 
       {filteredMeals.length > 0 ? (
