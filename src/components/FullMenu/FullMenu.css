@@ -13,13 +13,18 @@
 .full-menu > div:nth-child(2) {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.full-menu > div:nth-child(2) > div:nth-child(1) {
+  display: flex;
+  gap: 8px;
 }
 
 .category-bar {
   display: flex;
   gap: 8px;
   overflow-x: auto;
-  padding-bottom: 4px;
 }
 
 .category-btn {
