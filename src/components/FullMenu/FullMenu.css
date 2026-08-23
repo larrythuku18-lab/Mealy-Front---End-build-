@@ -51,6 +51,45 @@
   border-color: var(--color-text);
 }
 
+.sort-bar {
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+}
+
+.select-wrapper {
+  position: relative;
+}
+
+.sort-bar select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 10px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s;
+  width: 98px;
+}
+
+.select-icon {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  width: 16px;
+  height: 16px;
+}
+
 .search-bar {
   height: 40px;
   width: 20%;
@@ -65,13 +104,13 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-pill);
   flex-grow: 1;
-  padding: 0 16px;
+  padding: 10px 16px;
 }
 
 .search-bar button {
   height: 100%;
   border-radius: var(--radius-pill);
-  padding: 0 12px;
+  padding: 10px 16px;
   background: var(--color-text);
   color: #fff;
   border: none;
@@ -80,8 +119,26 @@
 /* Card Grid Layout */
 .meal-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(6, 1fr);
   gap: 16px;
+}
+
+@media (max-width: 1200px) {
+  .meal-list {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 800px) {
+  .meal-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .meal-list {
+    grid-template-columns: 1fr;
+  }
 }
 
 .empty-state {
