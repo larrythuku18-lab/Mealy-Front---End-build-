@@ -1,5 +1,8 @@
 :root {
   /* Colors */
+  --color-primary: #ffcb05;
+  --color-success: #8bc34a;
+  --color-failure: #e9351c;
   --color-bg: #f9fafb;
   --color-surface: #ffffff;
   --color-surface-muted: #f3f4f6;
