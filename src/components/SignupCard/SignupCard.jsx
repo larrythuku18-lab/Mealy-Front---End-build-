@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import InputPrimary from "../ui/InputPrimary";
 import BtnPrimary from "../ui/BtnPrimary";
+import "../../Auth.css";
 import "./SignupCard.css";
 
 function SignupCard() {
