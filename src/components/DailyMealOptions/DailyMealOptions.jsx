@@ -4,6 +4,14 @@ import "./DailyMealOptions.css";
 import MealOptionCard from "../MealOptionCard/MealOptionCard";
 
 function DailyMealOptions() {
+  const today = new Date();
+  const dateStr = today.toLocaleDateString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
   const { options: dailyOptions } = useDailyOptions();
   const [selections, setSelections] = useState({}); // Track card selection state
 
@@ -14,6 +22,10 @@ function DailyMealOptions() {
 
   return (
     <section className="daily-options">
+      <div className="menu-header">
+        <span className="eyebrow">Today's Selection</span>
+        <h1>{dateStr}</h1>
+      </div>
       <div className="daily-options-grid">
         {dailyOptions.map((option) => {
           const qty = selections[option.id] || 0;
