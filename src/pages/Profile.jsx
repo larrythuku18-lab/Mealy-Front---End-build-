@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Navbar from "../components/Navbar/Navbar";
-import BtnPrimary from "../components/ui/BtnPrimary";
-import InputPrimary from "../components/ui/InputPrimary";
+import Btn from "../components/ui/Btn";
+import Input from "../components/ui/Input";
 import { currentUser } from "../data/mockData";
 import "./Profile.css";
 
@@ -62,46 +62,44 @@ function Profile() {
                   <span>{currentUser.joinedDate}</span>
                 </div>
                 <div className="profile-actions">
-                  <BtnPrimary onClick={() => setIsEditing(true)}>
-                    Edit Profile
-                  </BtnPrimary>
+                  <Btn onClick={() => setIsEditing(true)}>Edit Profile</Btn>
                 </div>
               </div>
             ) : (
               <form className="profile-form" onSubmit={handleSave}>
-                <InputPrimary
+                <Input
                   label="Full Name"
                   id="name"
                   value={form.name}
                   onChange={handleChange}
                 />
-                <InputPrimary
+                <Input
                   label="Email Address"
                   type="email"
                   id="email"
                   value={form.email}
                   onChange={handleChange}
                 />
-                <InputPrimary
+                <Input
                   label="Phone"
                   type="tel"
                   id="phone"
                   value={form.phone}
                   onChange={handleChange}
                 />
-                <InputPrimary
+                <Input
                   label="Address"
                   id="address"
                   value={form.address}
                   onChange={handleChange}
                 />
                 <div className="profile-actions">
-                  <BtnPrimary variant="cancel" onClick={() => setIsEditing(false)}>
+                  <Btn variant="cancel" onClick={() => setIsEditing(false)}>
                     Cancel
-                  </BtnPrimary>
-                  <BtnPrimary variant="save" type="submit">
+                  </Btn>
+                  <Btn variant="save" type="submit">
                     Save Changes
-                  </BtnPrimary>
+                  </Btn>
                 </div>
               </form>
             )}

@@ -1,3 +1,4 @@
+import Btn from "../ui/Btn";
 import "./MealOptionCard.css";
 import { Star } from "lucide-react";
 
@@ -43,13 +44,14 @@ function MealOptionCard({ option, qty, setSelections }) {
           </div>
         </div>
         {qty === 0 ? (
-          <button
+          <Btn
             type="button"
-            className="add-meal-btn"
+            title="Add meal button"
+            variant="tertiary"
             onClick={() => handleAdd(option.id)}
           >
             Add Meal
-          </button>
+          </Btn>
         ) : (
           <div className="quantity-stepper">
             <button

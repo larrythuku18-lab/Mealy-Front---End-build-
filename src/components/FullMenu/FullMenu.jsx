@@ -3,7 +3,8 @@ import { meals, categories } from "../../data/mockData";
 import "./FullMenu.css";
 import MealOptionCard from "../MealOptionCard/MealOptionCard";
 import { ChevronDown } from "lucide-react";
-import InputPrimary from "../ui/InputPrimary";
+import Input from "../ui/Input";
+import Btn from "../ui/Btn";
 
 function FullMenu() {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -20,15 +21,26 @@ function FullMenu() {
       <div>
         <div>
           <div className="category-bar">
-            {categories.map((cat) => (
-              <button
-                key={cat.id}
-                className={`category-btn ${activeCategory === cat.name ? "active" : ""}`}
-                onClick={() => setActiveCategory(cat.name)}
-              >
-                {cat.name}
-              </button>
-            ))}
+            {categories.map((cat) =>
+              activeCategory === cat.name ? (
+                <Btn
+                  key={cat.id}
+                  title={`${cat.name} category button`}
+                  onClick={() => setActiveCategory(cat.name)}
+                >
+                  {cat.name}
+                </Btn>
+              ) : (
+                <Btn
+                  key={cat.id}
+                  title={`${cat.name} category button`}
+                  variant="secondary"
+                  onClick={() => setActiveCategory(cat.name)}
+                >
+                  {cat.name}
+                </Btn>
+              ),
+            )}
           </div>
           <div className="sort-bar">
             <div className="select-wrapper">
@@ -50,13 +62,15 @@ function FullMenu() {
           </div>
         </div>
         <div className="search-bar">
-          <InputPrimary
+          <Input
             labelExists={false}
-            title="Search meals"
+            title="Search meals input"
             id="search-meals"
             placeholder="Search meals..."
           />
-          <button>Search</button>
+          <Btn title="Search meals button" type="submit">
+            Search
+          </Btn>
         </div>
       </div>
 

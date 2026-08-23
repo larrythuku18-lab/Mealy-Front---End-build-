@@ -90,23 +90,6 @@
   margin: 0;
 }
 
-.daily-option .add-meal-btn {
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: 8px 16px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--color-text);
-  background: transparent;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: background 0.15s;
-}
-
-.daily-option .add-meal-btn:hover {
-  background: var(--color-surface-muted);
-}
-
 .quantity-stepper {
   display: flex;
   align-items: center;

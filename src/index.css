@@ -71,19 +71,55 @@ body {
 .btn-primary {
   background: var(--color-text);
   color: #fff;
-  border: none;
+  border: 1px solid var(--color-text);
   border-radius: var(--radius-pill);
-  padding: 12px;
-  font-weight: 600;
-  font-size: 15px;
+  padding: 10px 16px;
+  font-weight: 500;
+  font-size: 13px;
   cursor: pointer;
   width: 100%;
+  transition: all 0.15s ease-in-out;
 }
 
 .btn-primary--inline {
   width: auto;
   padding: 10px 16px;
   font-size: 13px;
+}
+
+.btn-secondary {
+  padding: 10px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease-in-out;
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-border-strong);
+  color: var(--color-text);
+}
+
+.btn-tertiary {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text);
+  background: transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+.btn-tertiary:hover {
+  background: var(--color-surface-muted);
 }
 
 .btn-cancel {
@@ -127,7 +163,6 @@ body {
 
 .input-primary input {
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
   border-radius: var(--radius-pill);
   padding: 10px 16px;
   font-size: 13px;

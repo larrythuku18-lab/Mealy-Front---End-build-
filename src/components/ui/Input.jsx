@@ -1,4 +1,4 @@
-function InputPrimary({
+function Input({
   label,
   labelExists = true,
   type = "text",
@@ -26,4 +26,4 @@ function InputPrimary({
   );
 }
 
-export default InputPrimary;
+export default Input;

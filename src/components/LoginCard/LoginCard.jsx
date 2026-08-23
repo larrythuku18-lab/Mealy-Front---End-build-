@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import InputPrimary from "../ui/InputPrimary";
-import BtnPrimary from "../ui/BtnPrimary";
+import Input from "../ui/Input";
+import Btn from "../ui/Btn";
 import "../../Auth.css";
 import "./LoginCard.css";
 
@@ -34,7 +34,7 @@ function LoginCard() {
 
       <form className="auth-form" onSubmit={handleSubmit}>
         <div className="input-container">
-          <InputPrimary
+          <Input
             label="Email Address"
             title="Enter login email"
             type="email"
@@ -43,7 +43,7 @@ function LoginCard() {
             value={form.email}
             onChange={handleChange}
           />
-          <InputPrimary
+          <Input
             label="Password"
             title="Enter login password"
             type="password"
@@ -54,7 +54,7 @@ function LoginCard() {
           />
         </div>
 
-        <BtnPrimary type="submit">Log In</BtnPrimary>
+        <Btn type="submit">Log In</Btn>
       </form>
 
       <div className="auth-footer">
