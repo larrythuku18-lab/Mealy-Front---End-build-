@@ -51,27 +51,11 @@
   background: var(--color-text);
 }
 
-.user-profile {
+.nav-opts {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--color-text-muted);
-  text-decoration: none;
-}
-
-.user-profile svg {
-  color: var(--color-text-muted);
-}
-
-.user-profile.selected {
-  font-weight: 700;
-  color: var(--color-text);
-}
-
-.user-profile.selected svg {
-  color: var(--color-text);
+  gap: 16px;
+  height: 100%;
 }
 
 @media (max-width: 600px) {

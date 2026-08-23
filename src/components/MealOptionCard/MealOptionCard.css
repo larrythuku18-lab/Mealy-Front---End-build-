@@ -69,7 +69,7 @@
 .daily-option-footer-l {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
 }
 
 .daily-option .meal-price {
@@ -82,6 +82,7 @@
   color: var(--color-text-muted);
   display: flex;
   align-items: center;
+  gap: 4px;
 }
 
 .daily-option .meal-rating p {
