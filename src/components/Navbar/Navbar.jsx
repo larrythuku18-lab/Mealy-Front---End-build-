@@ -31,12 +31,16 @@ function Navbar({ user }) {
       <div className="nav-opts">
         <Link
           to="/favorites"
+          title="Favorites"
+          aria-label="Favorites"
           className={`nav-link ${isActive("/favorites") ? "selected" : ""}`}
         >
           <Heart />
         </Link>
         <Link
           to="/orders"
+          title="Orders"
+          aria-label="Orders"
           className={`nav-link ${isActive("/orders") ? "selected" : ""}`}
         >
           <ShoppingBag />
@@ -44,6 +48,8 @@ function Navbar({ user }) {
 
         <Link
           to="/profile"
+          title="Profile"
+          aria-label="Profile"
           className={`nav-link ${isActive("/profile") ? "selected" : ""}`}
         >
           <User />
