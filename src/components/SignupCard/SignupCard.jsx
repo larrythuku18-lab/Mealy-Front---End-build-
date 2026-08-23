@@ -31,7 +31,7 @@ function SignupCard() {
   return (
     <div className="auth-card">
       <div className="brand">
-        <div className="brand-mark">M</div>
+        <img src="https://res.cloudinary.com/diwkfbsgv/image/upload/v1787408999/Kibandaski-brand_nft37v.png" />
         <span className="brand-name">Mealy</span>
       </div>
 
