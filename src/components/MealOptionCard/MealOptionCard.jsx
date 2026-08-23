@@ -1,8 +1,10 @@
 import Btn from "../ui/Btn";
 import "./MealOptionCard.css";
-import { Star } from "lucide-react";
+import { Heart, Star } from "lucide-react";
+import { useState } from "react";
 
 function MealOptionCard({ option, qty, setSelections }) {
+  const [isHovered, setIsHovered] = useState(false);
   const handleAdd = (optionId) => {
     setSelections((prev) => ({
       ...prev,
@@ -25,8 +27,15 @@ function MealOptionCard({ option, qty, setSelections }) {
     <article
       key={option.id}
       className={`daily-option ${qty > 0 ? "selected" : ""}`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       <div className="daily-option-image">
+        <Heart
+          aria-label="Add to favorites"
+          className={`favorite-icon ${isHovered ? "" : "hidden"}`}
+          color="white"
+        />
         <img src={option.image} alt={option.name} />
       </div>
       <div className="daily-option-body">
