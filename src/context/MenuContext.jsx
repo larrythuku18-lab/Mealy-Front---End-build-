@@ -9,7 +9,7 @@ const DEMO_MEAL_OPTION_IDS = [1, 2, 3];
 export function MenuProvider({ children }) {
   const [mealOptionIds, setMealOptionIds] = useState(DEMO_MEAL_OPTION_IDS);
   const [isPublished, setIsPublished] = useState(true);
-  const [status, setStatus] = useState("idle"); // "idle" | "loading" | "failed"
+  const [status, setStatus] = useState("idle"); 
   const [error, setError] = useState(null);
 
   const fetchTodaysMenu = async () => {
@@ -26,7 +26,7 @@ export function MenuProvider({ children }) {
 
   const publishMenu = async (ids) => {
   
-    setMealOptionIds(ids); r
+    setMealOptionIds(ids);
     setIsPublished(true);
   };
 
@@ -34,6 +34,7 @@ export function MenuProvider({ children }) {
 
   return <MenuContext.Provider value={value}>{children}</MenuContext.Provider>;
 }
+
 
 
 export function useMenu() {

@@ -1,11 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-
- 
 const initialState = {
   user: null,
   token: null,
-  status: "idle", // "idle" | "loading" | "succeeded" | "failed"
+  status: "idle", 
   error: null,
 };
 
@@ -45,12 +42,10 @@ export default authSlice.reducer;
 export const selectCurrentUser = (state) => state.auth.user;
 export const selectIsAuthenticated = (state) => !!state.auth.token;
 export const selectAuthStatus = (state) => state.auth.status;
-
-
 export const login = (credentials) => async (dispatch) => {
   dispatch(authRequestStarted());
   try {
- 
+  
   } catch (err) {
     dispatch(authRequestFailed(err.message));
     throw err;
@@ -61,7 +56,7 @@ export const login = (credentials) => async (dispatch) => {
 export const signup = (details) => async (dispatch) => {
   dispatch(authRequestStarted());
   try {
-  
+   
   } catch (err) {
     dispatch(authRequestFailed(err.message));
     throw err;

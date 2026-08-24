@@ -1,14 +1,17 @@
-import { Navigate, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
+import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
-
-
+import Menu from "../pages/Menu";
 function CustomerRoutes() {
   return (
     <>
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
-      <Route path="/" element={<Navigate to="/admin" replace />} />
+
+      <Route element={<ProtectedRoute />}>
+        <Route path="/" element={<Menu />} />
+      </Route>
     </>
   );
 }

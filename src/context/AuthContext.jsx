@@ -4,7 +4,7 @@ const AuthContext = createContext(null);
 
 
 const DEV_BYPASS_AUTH = true;
-const DEV_BYPASS_ROLE = "admin"; // "admin" | "customer"
+const DEV_BYPASS_ROLE = "admin"; 
 
 const DEV_USER = {
   id: "dev-user",
@@ -14,11 +14,10 @@ const DEV_USER = {
   catererId: "dev-caterer",
 };
 
-
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(DEV_BYPASS_AUTH ? DEV_USER : null);
   const [token, setToken] = useState(DEV_BYPASS_AUTH ? "dev-bypass-token" : null);
-  const [status, setStatus] = useState("idle"); // "idle" | "loading" | "failed"
+  const [status, setStatus] = useState("idle"); 
   const [error, setError] = useState(null);
 
   
@@ -26,7 +25,8 @@ export function AuthProvider({ children }) {
     setStatus("loading");
     setError(null);
     try {
-    
+     
+      setStatus("idle");
     } catch (err) {
       setStatus("failed");
       setError(err.message);
@@ -34,12 +34,13 @@ export function AuthProvider({ children }) {
     }
   };
 
- 
+  
   const signup = async (details) => {
     setStatus("loading");
     setError(null);
     try {
-   
+      
+      setStatus("idle");
     } catch (err) {
       setStatus("failed");
       setError(err.message);

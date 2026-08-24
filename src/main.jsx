@@ -6,6 +6,7 @@ import { AuthProvider } from './context/AuthContext.jsx'
 import { MealOptionsProvider } from './context/MealOptionsContext.jsx'
 import { MenuProvider } from './context/MenuContext.jsx'
 import { OrdersProvider } from './context/OrdersContext.jsx'
+import { DailyOptionsProvider } from './contexts/DailyOptionsContext.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -13,7 +14,9 @@ createRoot(document.getElementById('root')).render(
       <MealOptionsProvider>
         <MenuProvider>
           <OrdersProvider>
-            <App />
+            <DailyOptionsProvider>
+              <App />
+            </DailyOptionsProvider>
           </OrdersProvider>
         </MenuProvider>
       </MealOptionsProvider>

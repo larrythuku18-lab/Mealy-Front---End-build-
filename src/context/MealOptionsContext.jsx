@@ -61,7 +61,6 @@ export function MealOptionsProvider({ children }) {
   return <MealOptionsContext.Provider value={value}>{children}</MealOptionsContext.Provider>;
 }
 
-
 export function useMealOptions() {
   const ctx = useContext(MealOptionsContext);
   if (!ctx) throw new Error("useMealOptions must be used within a MealOptionsProvider");

@@ -17,6 +17,7 @@ function DailyMealOptionCard() {
     setSelections((prev) => {
       const current = prev[optionId] || 0;
       if (current <= 1) {
+        
         const { [optionId]: _, ...rest } = prev;
         return rest;
       }

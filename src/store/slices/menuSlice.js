@@ -1,12 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-
-
 const initialState = {
   date: new Date().toISOString().slice(0, 10),
   mealOptionIds: [],
   isPublished: false,
-  status: "idle", // "idle" | "loading" | "succeeded" | "failed"
+  status: "idle", 
   error: null,
 };
 
@@ -43,13 +41,13 @@ export const fetchTodaysMenu = () => async (dispatch) => {
   dispatch(fetchStarted());
   try {
    
-    dispatch(fetchSucceeded({ mealOptionIds: [], isPublished: false })); // placeholder
+    dispatch(fetchSucceeded({ mealOptionIds: [], isPublished: false })); 
   } catch (err) {
     dispatch(fetchFailed(err.message));
   }
 };
 
 export const publishMenu = (mealOptionIds) => async (dispatch) => {
- 
-  dispatch(menuPublished({ mealOptionIds })); // placeholder
+
+  dispatch(menuPublished({ mealOptionIds })); 
 };
