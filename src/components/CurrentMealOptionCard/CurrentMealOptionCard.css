@@ -1,0 +1,56 @@
+.current-option {
+  position: relative;
+  width: 1800px;
+  height: 315px;
+  border-radius: var(--radius-2xl);
+  background-image: url("https://i.pinimg.com/736x/a7/aa/ce/a7aace04c023adb95039697c0a1f4528.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: var(--color-surface);
+}
+
+.current-option::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(80px);
+  -webkit-backdrop-filter: blur(80px);
+  mask-image: linear-gradient(to top, black 0%, black 50%, transparent 90%);
+  -webkit-mask-image: linear-gradient(to top, black 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.current-option::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(80px);
+  -webkit-backdrop-filter: blur(80px);
+  mask-image: linear-gradient(45deg, black 0%, black 50%, transparent 90%);
+  -webkit-mask-image: linear-gradient(45deg, black 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.current-option .content {
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 50%;
+}
+
+.current-option .content p,
+h3 {
+  margin: 0;
+}
+
+.current-option .content .ratings {
+  display: flex;
+  gap: 2px;
+}

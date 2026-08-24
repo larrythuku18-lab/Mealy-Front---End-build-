@@ -25,6 +25,11 @@
   }
 }
 
+.grid-wrapper {
+  display: flex;
+  gap: 16px;
+}
+
 .daily-options-grid {
   display: flex;
   gap: 16px;
