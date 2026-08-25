@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   items: [],
-  status: "idle", // "idle" | "loading" | "succeeded" | "failed"
+  status: "idle", 
   error: null,
 };
 
@@ -55,8 +55,8 @@ export const selectMealOptionsStatus = (state) => state.mealOptions.status;
 export const fetchMealOptions = () => async (dispatch) => {
   dispatch(fetchStarted());
   try {
-
-    dispatch(fetchSucceeded([])); // placeholder until backend endpoint exists
+   
+    dispatch(fetchSucceeded([])); 
   } catch (err) {
     dispatch(fetchFailed(err.message));
   }
@@ -64,15 +64,15 @@ export const fetchMealOptions = () => async (dispatch) => {
 
 export const createMealOption = (mealOption) => async (dispatch) => {
  
-  dispatch(mealOptionAdded({ id: Date.now(), ...mealOption })); // placeholder
+  dispatch(mealOptionAdded({ id: Date.now(), ...mealOption }));
 };
 
 export const updateMealOption = (id, changes) => async (dispatch) => {
- 
-  dispatch(mealOptionUpdated({ id, ...changes })); // placeholder
+
+  dispatch(mealOptionUpdated({ id, ...changes })); 
 };
 
 export const deleteMealOption = (id) => async (dispatch) => {
- 
+
   dispatch(mealOptionRemoved(id));
 };

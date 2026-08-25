@@ -13,7 +13,7 @@ function TodaysOrders() {
 
   useEffect(() => {
     fetchTodaysOrders();
-   
+    
   }, []);
 
   return (

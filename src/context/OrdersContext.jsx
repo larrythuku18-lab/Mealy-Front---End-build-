@@ -16,12 +16,10 @@ const DEMO_ORDERS = [
   { id: 4, customerName: "Joy Mwongera", mealOptionName: "Veggie Pasta", price: 1200, createdAt: todayAt(11, 2) },
 ];
 
-
- 
 export function OrdersProvider({ children }) {
- 
+
   const [items, setItems] = useState(DEMO_ORDERS);
-  const [status, setStatus] = useState("idle"); // "idle" | "loading" | "failed"
+  const [status, setStatus] = useState("idle"); 
   const [error, setError] = useState(null);
 
   const fetchTodaysOrders = async () => {
@@ -45,7 +43,6 @@ export function OrdersProvider({ children }) {
 
   return <OrdersContext.Provider value={value}>{children}</OrdersContext.Provider>;
 }
-
 
 export function useOrders() {
   const ctx = useContext(OrdersContext);

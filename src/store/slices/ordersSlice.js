@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   items: [],
-  status: "idle", // "idle" | "loading" | "succeeded" | "failed"
+  status: "idle", 
   error: null,
 };
 
@@ -36,8 +36,8 @@ export const selectTotalRevenue = (state) =>
 export const fetchTodaysOrders = () => async (dispatch) => {
   dispatch(fetchStarted());
   try {
-    
-    dispatch(fetchSucceeded([])); // placeholder
+   
+    dispatch(fetchSucceeded([])); 
   } catch (err) {
     dispatch(fetchFailed(err.message));
   }
