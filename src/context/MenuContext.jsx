@@ -12,25 +12,25 @@ export function MenuProvider({ children }) {
   const [status, setStatus] = useState("idle"); 
   const [error, setError] = useState(null);
 
-const fetchTodaysMenu = async () => {
-     setStatus("loading");
-     setError(null);
-     try {
-      
-       setStatus("idle");
-     } catch (err) {
-       setStatus("failed");
-       setError(err.message);
-     }
-   };
+  const fetchTodaysMenu = async () => {
+    setStatus("loading");
+    setError(null);
+    try {
+     
+      setStatus("idle");
+    } catch (err) {
+      setStatus("failed");
+      setError(err.message);
+    }
+  };
 
-   const publishMenu = async (ids) => {
-   
-     setMealOptionIds(ids);
-     setIsPublished(true);
-   };
+  const publishMenu = async (ids) => {
+  
+    setMealOptionIds(ids);
+    setIsPublished(true);
+  };
 
-   const value = { mealOptionIds, isPublished, status, error, fetchTodaysMenu, publishMenu };
+  const value = { mealOptionIds, isPublished, status, error, fetchTodaysMenu, publishMenu };
 
   return <MenuContext.Provider value={value}>{children}</MenuContext.Provider>;
 }
