@@ -1,14 +1,16 @@
-import { BrowserRouter, Routes } from "react-router-dom";
-import CustomerRoutes from "./routes/CustomerRoutes";
-import AdminRoutes from "./routes/AdminRoutes";
-
+import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Admin from "./pages/Admin";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {CustomerRoutes()}
-        {AdminRoutes()}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/admin" element={<Admin />} />
+        <Route path="*" element={<Navigate to="/admin" replace />} />
       </Routes>
     </BrowserRouter>
   );

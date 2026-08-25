@@ -24,11 +24,11 @@ export function MenuProvider({ children }) {
     }
   };
 
-  const publishMenu = async (ids) => {
-  
-    setMealOptionIds(ids); r
-    setIsPublished(true);
-  };
+const publishMenu = async (ids) => {
+   
+     setMealOptionIds(ids);
+     setIsPublished(true);
+   };
 
   const value = { mealOptionIds, isPublished, status, error, fetchTodaysMenu, publishMenu };
 
