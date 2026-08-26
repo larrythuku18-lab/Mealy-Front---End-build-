@@ -3,8 +3,10 @@ import { useDailyOptions } from "../../contexts/DailyOptionsContext";
 import "./DailyMealOptionCard.css";
 
 function DailyMealOptionCard() {
-  const { options: dailyOptions } = useDailyOptions();
+  const { options: dailyOptions, status, placeOrder } = useDailyOptions();
   const [selections, setSelections] = useState({});
+  const [orderPlacing, setOrderPlacing] = useState(false);
+  const [orderSuccess, setOrderSuccess] = useState(false);
 
   const handleAdd = (optionId) => {
     setSelections((prev) => ({
@@ -17,12 +19,25 @@ function DailyMealOptionCard() {
     setSelections((prev) => {
       const current = prev[optionId] || 0;
       if (current <= 1) {
-        
         const { [optionId]: _, ...rest } = prev;
         return rest;
       }
       return { ...prev, [optionId]: current - 1 };
     });
+  };
+
+  const handlePlaceOrder = async () => {
+    setOrderPlacing(true);
+    try {
+      await placeOrder(selections);
+      setSelections({});
+      setOrderSuccess(true);
+      setTimeout(() => setOrderSuccess(false), 3000);
+    } catch (err) {
+      alert(err.message);
+    } finally {
+      setOrderPlacing(false);
+    }
   };
 
   const selectedCount = Object.values(selections).reduce((a, b) => a + b, 0);
@@ -33,6 +48,16 @@ function DailyMealOptionCard() {
   return (
     <section className="daily-options">
       <h2>Daily Options</h2>
+
+      {status === "loading" && <p>Loading today's menu...</p>}
+      {status === "failed" && <p>Could not load today's menu.</p>}
+
+      {orderSuccess && (
+        <p style={{ color: "#16a34a", fontWeight: 600 }}>
+          ✓ Order placed successfully!
+        </p>
+      )}
+
       <div className="daily-options-grid">
         {dailyOptions.map((option) => {
           const qty = selections[option.id] || 0;
@@ -41,9 +66,6 @@ function DailyMealOptionCard() {
               key={option.id}
               className={`daily-option ${qty > 0 ? "selected" : ""}`}
             >
-              <div className="daily-option-image">
-                <img src={option.image} alt={option.name} />
-              </div>
               <div className="daily-option-body">
                 <p className="meal-name">{option.name}</p>
                 <p className="meal-description">{option.description}</p>
@@ -108,8 +130,12 @@ function DailyMealOptionCard() {
               Subtotal: KSh {selectedTotal.toLocaleString()}
             </span>
           </div>
-          <button className="btn-primary btn-primary--inline">
-            Confirm &amp; Place Order
+          <button
+            className="btn-primary btn-primary--inline"
+            onClick={handlePlaceOrder}
+            disabled={orderPlacing}
+          >
+            {orderPlacing ? "Placing..." : "Confirm & Place Order"}
           </button>
         </div>
       )}
@@ -124,8 +150,12 @@ function DailyMealOptionCard() {
               KSh {selectedTotal.toLocaleString()}
             </span>
           </div>
-          <button className="btn-primary btn-primary--inline cart-float-btn">
-            Place Order
+          <button
+            className="btn-primary btn-primary--inline cart-float-btn"
+            onClick={handlePlaceOrder}
+            disabled={orderPlacing}
+          >
+            {orderPlacing ? "Placing..." : "Place Order"}
           </button>
         </div>
       )}
