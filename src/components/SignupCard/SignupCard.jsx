@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import InputPrimary from "../ui/InputPrimary";
 import BtnPrimary from "../ui/BtnPrimary";
+import "../../Auth.css";
 import "./SignupCard.css";
 
 function SignupCard() {
@@ -40,7 +41,7 @@ function SignupCard() {
   return (
     <div className="auth-card">
       <div className="brand">
-        <div className="brand-mark">M</div>
+        <img src="https://res.cloudinary.com/diwkfbsgv/image/upload/v1787408999/Kibandaski-brand_nft37v.png" />
         <span className="brand-name">Mealy</span>
       </div>
 
@@ -56,7 +57,6 @@ function SignupCard() {
           <InputPrimary
             label="Full Name"
             type="text"
-            id="full-name"
             placeholder="e.g. Jane Smith"
             value={form.fullName}
             onChange={handleChange}
@@ -64,7 +64,6 @@ function SignupCard() {
           <InputPrimary
             label="Email Address"
             type="email"
-            id="email"
             placeholder="john@example.com"
             value={form.email}
             onChange={handleChange}
@@ -72,7 +71,6 @@ function SignupCard() {
           <InputPrimary
             label="Password"
             type="password"
-            id="password"
             placeholder="••••••••"
             value={form.password}
             onChange={handleChange}
@@ -80,7 +78,6 @@ function SignupCard() {
           <InputPrimary
             label="Confirm Password"
             type="password"
-            id="confirm-password"
             placeholder="••••••••"
             value={form.confirmPassword}
             onChange={handleChange}

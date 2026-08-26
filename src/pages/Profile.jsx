@@ -17,7 +17,6 @@ function Profile() {
   });
   const [saving, setSaving] = useState(false);
 
-  // Sync form with user data when it loads
   useEffect(() => {
     if (user) {
       setForm({
@@ -98,36 +97,30 @@ function Profile() {
                   <span>{joinedDate}</span>
                 </div>
                 <div className="profile-actions">
-                  <BtnPrimary onClick={() => setIsEditing(true)}>
-                    Edit Profile
-                  </BtnPrimary>
+                  <BtnPrimary onClick={() => setIsEditing(true)}>Edit Profile</BtnPrimary>
                 </div>
               </div>
             ) : (
               <form className="profile-form" onSubmit={handleSave}>
                 <InputPrimary
                   label="Full Name"
-                  id="name"
                   value={form.name}
                   onChange={handleChange}
                 />
                 <InputPrimary
                   label="Email Address"
                   type="email"
-                  id="email"
                   value={form.email}
                   onChange={handleChange}
                 />
                 <InputPrimary
                   label="Phone"
                   type="tel"
-                  id="phone"
                   value={form.phone}
                   onChange={handleChange}
                 />
                 <InputPrimary
                   label="Address"
-                  id="address"
                   value={form.address}
                   onChange={handleChange}
                 />

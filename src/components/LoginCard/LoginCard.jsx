@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import InputPrimary from "../ui/InputPrimary";
 import BtnPrimary from "../ui/BtnPrimary";
+import "../../Auth.css";
 import "./LoginCard.css";
 
 function LoginCard() {
@@ -18,7 +19,6 @@ function LoginCard() {
     e.preventDefault();
     try {
       const data = await login(form);
-      // Redirect admin to /admin, customers to /
       if (data.user?.role === "admin") {
         navigate("/admin");
       } else {
@@ -32,7 +32,7 @@ function LoginCard() {
   return (
     <div className="auth-card">
       <div className="brand">
-        <div className="brand-mark">M</div>
+        <img src="https://res.cloudinary.com/diwkfbsgv/image/upload/v1787408999/Kibandaski-brand_nft37v.png" />
         <span className="brand-name">Mealy</span>
       </div>
 
@@ -48,7 +48,6 @@ function LoginCard() {
           <InputPrimary
             label="Email Address"
             type="email"
-            id="email"
             placeholder="john@example.com"
             value={form.email}
             onChange={handleChange}
@@ -56,7 +55,6 @@ function LoginCard() {
           <InputPrimary
             label="Password"
             type="password"
-            id="password"
             placeholder="••••••••"
             value={form.password}
             onChange={handleChange}
