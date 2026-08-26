@@ -1,23 +1,22 @@
 import { createContext, useContext, useState } from "react";
+import { apiGetTodaysMenu, apiPublishMenu } from "../api";
 
 const MenuContext = createContext(null);
 
-
-const DEMO_MEAL_OPTION_IDS = [1, 2, 3];
-
-
 export function MenuProvider({ children }) {
-  const [mealOptionIds, setMealOptionIds] = useState(DEMO_MEAL_OPTION_IDS);
-  const [isPublished, setIsPublished] = useState(true);
-  const [status, setStatus] = useState("idle"); 
+  const [mealOptionIds, setMealOptionIds] = useState([]);
+  const [isPublished, setIsPublished] = useState(false);
+  const [status, setStatus] = useState("idle");
   const [error, setError] = useState(null);
 
   const fetchTodaysMenu = async () => {
     setStatus("loading");
     setError(null);
     try {
-     
-      setStatus("idle");
+      const data = await apiGetTodaysMenu();
+      setMealOptionIds(data.mealOptionIds || []);
+      setIsPublished(data.isPublished || false);
+      setStatus("succeeded");
     } catch (err) {
       setStatus("failed");
       setError(err.message);
@@ -25,17 +24,31 @@ export function MenuProvider({ children }) {
   };
 
   const publishMenu = async (ids) => {
-  
-    setMealOptionIds(ids);
-    setIsPublished(true);
+    setStatus("loading");
+    setError(null);
+    try {
+      const data = await apiPublishMenu(ids);
+      setMealOptionIds(data.mealOptionIds || ids);
+      setIsPublished(true);
+      setStatus("succeeded");
+    } catch (err) {
+      setStatus("failed");
+      setError(err.message);
+      throw err;
+    }
   };
 
-  const value = { mealOptionIds, isPublished, status, error, fetchTodaysMenu, publishMenu };
+  const value = {
+    mealOptionIds,
+    isPublished,
+    status,
+    error,
+    fetchTodaysMenu,
+    publishMenu,
+  };
 
   return <MenuContext.Provider value={value}>{children}</MenuContext.Provider>;
 }
-
-
 
 export function useMenu() {
   const ctx = useContext(MenuContext);

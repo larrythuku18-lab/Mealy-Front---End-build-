@@ -1,28 +1,25 @@
 import { createContext, useContext, useState } from "react";
+import {
+  apiListMealOptions,
+  apiCreateMealOption,
+  apiUpdateMealOption,
+  apiDeleteMealOption,
+} from "../api";
 
 const MealOptionsContext = createContext(null);
 
-
-const DEMO_MEAL_OPTIONS = [
-  { id: 1, name: "Beef with Rice", description: "Tender beef slices with jasmine brown rice.", price: 750, catererId: "dev-caterer" },
-  { id: 2, name: "Chicken with Fries", description: "Grilled breast with baked sweet potato fries.", price: 1050, catererId: "dev-caterer" },
-  { id: 3, name: "Veggie Pasta", description: "Whole wheat penne with fresh basils.", price: 1200, catererId: "dev-caterer" },
-  { id: 4, name: "Salmon Teriyaki", description: "Salmon fillet with glazed teriyaki.", price: 1400, catererId: "dev-caterer" },
-  { id: 5, name: "Avocado Salad", description: "Fresh greens with sliced avocados & sesame dress.", price: 900, catererId: "dev-caterer" },
-];
-
-
 export function MealOptionsProvider({ children }) {
-  const [items, setItems] = useState(DEMO_MEAL_OPTIONS);
-  const [status, setStatus] = useState("idle"); // "idle" | "loading" | "failed"
+  const [items, setItems] = useState([]);
+  const [status, setStatus] = useState("idle");
   const [error, setError] = useState(null);
 
   const fetchMealOptions = async () => {
     setStatus("loading");
     setError(null);
     try {
-    
-      setStatus("idle");
+      const data = await apiListMealOptions();
+      setItems(data.mealOptions || []);
+      setStatus("succeeded");
     } catch (err) {
       setStatus("failed");
       setError(err.message);
@@ -30,22 +27,49 @@ export function MealOptionsProvider({ children }) {
   };
 
   const createMealOption = async (mealOption) => {
-   
-    const created = { id: Date.now(), ...mealOption }; // placeholder
-    setItems((prev) => [...prev, created]);
-    return created;
+    setStatus("loading");
+    setError(null);
+    try {
+      const data = await apiCreateMealOption(mealOption);
+      const created = data.mealOption;
+      setItems((prev) => [...prev, created]);
+      setStatus("succeeded");
+      return created;
+    } catch (err) {
+      setStatus("failed");
+      setError(err.message);
+      throw err;
+    }
   };
 
   const updateMealOption = async (id, changes) => {
-  
-    const updated = { id, ...changes }; // placeholder
-    setItems((prev) => prev.map((m) => (m.id === id ? updated : m)));
-    return updated;
+    setStatus("loading");
+    setError(null);
+    try {
+      const data = await apiUpdateMealOption(id, changes);
+      const updated = data.mealOption;
+      setItems((prev) => prev.map((m) => (m.id === id ? updated : m)));
+      setStatus("succeeded");
+      return updated;
+    } catch (err) {
+      setStatus("failed");
+      setError(err.message);
+      throw err;
+    }
   };
 
   const deleteMealOption = async (id) => {
-   
-    setItems((prev) => prev.filter((m) => m.id !== id));
+    setStatus("loading");
+    setError(null);
+    try {
+      await apiDeleteMealOption(id);
+      setItems((prev) => prev.filter((m) => m.id !== id));
+      setStatus("succeeded");
+    } catch (err) {
+      setStatus("failed");
+      setError(err.message);
+      throw err;
+    }
   };
 
   const value = {
@@ -58,11 +82,16 @@ export function MealOptionsProvider({ children }) {
     deleteMealOption,
   };
 
-  return <MealOptionsContext.Provider value={value}>{children}</MealOptionsContext.Provider>;
+  return (
+    <MealOptionsContext.Provider value={value}>
+      {children}
+    </MealOptionsContext.Provider>
+  );
 }
 
 export function useMealOptions() {
   const ctx = useContext(MealOptionsContext);
-  if (!ctx) throw new Error("useMealOptions must be used within a MealOptionsProvider");
+  if (!ctx)
+    throw new Error("useMealOptions must be used within a MealOptionsProvider");
   return ctx;
 }
