@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import InputPrimary from "../ui/InputPrimary";
 import BtnPrimary from "../ui/BtnPrimary";
 import "./SignupCard.css";
 
 function SignupCard() {
   const navigate = useNavigate();
+  const { signup, status, error } = useAuth();
   const [form, setForm] = useState({
     fullName: "",
     email: "",
@@ -17,15 +19,22 @@ function SignupCard() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (form.password !== form.confirmPassword) {
       alert("Passwords do not match");
       return;
     }
-    // TODO: integrate with backend auth API
-    console.log("Signup:", form);
-    navigate("/login");
+    try {
+      await signup({
+        name: form.fullName,
+        email: form.email,
+        password: form.password,
+      });
+      navigate("/");
+    } catch (err) {
+      // Error is already set in AuthContext
+    }
   };
 
   return (
@@ -39,6 +48,8 @@ function SignupCard() {
         <h1>Create your Mealy Account</h1>
         <p>Start ordering healthy daily catering today.</p>
       </div>
+
+      {error && <p className="auth-error">{error}</p>}
 
       <form className="auth-form" onSubmit={handleSubmit}>
         <div className="input-container">
@@ -76,7 +87,9 @@ function SignupCard() {
           />
         </div>
 
-        <BtnPrimary type="submit">Create Account</BtnPrimary>
+        <BtnPrimary type="submit" disabled={status === "loading"}>
+          {status === "loading" ? "Creating Account..." : "Create Account"}
+        </BtnPrimary>
       </form>
 
       <div className="auth-footer">

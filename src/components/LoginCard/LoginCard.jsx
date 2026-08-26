@@ -1,22 +1,32 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import InputPrimary from "../ui/InputPrimary";
 import BtnPrimary from "../ui/BtnPrimary";
 import "./LoginCard.css";
 
 function LoginCard() {
   const navigate = useNavigate();
+  const { login, status, error } = useAuth();
   const [form, setForm] = useState({ email: "", password: "" });
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO: integrate with backend auth API
-    console.log("Login:", form);
-    navigate("/");
+    try {
+      const data = await login(form);
+      // Redirect admin to /admin, customers to /
+      if (data.user?.role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
+    } catch (err) {
+      // Error is already set in AuthContext
+    }
   };
 
   return (
@@ -30,6 +40,8 @@ function LoginCard() {
         <h1>Welcome back</h1>
         <p>Log in to manage or order your meals.</p>
       </div>
+
+      {error && <p className="auth-error">{error}</p>}
 
       <form className="auth-form" onSubmit={handleSubmit}>
         <div className="input-container">
@@ -51,7 +63,9 @@ function LoginCard() {
           />
         </div>
 
-        <BtnPrimary type="submit">Log In</BtnPrimary>
+        <BtnPrimary type="submit" disabled={status === "loading"}>
+          {status === "loading" ? "Logging in..." : "Log In"}
+        </BtnPrimary>
       </form>
 
       <div className="auth-footer">
