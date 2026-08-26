@@ -47,7 +47,13 @@ function OrderHistoryCard({ order }) {
       <div className="order-card-items">
         {order.meals.map((meal, index) => (
           <div key={index} className="order-item">
-            <img src={meal.image} alt={meal.name} className="order-item-img" />
+            {meal.image ? (
+              <img src={meal.image} alt={meal.name} className="order-item-img" />
+            ) : (
+              <div className="order-item-img order-item-img--placeholder">
+                {meal.name?.charAt(0) || '?'}
+              </div>
+            )}
             <div className="order-item-info">
               <span className="order-item-name">{meal.name}</span>
               <span className="order-item-qty">Qty: {meal.quantity}</span>

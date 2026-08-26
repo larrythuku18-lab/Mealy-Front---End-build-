@@ -99,17 +99,17 @@ export async function apiListMealOptions() {
   return request("/menus/");
 }
 
-export async function apiCreateMealOption({ name, description, price, catererId }) {
+export async function apiCreateMealOption({ name, description, price, category, image, catererId }) {
   return request("/menus/", {
     method: "POST",
-    body: JSON.stringify({ name, description, price, catererId }),
+    body: JSON.stringify({ name, description, price, category, image, catererId }),
   });
 }
 
-export async function apiUpdateMealOption(id, { name, description, price, catererId }) {
+export async function apiUpdateMealOption(id, { name, description, price, category, image, catererId }) {
   return request(`/menus/${id}`, {
     method: "PUT",
-    body: JSON.stringify({ name, description, price, catererId }),
+    body: JSON.stringify({ name, description, price, category, image, catererId }),
   });
 }
 
