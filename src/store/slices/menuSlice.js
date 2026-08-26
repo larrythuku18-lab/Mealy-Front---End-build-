@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { apiGetTodaysMenu, apiPublishMenu } from "../../api";
 
 const initialState = {
   date: new Date().toISOString().slice(0, 10),
   mealOptionIds: [],
   isPublished: false,
-  status: "idle", 
+  status: "idle",
   error: null,
 };
 
@@ -32,22 +33,35 @@ const menuSlice = createSlice({
   },
 });
 
-export const { fetchStarted, fetchSucceeded, fetchFailed, menuPublished } = menuSlice.actions;
+export const { fetchStarted, fetchSucceeded, fetchFailed, menuPublished } =
+  menuSlice.actions;
 export default menuSlice.reducer;
 
 export const selectTodaysMenu = (state) => state.menu;
 
+// Thunks
 export const fetchTodaysMenu = () => async (dispatch) => {
   dispatch(fetchStarted());
   try {
-   
-    dispatch(fetchSucceeded({ mealOptionIds: [], isPublished: false })); 
+    const data = await apiGetTodaysMenu();
+    dispatch(
+      fetchSucceeded({
+        mealOptionIds: data.mealOptionIds,
+        isPublished: data.isPublished,
+      })
+    );
   } catch (err) {
     dispatch(fetchFailed(err.message));
   }
 };
 
 export const publishMenu = (mealOptionIds) => async (dispatch) => {
-
-  dispatch(menuPublished({ mealOptionIds })); 
+  dispatch(fetchStarted());
+  try {
+    await apiPublishMenu(mealOptionIds);
+    dispatch(menuPublished({ mealOptionIds }));
+  } catch (err) {
+    dispatch(fetchFailed(err.message));
+    throw err;
+  }
 };

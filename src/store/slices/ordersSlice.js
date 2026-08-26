@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { apiGetTodaysOrders } from "../../api";
 
 const initialState = {
   items: [],
-  status: "idle", 
+  status: "idle",
   error: null,
 };
 
@@ -31,13 +32,14 @@ export default ordersSlice.reducer;
 export const selectTodaysOrders = (state) => state.orders.items;
 export const selectOrdersStatus = (state) => state.orders.status;
 export const selectTotalRevenue = (state) =>
-  state.orders.items.reduce((sum, order) => sum + order.price, 0);
+  state.orders.items.reduce((sum, order) => sum + (order.price || 0), 0);
 
+// Thunks
 export const fetchTodaysOrders = () => async (dispatch) => {
   dispatch(fetchStarted());
   try {
-   
-    dispatch(fetchSucceeded([])); 
+    const data = await apiGetTodaysOrders();
+    dispatch(fetchSucceeded(data.orders || []));
   } catch (err) {
     dispatch(fetchFailed(err.message));
   }

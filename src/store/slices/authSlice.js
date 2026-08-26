@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { apiLogin, apiRegister } from "../../api";
+
 const initialState = {
   user: null,
-  token: null,
-  status: "idle", 
+  token: localStorage.getItem("mealy_token") || null,
+  status: "idle",
   error: null,
 };
 
@@ -42,23 +44,35 @@ export default authSlice.reducer;
 export const selectCurrentUser = (state) => state.auth.user;
 export const selectIsAuthenticated = (state) => !!state.auth.token;
 export const selectAuthStatus = (state) => state.auth.status;
+
+// Thunks
 export const login = (credentials) => async (dispatch) => {
   dispatch(authRequestStarted());
   try {
-  
+    const data = await apiLogin(credentials);
+    localStorage.setItem("mealy_token", data.token);
+    dispatch(credentialsSet(data));
+    return data;
   } catch (err) {
     dispatch(authRequestFailed(err.message));
     throw err;
   }
 };
 
-
 export const signup = (details) => async (dispatch) => {
   dispatch(authRequestStarted());
   try {
-   
+    const data = await apiRegister(details);
+    localStorage.setItem("mealy_token", data.token);
+    dispatch(credentialsSet(data));
+    return data;
   } catch (err) {
     dispatch(authRequestFailed(err.message));
     throw err;
   }
+};
+
+export const logoutThunk = () => async (dispatch) => {
+  localStorage.removeItem("mealy_token");
+  dispatch(loggedOut());
 };
