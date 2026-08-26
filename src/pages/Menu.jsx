@@ -1,11 +1,37 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar/Navbar";
 import DailyMealOptionCard from "../components/DailyMealOptionCard/DailyMealOptionCard";
-import { meals, categories, currentUser } from "../data/mockData";
+import { useAuth } from "../context/AuthContext";
+import { apiListMealOptions, apiListCategories } from "../api";
 import "./Menu.css";
 
 function Menu() {
+  const { user } = useAuth();
   const [activeCategory, setActiveCategory] = useState("All");
+  const [meals, setMeals] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadData() {
+      try {
+        const [mealsData, catsData] = await Promise.all([
+          apiListMealOptions(),
+          apiListCategories(),
+        ]);
+        setMeals(mealsData.mealOptions || []);
+        setCategories([
+          { id: 0, name: "All" },
+          ...(catsData.categories || []),
+        ]);
+      } catch {
+        // Silently fail — show empty state
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadData();
+  }, []);
 
   const filteredMeals =
     activeCategory === "All"
@@ -22,7 +48,7 @@ function Menu() {
 
   return (
     <div className="page">
-      <Navbar user={currentUser} />
+      <Navbar user={user} />
       <main className="menu-main">
         <div className="menu-header">
           <span className="eyebrow">Today's Selection</span>
@@ -45,17 +71,15 @@ function Menu() {
             ))}
           </div>
 
-          {filteredMeals.length > 0 ? (
+          {loading ? (
+            <p>Loading menu...</p>
+          ) : filteredMeals.length > 0 ? (
             <div className="meal-list">
               {filteredMeals.map((meal) => (
                 <div key={meal.id} className="meal-row">
-                  <div className="meal-row-img">
-                    <img src={meal.image} alt={meal.name} />
-                  </div>
                   <div className="meal-row-info">
                     <div className="meal-row-top">
                       <span className="meal-row-name">{meal.name}</span>
-                      <span className="category-tag">{meal.category}</span>
                     </div>
                     <p className="meal-row-desc">{meal.description}</p>
                   </div>
@@ -63,11 +87,7 @@ function Menu() {
                     <span className="meal-row-price">
                       KSh {meal.price.toLocaleString()}
                     </span>
-                    {meal.available ? (
-                      <button className="btn-add">+ Add</button>
-                    ) : (
-                      <span className="unavailable-label">Unavailable</span>
-                    )}
+                    <button className="btn-add">+ Add</button>
                   </div>
                 </div>
               ))}

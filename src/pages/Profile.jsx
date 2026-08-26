@@ -1,32 +1,68 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar/Navbar";
 import BtnPrimary from "../components/ui/BtnPrimary";
 import InputPrimary from "../components/ui/InputPrimary";
-import { currentUser } from "../data/mockData";
+import { useAuth } from "../context/AuthContext";
+import { apiUpdateProfile } from "../api";
 import "./Profile.css";
 
 function Profile() {
+  const { user, updateUser } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
   const [form, setForm] = useState({
-    name: currentUser.name,
-    email: currentUser.email,
-    phone: currentUser.phone,
-    address: currentUser.address,
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
   });
+  const [saving, setSaving] = useState(false);
+
+  // Sync form with user data when it loads
+  useEffect(() => {
+    if (user) {
+      setForm({
+        name: user.name || "",
+        email: user.email || "",
+        phone: user.phone || "",
+        address: user.address || "",
+      });
+    }
+  }, [user]);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSave = (e) => {
+  const handleSave = async (e) => {
     e.preventDefault();
-    // TODO: integrate with backend API
-    setIsEditing(false);
+    setSaving(true);
+    try {
+      const data = await apiUpdateProfile({
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        address: form.address,
+      });
+      updateUser(data.user);
+      setIsEditing(false);
+    } catch (err) {
+      alert(err.message);
+    } finally {
+      setSaving(false);
+    }
   };
+
+  const joinedDate = user?.joinedDate
+    ? new Date(user.joinedDate).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+    : "N/A";
 
   return (
     <div className="page">
-      <Navbar user={currentUser} />
+      <Navbar user={user} />
       <main className="profile-page">
         <div className="profile-container">
           <div className="profile-header">
@@ -36,7 +72,7 @@ function Profile() {
 
           <div className="profile-card">
             <div className="profile-avatar">
-              <span>{currentUser.name ? currentUser.name.charAt(0) : "?"}</span>
+              <span>{user?.name ? user.name.charAt(0) : "?"}</span>
             </div>
 
             {!isEditing ? (
@@ -51,15 +87,15 @@ function Profile() {
                 </div>
                 <div className="profile-field">
                   <label>Phone</label>
-                  <span>{form.phone}</span>
+                  <span>{form.phone || "Not set"}</span>
                 </div>
                 <div className="profile-field">
                   <label>Address</label>
-                  <span>{form.address}</span>
+                  <span>{form.address || "Not set"}</span>
                 </div>
                 <div className="profile-field">
                   <label>Member Since</label>
-                  <span>{currentUser.joinedDate}</span>
+                  <span>{joinedDate}</span>
                 </div>
                 <div className="profile-actions">
                   <BtnPrimary onClick={() => setIsEditing(true)}>
@@ -96,11 +132,14 @@ function Profile() {
                   onChange={handleChange}
                 />
                 <div className="profile-actions">
-                  <BtnPrimary variant="cancel" onClick={() => setIsEditing(false)}>
+                  <BtnPrimary
+                    variant="cancel"
+                    onClick={() => setIsEditing(false)}
+                  >
                     Cancel
                   </BtnPrimary>
-                  <BtnPrimary variant="save" type="submit">
-                    Save Changes
+                  <BtnPrimary variant="save" type="submit" disabled={saving}>
+                    {saving ? "Saving..." : "Save Changes"}
                   </BtnPrimary>
                 </div>
               </form>

@@ -1,16 +1,45 @@
+import { useState, useEffect, useMemo } from "react";
 import Navbar from "../components/Navbar/Navbar";
 import OrderHistoryCard from "../components/OrderHistoryCard/OrderHistoryCard";
-import { initialOrders, currentUser } from "../data/mockData";
+import { useAuth } from "../context/AuthContext";
+import { apiListOrders } from "../api";
 import "./Orders.css";
 
 function Orders() {
-  const activeOrders = initialOrders.filter((o) => o.status !== "delivered");
-  const pastOrders = initialOrders.filter((o) => o.status === "delivered");
-  const totalSpent = initialOrders.reduce((sum, o) => sum + o.total, 0);
+  const { user } = useAuth();
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadOrders() {
+      try {
+        const data = await apiListOrders();
+        setOrders(data.orders || []);
+      } catch {
+        // Silently fail — show empty state
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadOrders();
+  }, []);
+
+  const activeOrders = useMemo(
+    () => orders.filter((o) => o.status !== "delivered"),
+    [orders]
+  );
+  const pastOrders = useMemo(
+    () => orders.filter((o) => o.status === "delivered"),
+    [orders]
+  );
+  const totalSpent = useMemo(
+    () => orders.reduce((sum, o) => sum + (o.total || 0), 0),
+    [orders]
+  );
 
   return (
     <div className="page">
-      <Navbar user={currentUser} />
+      <Navbar user={user} />
       <main className="orders-page">
         <div className="orders-container">
           <div className="orders-header">
@@ -20,7 +49,7 @@ function Orders() {
 
           <div className="orders-stats">
             <div className="o-stat-card">
-              <span className="o-stat-number">{initialOrders.length}</span>
+              <span className="o-stat-number">{orders.length}</span>
               <span className="o-stat-label">Total Orders</span>
             </div>
             <div className="o-stat-card">
@@ -39,7 +68,9 @@ function Orders() {
             </div>
           </div>
 
-          {activeOrders.length > 0 && (
+          {loading && <p>Loading orders...</p>}
+
+          {!loading && activeOrders.length > 0 && (
             <section className="orders-section">
               <div className="orders-section-header">
                 <h2>Active Orders</h2>
@@ -55,7 +86,7 @@ function Orders() {
             </section>
           )}
 
-          {pastOrders.length > 0 && (
+          {!loading && pastOrders.length > 0 && (
             <section className="orders-section">
               <div className="orders-section-header">
                 <h2>Past Orders</h2>
@@ -71,7 +102,7 @@ function Orders() {
             </section>
           )}
 
-          {initialOrders.length === 0 && (
+          {!loading && orders.length === 0 && (
             <div className="orders-empty">
               <div className="orders-empty-icon">
                 <svg
