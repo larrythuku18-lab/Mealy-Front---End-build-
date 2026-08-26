@@ -1,5 +1,15 @@
-import { createContext, useContext, useState, useEffect } from "react";
-import { apiGetTodaysMenu, apiListMealOptions, apiCreateOrder } from "../api";
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+} from "react";
+import {
+  apiGetTodaysMenu,
+  apiListMealOptions,
+  apiCreateOrder,
+} from "../api";
 
 const DailyOptionsContext = createContext(null);
 
@@ -7,13 +17,13 @@ export function DailyOptionsProvider({ children }) {
   const [options, setOptions] = useState([]);
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState(null);
+  const [lastOrder, setLastOrder] = useState(null);
 
   /** Fetch today's published menu and resolve full meal option details. */
-  const fetchDailyOptions = async () => {
+  const fetchDailyOptions = useCallback(async () => {
     setStatus("loading");
     setError(null);
     try {
-      // Get today's menu to find which meal option IDs are published
       const menuData = await apiGetTodaysMenu();
       const ids = menuData.mealOptionIds || [];
 
@@ -23,7 +33,6 @@ export function DailyOptionsProvider({ children }) {
         return;
       }
 
-      // Fetch all meal options and filter to the published ones
       const allData = await apiListMealOptions();
       const allOptions = allData.mealOptions || [];
       const published = allOptions.filter((mo) => ids.includes(mo.id));
@@ -33,33 +42,48 @@ export function DailyOptionsProvider({ children }) {
       setStatus("failed");
       setError(err.message);
     }
-  };
+  }, []);
 
-  /** Place an order for the given selections. */
+  /** Place an order and return the created order object. */
   const placeOrder = async (selections) => {
-    // selections is { [mealOptionId]: quantity }
     const mealOptionIds = Object.keys(selections).map(Number);
     const quantities = mealOptionIds.map((id) => selections[id]);
 
-    try {
-      const data = await apiCreateOrder({ mealOptionIds, quantities });
-      return data.order;
-    } catch (err) {
-      throw err;
-    }
+    const data = await apiCreateOrder({ mealOptionIds, quantities });
+    const order = data.order;
+
+    // Attach resolved meal names/quantities to the order for the confirmation screen
+    const items = mealOptionIds.map((id, i) => {
+      const option = options.find((o) => o.id === id);
+      return {
+        id,
+        name: option?.name || `Meal #${id}`,
+        price: option?.price || 0,
+        quantity: quantities[i],
+      };
+    });
+
+    const enrichedOrder = { ...order, items };
+    setLastOrder(enrichedOrder);
+    return enrichedOrder;
   };
+
+  /** Clear the last order (e.g. when dismissing the confirmation). */
+  const clearLastOrder = () => setLastOrder(null);
 
   // Fetch on mount
   useEffect(() => {
     fetchDailyOptions();
-  }, []);
+  }, [fetchDailyOptions]);
 
   const value = {
     options,
     status,
     error,
+    lastOrder,
     fetchDailyOptions,
     placeOrder,
+    clearLastOrder,
   };
 
   return (

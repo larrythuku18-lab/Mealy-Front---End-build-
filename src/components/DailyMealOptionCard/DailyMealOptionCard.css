@@ -10,6 +10,8 @@
   margin: 0;
 }
 
+/* ─── Meal Option Grid ─────────────────────────────────────────────────────── */
+
 .daily-options-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -136,6 +138,8 @@
   text-align: center;
 }
 
+/* ─── Inline Selection Summary ─────────────────────────────────────────────── */
+
 .current-choice {
   background: var(--color-surface-muted);
   border: 1px solid var(--color-border);
@@ -173,7 +177,8 @@
   color: var(--color-text);
 }
 
-/* Floating cart bar */
+/* ─── Floating Cart Bar ────────────────────────────────────────────────────── */
+
 .cart-float {
   position: fixed;
   bottom: 24px;
@@ -232,7 +237,379 @@
   background: var(--color-surface-muted);
 }
 
-/* Responsive */
+/* ─── Cart Modal Overlay ───────────────────────────────────────────────────── */
+
+.cart-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fade-in 0.2s ease-out;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.cart-modal {
+  background: var(--color-surface);
+  border-radius: var(--radius-xl);
+  width: 90%;
+  max-width: 480px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
+  animation: modal-slide-up 0.25s ease-out;
+}
+
+@keyframes modal-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cart-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px 12px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.cart-modal__header h2 {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.cart-modal__close {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: var(--radius-md);
+  transition: background 0.15s;
+}
+
+.cart-modal__close:hover {
+  background: var(--color-surface-muted);
+}
+
+/* ─── Cart Modal Items ─────────────────────────────────────────────────────── */
+
+.cart-modal__items {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cart-modal__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.cart-modal__item:last-child {
+  border-bottom: none;
+}
+
+.cart-modal__item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cart-modal__item-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.cart-modal__item-unit-price {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.cart-modal__item-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-align: right;
+}
+
+.cart-modal__item-qty {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.cart-modal__item-subtotal {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text);
+  min-width: 80px;
+}
+
+/* ─── Cart Modal Footer ────────────────────────────────────────────────────── */
+
+.cart-modal__footer {
+  padding: 16px 24px 20px;
+  border-top: 1px solid var(--color-border);
+}
+
+.cart-modal__summary {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.cart-modal__summary-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+.cart-modal__summary-row--total {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--color-text);
+  padding-top: 6px;
+  border-top: 1px solid var(--color-border);
+}
+
+.cart-modal__actions {
+  display: flex;
+  gap: 12px;
+}
+
+.cart-modal__btn {
+  flex: 1;
+  padding: 12px 16px;
+  border-radius: var(--radius-lg);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: background 0.15s, opacity 0.15s;
+}
+
+.cart-modal__btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cart-modal__btn--secondary {
+  background: var(--color-surface-muted);
+  color: var(--color-text);
+}
+
+.cart-modal__btn--secondary:hover:not(:disabled) {
+  background: var(--color-surface-hover);
+}
+
+.cart-modal__btn--primary {
+  background: var(--color-text);
+  color: #fff;
+}
+
+.cart-modal__btn--primary:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+/* Spinner inside button */
+.cart-modal__spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ─── Order Confirmation ───────────────────────────────────────────────────── */
+
+.order-confirm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 40px 20px;
+  gap: 16px;
+  animation: modal-slide-up 0.3s ease-out;
+}
+
+.order-confirm__icon {
+  color: var(--color-text);
+  background: var(--color-surface-muted);
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.order-confirm__title {
+  font-size: 22px;
+  font-weight: 800;
+  margin: 0;
+}
+
+.order-confirm__subtitle {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.order-confirm__details {
+  background: var(--color-surface-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.order-confirm__item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--color-text);
+}
+
+.order-confirm__total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--color-text);
+  padding-top: 8px;
+  border-top: 1px solid var(--color-border);
+}
+
+.order-confirm__status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.order-confirm__badge {
+  background: #dcfce7;
+  color: #166534;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.order-confirm__status-text {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.order-confirm__btn {
+  margin-top: 8px;
+  background: var(--color-text);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: 12px 32px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.order-confirm__btn:hover {
+  opacity: 0.9;
+}
+
+/* ─── Toast ────────────────────────────────────────────────────────────────── */
+
+.toast {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: var(--radius-lg);
+  font-size: 13px;
+  font-weight: 600;
+  animation: toast-in 0.25s ease-out;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.toast--error {
+  background: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.toast--success {
+  background: #f0fdf4;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+.toast__close {
+  background: none;
+  border: none;
+  font-size: 14px;
+  color: inherit;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: var(--radius-sm, 4px);
+  opacity: 0.6;
+  transition: opacity 0.15s;
+}
+
+.toast__close:hover {
+  opacity: 1;
+}
+
+/* ─── Responsive ───────────────────────────────────────────────────────────── */
+
 @media (max-width: 900px) {
   .daily-options-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -275,5 +652,26 @@
     width: 28px;
     height: 28px;
     font-size: 14px;
+  }
+
+  .cart-modal {
+    width: 95%;
+    max-height: 85vh;
+  }
+
+  .cart-modal__header {
+    padding: 16px 18px 10px;
+  }
+
+  .cart-modal__items {
+    padding: 10px 18px;
+  }
+
+  .cart-modal__footer {
+    padding: 14px 18px 18px;
+  }
+
+  .order-confirm {
+    padding: 28px 16px;
   }
 }

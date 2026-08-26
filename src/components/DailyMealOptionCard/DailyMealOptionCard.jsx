@@ -1,13 +1,184 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDailyOptions } from "../../contexts/DailyOptionsContext";
+import { useAuth } from "../../context/AuthContext";
 import "./DailyMealOptionCard.css";
 
-function DailyMealOptionCard() {
-  const { options: dailyOptions, status, placeOrder } = useDailyOptions();
-  const [selections, setSelections] = useState({});
-  const [orderPlacing, setOrderPlacing] = useState(false);
-  const [orderSuccess, setOrderSuccess] = useState(false);
+/* ─── Toast ─────────────────────────────────────────────────────────────────── */
+function Toast({ message, type, onClose }) {
+  return (
+    <div className={`toast toast--${type}`}>
+      <span>{message}</span>
+      <button className="toast__close" onClick={onClose} aria-label="Dismiss">
+        ✕
+      </button>
+    </div>
+  );
+}
 
+/* ─── Cart Review Modal ─────────────────────────────────────────────────────── */
+function CartModal({
+  selections,
+  dailyOptions,
+  onConfirm,
+  onClearSelection,
+  onClose,
+  isPlacing,
+}) {
+  const items = Object.entries(selections)
+    .map(([id, qty]) => {
+      const option = dailyOptions.find((o) => o.id === Number(id));
+      return option ? { ...option, quantity: qty } : null;
+    })
+    .filter(Boolean);
+
+  const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
+
+  return (
+    <div className="cart-overlay" onClick={onClose}>
+      <div className="cart-modal" onClick={(e) => e.stopPropagation()}>
+        <div className="cart-modal__header">
+          <h2>Your Cart</h2>
+          <button className="cart-modal__close" onClick={onClose} aria-label="Close">
+            ✕
+          </button>
+        </div>
+
+        <div className="cart-modal__items">
+          {items.map((item) => (
+            <div key={item.id} className="cart-modal__item">
+              <div className="cart-modal__item-info">
+                <span className="cart-modal__item-name">{item.name}</span>
+                <span className="cart-modal__item-unit-price">
+                  KSh {item.price.toLocaleString()} each
+                </span>
+              </div>
+              <div className="cart-modal__item-right">
+                <span className="cart-modal__item-qty">×{item.quantity}</span>
+                <span className="cart-modal__item-subtotal">
+                  KSh {(item.price * item.quantity).toLocaleString()}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="cart-modal__footer">
+          <div className="cart-modal__summary">
+            <div className="cart-modal__summary-row">
+              <span>Items</span>
+              <span>{itemCount}</span>
+            </div>
+            <div className="cart-modal__summary-row cart-modal__summary-row--total">
+              <span>Total</span>
+              <span>KSh {subtotal.toLocaleString()}</span>
+            </div>
+          </div>
+
+          <div className="cart-modal__actions">
+            <button
+              className="cart-modal__btn cart-modal__btn--secondary"
+              onClick={onClearSelection}
+            >
+              Clear Cart
+            </button>
+            <button
+              className="cart-modal__btn cart-modal__btn--primary"
+              onClick={onConfirm}
+              disabled={isPlacing}
+            >
+              {isPlacing ? (
+                <span className="cart-modal__spinner" />
+              ) : (
+                "Confirm & Place Order"
+              )}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─── Order Confirmation Screen ─────────────────────────────────────────────── */
+function OrderConfirmation({ order, onContinue }) {
+  return (
+    <div className="order-confirm">
+      <div className="order-confirm__icon">
+        <svg
+          width="48"
+          height="48"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+          <polyline points="22 4 12 14.01 9 11.01" />
+        </svg>
+      </div>
+
+      <h2 className="order-confirm__title">Order Placed!</h2>
+      <p className="order-confirm__subtitle">
+        Your order <strong>{order.id}</strong> has been confirmed.
+      </p>
+
+      <div className="order-confirm__details">
+        {order.items.map((item, i) => (
+          <div key={i} className="order-confirm__item">
+            <span>{item.name}</span>
+            <span>
+              ×{item.quantity} — KSh{" "}
+              {(item.price * item.quantity).toLocaleString()}
+            </span>
+          </div>
+        ))}
+        <div className="order-confirm__total">
+          <span>Total</span>
+          <span>KSh {(order.total || 0).toLocaleString()}</span>
+        </div>
+      </div>
+
+      <div className="order-confirm__status">
+        <span className="order-confirm__badge">Confirmed</span>
+        <span className="order-confirm__status-text">
+          Your caterer will start preparing shortly.
+        </span>
+      </div>
+
+      <button className="order-confirm__btn" onClick={onContinue}>
+        Continue Ordering
+      </button>
+    </div>
+  );
+}
+
+/* ─── Main Component ────────────────────────────────────────────────────────── */
+function DailyMealOptionCard() {
+  const navigate = useNavigate();
+  const {
+    options: dailyOptions,
+    status,
+    placeOrder,
+    lastOrder,
+    clearLastOrder,
+  } = useDailyOptions();
+  const { isAuthenticated } = useAuth();
+
+  const [selections, setSelections] = useState({});
+  const [cartOpen, setCartOpen] = useState(false);
+  const [isPlacing, setIsPlacing] = useState(false);
+  const [toast, setToast] = useState(null);
+
+  const showToast = (message, type = "error") => {
+    setToast({ message, type });
+    setTimeout(() => setToast(null), 4000);
+  };
+
+  /* ── Quantity controls ─────────────────────────────────────────────────── */
   const handleAdd = (optionId) => {
     setSelections((prev) => ({
       ...prev,
@@ -26,38 +197,82 @@ function DailyMealOptionCard() {
     });
   };
 
-  const handlePlaceOrder = async () => {
-    setOrderPlacing(true);
+  const handleRemoveItem = (optionId) => {
+    setSelections((prev) => {
+      const { [optionId]: _, ...rest } = prev;
+      return rest;
+    });
+  };
+
+  const handleClearSelection = () => {
+    setSelections({});
+    setCartOpen(false);
+  };
+
+  /* ── Order placement ───────────────────────────────────────────────────── */
+  const handleOpenCart = () => {
+    if (!isAuthenticated) {
+      showToast("Please log in to place an order", "error");
+      navigate("/login");
+      return;
+    }
+    setCartOpen(true);
+  };
+
+  const handleConfirmOrder = async () => {
+    setIsPlacing(true);
     try {
       await placeOrder(selections);
       setSelections({});
-      setOrderSuccess(true);
-      setTimeout(() => setOrderSuccess(false), 3000);
+      setCartOpen(false);
+      // lastOrder will be set by context — the confirmation screen renders via `lastOrder`
     } catch (err) {
-      alert(err.message);
+      showToast(err.message, "error");
     } finally {
-      setOrderPlacing(false);
+      setIsPlacing(false);
     }
   };
 
+  /* ── Derived values ────────────────────────────────────────────────────── */
   const selectedCount = Object.values(selections).reduce((a, b) => a + b, 0);
   const selectedTotal = dailyOptions
     .filter((o) => selections[o.id])
     .reduce((sum, o) => sum + o.price * selections[o.id], 0);
 
+  /* ── Render ────────────────────────────────────────────────────────────── */
+
+  // Show order confirmation screen
+  if (lastOrder) {
+    return (
+      <section className="daily-options">
+        <OrderConfirmation
+          order={lastOrder}
+          onContinue={() => {
+            clearLastOrder();
+          }}
+        />
+      </section>
+    );
+  }
+
   return (
     <section className="daily-options">
       <h2>Daily Options</h2>
 
+      {/* Toast */}
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
+      )}
+
+      {/* Loading / error states */}
       {status === "loading" && <p>Loading today's menu...</p>}
       {status === "failed" && <p>Could not load today's menu.</p>}
 
-      {orderSuccess && (
-        <p style={{ color: "#16a34a", fontWeight: 600 }}>
-          ✓ Order placed successfully!
-        </p>
-      )}
-
+      {/* Meal option cards */}
       <div className="daily-options-grid">
         {dailyOptions.map((option) => {
           const qty = selections[option.id] || 0;
@@ -107,6 +322,7 @@ function DailyMealOptionCard() {
         })}
       </div>
 
+      {/* Inline selection summary */}
       {selectedCount > 0 && (
         <div className="current-choice">
           <div className="current-choice-icon">
@@ -132,14 +348,14 @@ function DailyMealOptionCard() {
           </div>
           <button
             className="btn-primary btn-primary--inline"
-            onClick={handlePlaceOrder}
-            disabled={orderPlacing}
+            onClick={handleOpenCart}
           >
-            {orderPlacing ? "Placing..." : "Confirm & Place Order"}
+            View Cart
           </button>
         </div>
       )}
 
+      {/* Floating cart bar */}
       {selectedCount > 0 && (
         <div className="cart-float">
           <div className="cart-float-info">
@@ -152,12 +368,23 @@ function DailyMealOptionCard() {
           </div>
           <button
             className="btn-primary btn-primary--inline cart-float-btn"
-            onClick={handlePlaceOrder}
-            disabled={orderPlacing}
+            onClick={handleOpenCart}
           >
-            {orderPlacing ? "Placing..." : "Place Order"}
+            View Cart
           </button>
         </div>
+      )}
+
+      {/* Cart review modal */}
+      {cartOpen && (
+        <CartModal
+          selections={selections}
+          dailyOptions={dailyOptions}
+          onConfirm={handleConfirmOrder}
+          onClearSelection={handleClearSelection}
+          onClose={() => setCartOpen(false)}
+          isPlacing={isPlacing}
+        />
       )}
     </section>
   );
