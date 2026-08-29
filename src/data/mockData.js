@@ -1,10 +1,34 @@
 export const categories = [
-  { id: 1, name: "All" },
-  { id: 2, name: "Breakfast" },
-  { id: 3, name: "Lunch" },
-  { id: 4, name: "Dinner" },
-  { id: 5, name: "Snacks" },
-  { id: 6, name: "Drinks" },
+  {
+    id: 1,
+    name: "All",
+    icon: "https://res.cloudinary.com/diwkfbsgv/image/upload/v1787548169/CD265227-A7D6-4869-9F0C-A18049CA4A49_kebn6p.png",
+  },
+  {
+    id: 2,
+    name: "Breakfast",
+    icon: "https://res.cloudinary.com/diwkfbsgv/image/upload/v1787549853/1EF307C6-FB1A-4D2A-BD2B-1392F861B143_aca8tx.png",
+  },
+  {
+    id: 3,
+    name: "Whole Meals",
+    icon: "https://res.cloudinary.com/diwkfbsgv/image/upload/v1787549852/535D7166-0CC4-4CF1-80EE-C58B091C73D4_xo0ikp.png",
+  },
+  {
+    id: 4,
+    name: "Fast Foods",
+    icon: "https://res.cloudinary.com/diwkfbsgv/image/upload/v1787549866/0032C455-7826-4F93-A99F-37891AE48E13_sowzvh.png",
+  },
+  {
+    id: 5,
+    name: "Snacks",
+    icon: "https://res.cloudinary.com/diwkfbsgv/image/upload/v1787550623/639A699A-C43C-449D-AA4A-81635232815A_ocwfck.png",
+  },
+  {
+    id: 6,
+    name: "Drinks",
+    icon: "https://res.cloudinary.com/diwkfbsgv/image/upload/v1787549852/2CDFC2A0-66DA-4A63-938B-8A463585BF2F_htafm0.png",
+  },
 ];
 
 export const dailyOptions = [
@@ -18,16 +42,16 @@ export const dailyOptions = [
     image:
       "https://i.pinimg.com/736x/fc/a4/03/fca4039903d2b6f0b4a553d33c85e513.jpg",
   },
-  {
-    id: "d2",
-    name: "Chicken with Fries",
-    description:
-      "Grilled chicken breast accompanied by sweet potato fries and herb aioli.",
-    price: 1050,
-    rating: 4.5,
-    image:
-      "https://i.pinimg.com/736x/a7/aa/ce/a7aace04c023adb95039697c0a1f4528.jpg",
-  },
+  //{
+  //id: "d2",
+  //name: "Chicken with Fries",
+  //description:
+  //"Grilled chicken breast accompanied by sweet potato fries and herb aioli.",
+  //price: 1050,
+  //rating: 4.5,
+  //image:
+  //"https://i.pinimg.com/736x/a7/aa/ce/a7aace04c023adb95039697c0a1f4528.jpg",
+  //},
   {
     id: "d3",
     name: "Veggie Pasta",
@@ -118,7 +142,7 @@ export const meals = [
     description: "Romaine lettuce, parmesan, croutons, and Caesar dressing",
     price: 1000,
     rating: 4.1,
-    category: ["Lunch"],
+    category: ["Whole Meals"],
     image:
       "https://i.pinimg.com/736x/41/b3/ac/41b3ac8e22d2c01e5db2e091ee69e080.jpg",
     available: true,
@@ -129,7 +153,7 @@ export const meals = [
     description: "Penne pasta with grilled chicken in Alfredo sauce",
     price: 1400,
     rating: 4.6,
-    category: ["Lunch", "Dinner"],
+    category: ["Whole Meals"],
     image:
       "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400&h=300&fit=crop",
     available: true,
@@ -162,7 +186,7 @@ export const meals = [
     description: "Atlantic salmon with lemon butter and roasted vegetables",
     price: 1800,
     rating: 4.8,
-    category: ["Dinner"],
+    category: ["Whole Meals"],
     image:
       "https://i.pinimg.com/736x/d0/5f/2e/d05f2ea7519ec2180967b8b773f63a1f.jpg",
     available: true,
@@ -173,7 +197,7 @@ export const meals = [
     description: "Grilled chicken, veggies, and hummus in a whole wheat wrap",
     price: 1100,
     rating: 4.0,
-    category: ["Lunch"],
+    category: ["Fast Foods", "Snacks"],
     image:
       "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400&h=300&fit=crop",
     available: true,
@@ -206,7 +230,7 @@ export const meals = [
     description: "Soft layered chapati served with delicious coconut bean stew",
     price: 850,
     rating: 4.8,
-    category: ["Lunch", "Breakfast"],
+    category: ["Whole Meals"],
     image:
       "https://plus.unsplash.com/premium_photo-1723730426108-1bb37a500d5c?q=80&w=400&h=300&fit=crop",
     available: true,
@@ -218,7 +242,7 @@ export const meals = [
       "Crispy fries tossed in a spicy, tangy tomato-based masala sauce",
     price: 900,
     rating: 4.5,
-    category: ["Snacks"],
+    category: ["Fast Foods"],
     image:
       "https://i.pinimg.com/736x/24/6b/ea/246bea12bc1e0937deb7a6a12cb01a75.jpg",
     available: true,
@@ -230,7 +254,7 @@ export const meals = [
       "Deep-fried fresh lake tilapia simmered in tomato and onion stew, served with ugali",
     price: 1100,
     rating: 4.7,
-    category: ["Dinner", "Lunch"],
+    category: ["Whole Meals"],
     image:
       "https://i.pinimg.com/1200x/a7/1a/49/a71a4926cd93a589f0fdfe44af9239f3.jpg",
     available: true,
@@ -242,7 +266,7 @@ export const meals = [
       "Free-range local chicken stew served with mashed potatoes, corn, and greens mash",
     price: 1800,
     rating: 4.8,
-    category: ["Dinner"],
+    category: ["Fast Foods"],
     image:
       "https://images.unsplash.com/photo-1709164632728-8a943456dd0a?q=80&w=1353&auto=format&fit=crop",
     available: true,
@@ -289,7 +313,7 @@ export const meals = [
     description: "Classic crispy golden salted potato french fries",
     price: 850,
     rating: 4.1,
-    category: ["Snacks"],
+    category: ["Fast Foods"],
     image:
       "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&h=300&fit=crop",
     available: true,

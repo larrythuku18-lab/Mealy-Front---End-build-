@@ -18,29 +18,20 @@ function FullMenu() {
   return (
     <section className="full-menu">
       <h2>Full Menu</h2>
-      <div>
-        <div>
+      <div className="filter-search-wrapper">
+        <div className="filters">
           <div className="category-bar">
-            {categories.map((cat) =>
-              activeCategory === cat.name ? (
-                <Btn
-                  key={cat.id}
-                  title={`${cat.name} category button`}
-                  onClick={() => setActiveCategory(cat.name)}
-                >
-                  {cat.name}
-                </Btn>
-              ) : (
-                <Btn
-                  key={cat.id}
-                  title={`${cat.name} category button`}
-                  variant="secondary"
-                  onClick={() => setActiveCategory(cat.name)}
-                >
-                  {cat.name}
-                </Btn>
-              ),
-            )}
+            {categories.map((cat) => (
+              <button
+                key={cat.id}
+                title={`${cat.name} category button`}
+                onClick={() => setActiveCategory(cat.name)}
+                className={`category-btn ${activeCategory === cat.name ? "is-active" : ""}`}
+              >
+                <img src={cat.icon} />
+                {cat.name}
+              </button>
+            ))}
           </div>
           <div className="sort-bar">
             <div className="select-wrapper">
