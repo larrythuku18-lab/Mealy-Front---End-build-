@@ -16,6 +16,7 @@ function MealOptionCard({ option, qty, setSelections }) {
     setSelections((prev) => {
       const current = prev[optionId] || 0;
       if (current <= 1) {
+        // eslint-disable-next-line no-unused-vars
         const { [optionId]: _, ...rest } = prev;
         return rest;
       }

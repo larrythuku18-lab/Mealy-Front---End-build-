@@ -89,6 +89,7 @@ export function MealOptionsProvider({ children }) {
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useMealOptions() {
   const ctx = useContext(MealOptionsContext);
   if (!ctx)

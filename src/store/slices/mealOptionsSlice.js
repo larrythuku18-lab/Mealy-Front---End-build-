@@ -67,30 +67,18 @@ export const fetchMealOptions = () => async (dispatch) => {
 };
 
 export const createMealOption = (mealOption) => async (dispatch) => {
-  try {
-    const data = await apiCreateMealOption(mealOption);
-    dispatch(mealOptionAdded(data.mealOption));
-    return data.mealOption;
-  } catch (err) {
-    throw err;
-  }
+  const data = await apiCreateMealOption(mealOption);
+  dispatch(mealOptionAdded(data.mealOption));
+  return data.mealOption;
 };
 
 export const updateMealOption = (id, changes) => async (dispatch) => {
-  try {
-    const data = await apiUpdateMealOption(id, changes);
+  const data = await apiUpdateMealOption(id, changes);
     dispatch(mealOptionUpdated(data.mealOption));
     return data.mealOption;
-  } catch (err) {
-    throw err;
-  }
 };
 
 export const deleteMealOption = (id) => async (dispatch) => {
-  try {
-    await apiDeleteMealOption(id);
-    dispatch(mealOptionRemoved(id));
-  } catch (err) {
-    throw err;
-  }
+  await apiDeleteMealOption(id);
+  dispatch(mealOptionRemoved(id));
 };

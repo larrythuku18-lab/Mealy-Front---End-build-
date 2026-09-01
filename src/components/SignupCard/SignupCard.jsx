@@ -33,7 +33,7 @@ function SignupCard() {
         password: form.password,
       });
       navigate("/");
-    } catch (err) {
+    } catch {
       // Error is already set in AuthContext
     }
   };

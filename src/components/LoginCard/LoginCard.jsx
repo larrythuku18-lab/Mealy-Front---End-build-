@@ -24,7 +24,7 @@ function LoginCard() {
       } else {
         navigate("/");
       }
-    } catch (err) {
+    } catch {
       // Error is already set in AuthContext
     }
   };

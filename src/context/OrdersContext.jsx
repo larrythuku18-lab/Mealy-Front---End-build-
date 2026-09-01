@@ -33,6 +33,7 @@ export function OrdersProvider({ children }) {
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useOrders() {
   const ctx = useContext(OrdersContext);
   if (!ctx) throw new Error("useOrders must be used within an OrdersProvider");

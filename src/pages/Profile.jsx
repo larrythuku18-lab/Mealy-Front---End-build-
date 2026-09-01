@@ -19,6 +19,7 @@ function Profile() {
 
   useEffect(() => {
     if (user) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setForm({
         name: user.name || "",
         email: user.email || "",

@@ -50,6 +50,7 @@ export function MenuProvider({ children }) {
   return <MenuContext.Provider value={value}>{children}</MenuContext.Provider>;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useMenu() {
   const ctx = useContext(MenuContext);
   if (!ctx) throw new Error("useMenu must be used within a MenuProvider");

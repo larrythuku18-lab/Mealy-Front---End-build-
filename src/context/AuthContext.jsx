@@ -10,7 +10,17 @@ import {
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    const stored = localStorage.getItem("mealy_user");
+    if (stored) {
+      try {
+        return JSON.parse(stored);
+      } catch {
+        return null;
+      }
+    }
+    return null;
+  });
   const [token, setTokenState] = useState(() => {
     // Restore token from localStorage on load
     return localStorage.getItem("mealy_token") || null;
@@ -24,17 +34,7 @@ export function AuthProvider({ children }) {
       setToken(token);
       localStorage.setItem("mealy_token", token);
 
-      // Try to restore user from localStorage first for instant UI
-      const stored = localStorage.getItem("mealy_user");
-      if (stored) {
-        try {
-          setUser(JSON.parse(stored));
-        } catch {
-          // ignore parse error
-        }
-      }
-
-      // Then fetch fresh user data from API
+      // Fetch fresh user data from API
       apiGetMe()
         .then((data) => {
           setUser(data.user);
@@ -50,6 +50,7 @@ export function AuthProvider({ children }) {
         });
     } else {
       setToken(null);
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setUser(null);
       localStorage.removeItem("mealy_token");
       localStorage.removeItem("mealy_user");
@@ -126,6 +127,7 @@ export function AuthProvider({ children }) {
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useAuth() {
   const ctx = useContext(AuthContext);
   if (!ctx) throw new Error("useAuth must be used within an AuthProvider");

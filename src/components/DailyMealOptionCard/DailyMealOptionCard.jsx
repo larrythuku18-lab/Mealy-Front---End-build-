@@ -190,17 +190,11 @@ function DailyMealOptionCard() {
     setSelections((prev) => {
       const current = prev[optionId] || 0;
       if (current <= 1) {
+        // eslint-disable-next-line no-unused-vars
         const { [optionId]: _, ...rest } = prev;
         return rest;
       }
       return { ...prev, [optionId]: current - 1 };
-    });
-  };
-
-  const handleRemoveItem = (optionId) => {
-    setSelections((prev) => {
-      const { [optionId]: _, ...rest } = prev;
-      return rest;
     });
   };
 

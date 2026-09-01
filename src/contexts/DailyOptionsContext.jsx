@@ -73,7 +73,8 @@ export function DailyOptionsProvider({ children }) {
 
   // Fetch on mount
   useEffect(() => {
-    fetchDailyOptions();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    void fetchDailyOptions();
   }, [fetchDailyOptions]);
 
   const value = {
@@ -93,6 +94,7 @@ export function DailyOptionsProvider({ children }) {
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useDailyOptions() {
   const ctx = useContext(DailyOptionsContext);
   if (!ctx)
