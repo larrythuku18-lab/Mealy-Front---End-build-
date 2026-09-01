@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useCallback } from "react";
 import { apiGetTodaysMenu, apiPublishMenu } from "../api";
 
 const MenuContext = createContext(null);
@@ -9,7 +9,7 @@ export function MenuProvider({ children }) {
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState(null);
 
-  const fetchTodaysMenu = async () => {
+  const fetchTodaysMenu = useCallback(async () => {
     setStatus("loading");
     setError(null);
     try {
@@ -21,7 +21,7 @@ export function MenuProvider({ children }) {
       setStatus("failed");
       setError(err.message);
     }
-  };
+  }, []);
 
   const publishMenu = async (ids) => {
     setStatus("loading");

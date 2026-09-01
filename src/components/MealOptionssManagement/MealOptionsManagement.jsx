@@ -13,8 +13,7 @@ function MealOptionsManagement() {
 
   useEffect(() => {
     fetchMealOptions();
-   
-  }, []);
+  }, [fetchMealOptions]);
 
   return (
     <section className="meal-options-management">

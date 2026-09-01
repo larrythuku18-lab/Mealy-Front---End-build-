@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useMemo, useState, useCallback } from "react";
 import { apiGetTodaysOrders } from "../api";
 
 const OrdersContext = createContext(null);
@@ -8,7 +8,7 @@ export function OrdersProvider({ children }) {
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState(null);
 
-  const fetchTodaysOrders = async () => {
+  const fetchTodaysOrders = useCallback(async () => {
     setStatus("loading");
     setError(null);
     try {
@@ -19,7 +19,7 @@ export function OrdersProvider({ children }) {
       setStatus("failed");
       setError(err.message);
     }
-  };
+  }, []);
 
   const totalRevenue = useMemo(
     () => items.reduce((sum, order) => sum + (order.price || 0), 0),

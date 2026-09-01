@@ -14,8 +14,7 @@ function SetTodaysMenu() {
 
   useEffect(() => {
     fetchTodaysMenu();
-    
-  }, []);
+  }, [fetchTodaysMenu]);
 
   const selectedIds = overrides ?? mealOptionIds;
 

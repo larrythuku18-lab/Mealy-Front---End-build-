@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useCallback } from "react";
 import {
   apiListMealOptions,
   apiCreateMealOption,
@@ -13,7 +13,7 @@ export function MealOptionsProvider({ children }) {
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState(null);
 
-  const fetchMealOptions = async () => {
+  const fetchMealOptions = useCallback(async () => {
     setStatus("loading");
     setError(null);
     try {
@@ -24,7 +24,7 @@ export function MealOptionsProvider({ children }) {
       setStatus("failed");
       setError(err.message);
     }
-  };
+  }, []);
 
   const createMealOption = async (mealOption) => {
     setStatus("loading");

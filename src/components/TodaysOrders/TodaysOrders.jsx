@@ -13,8 +13,7 @@ function TodaysOrders() {
 
   useEffect(() => {
     fetchTodaysOrders();
-    
-  }, []);
+  }, [fetchTodaysOrders]);
 
   return (
     <section className="todays-orders">
