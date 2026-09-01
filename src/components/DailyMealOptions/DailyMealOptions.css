@@ -25,6 +25,14 @@
   }
 }
 
+<<<<<<< HEAD
+=======
+.grid-wrapper {
+  display: flex;
+  gap: 16px;
+}
+
+>>>>>>> origin/dev
 .daily-options-grid {
   display: flex;
   gap: 16px;

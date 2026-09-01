@@ -1,68 +1,32 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Navbar from "../components/Navbar/Navbar";
-import BtnPrimary from "../components/ui/BtnPrimary";
-import InputPrimary from "../components/ui/InputPrimary";
-import { useAuth } from "../context/AuthContext";
-import { apiUpdateProfile } from "../api";
+import Btn from "../components/ui/Btn";
+import Input from "../components/ui/Input";
+import { currentUser } from "../data/mockData";
 import "./Profile.css";
 
 function Profile() {
-  const { user, updateUser } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
   const [form, setForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    address: "",
+    name: currentUser.name,
+    email: currentUser.email,
+    phone: currentUser.phone,
+    address: currentUser.address,
   });
-  const [saving, setSaving] = useState(false);
-
-  useEffect(() => {
-    if (user) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setForm({
-        name: user.name || "",
-        email: user.email || "",
-        phone: user.phone || "",
-        address: user.address || "",
-      });
-    }
-  }, [user]);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSave = async (e) => {
+  const handleSave = (e) => {
     e.preventDefault();
-    setSaving(true);
-    try {
-      const data = await apiUpdateProfile({
-        name: form.name,
-        email: form.email,
-        phone: form.phone,
-        address: form.address,
-      });
-      updateUser(data.user);
-      setIsEditing(false);
-    } catch (err) {
-      alert(err.message);
-    } finally {
-      setSaving(false);
-    }
+    // TODO: integrate with backend API
+    setIsEditing(false);
   };
-
-  const joinedDate = user?.joinedDate
-    ? new Date(user.joinedDate).toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      })
-    : "N/A";
 
   return (
     <div className="page">
-      <Navbar user={user} />
+      <Navbar user={currentUser} />
       <main className="profile-page">
         <div className="profile-container">
           <div className="profile-header">
@@ -72,7 +36,7 @@ function Profile() {
 
           <div className="profile-card">
             <div className="profile-avatar">
-              <span>{user?.name ? user.name.charAt(0) : "?"}</span>
+              <span>{currentUser.name ? currentUser.name.charAt(0) : "?"}</span>
             </div>
 
             {!isEditing ? (
@@ -87,54 +51,55 @@ function Profile() {
                 </div>
                 <div className="profile-field">
                   <label>Phone</label>
-                  <span>{form.phone || "Not set"}</span>
+                  <span>{form.phone}</span>
                 </div>
                 <div className="profile-field">
                   <label>Address</label>
-                  <span>{form.address || "Not set"}</span>
+                  <span>{form.address}</span>
                 </div>
                 <div className="profile-field">
                   <label>Member Since</label>
-                  <span>{joinedDate}</span>
+                  <span>{currentUser.joinedDate}</span>
                 </div>
                 <div className="profile-actions">
-                  <BtnPrimary onClick={() => setIsEditing(true)}>Edit Profile</BtnPrimary>
+                  <Btn onClick={() => setIsEditing(true)}>Edit Profile</Btn>
                 </div>
               </div>
             ) : (
               <form className="profile-form" onSubmit={handleSave}>
-                <InputPrimary
+                <Input
                   label="Full Name"
+                  id="name"
                   value={form.name}
                   onChange={handleChange}
                 />
-                <InputPrimary
+                <Input
                   label="Email Address"
                   type="email"
+                  id="email"
                   value={form.email}
                   onChange={handleChange}
                 />
-                <InputPrimary
+                <Input
                   label="Phone"
                   type="tel"
+                  id="phone"
                   value={form.phone}
                   onChange={handleChange}
                 />
-                <InputPrimary
+                <Input
                   label="Address"
+                  id="address"
                   value={form.address}
                   onChange={handleChange}
                 />
                 <div className="profile-actions">
-                  <BtnPrimary
-                    variant="cancel"
-                    onClick={() => setIsEditing(false)}
-                  >
+                  <Btn variant="cancel" onClick={() => setIsEditing(false)}>
                     Cancel
-                  </BtnPrimary>
-                  <BtnPrimary variant="save" type="submit" disabled={saving}>
-                    {saving ? "Saving..." : "Save Changes"}
-                  </BtnPrimary>
+                  </Btn>
+                  <Btn variant="save" type="submit">
+                    Save Changes
+                  </Btn>
                 </div>
               </form>
             )}

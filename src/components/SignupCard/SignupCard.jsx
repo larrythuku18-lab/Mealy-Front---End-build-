@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import InputPrimary from "../ui/InputPrimary";
-import BtnPrimary from "../ui/BtnPrimary";
+import Input from "../ui/Input";
+import Btn from "../ui/Btn";
 import "../../Auth.css";
 import "./SignupCard.css";
 
@@ -54,29 +54,33 @@ function SignupCard() {
 
       <form className="auth-form" onSubmit={handleSubmit}>
         <div className="input-container">
-          <InputPrimary
+          <Input
             label="Full Name"
+            title="Enter full name"
             type="text"
             placeholder="e.g. Jane Smith"
             value={form.fullName}
             onChange={handleChange}
           />
-          <InputPrimary
+          <Input
             label="Email Address"
+            title="Enter signup email"
             type="email"
             placeholder="john@example.com"
             value={form.email}
             onChange={handleChange}
           />
-          <InputPrimary
+          <Input
             label="Password"
+            title="Enter signup password"
             type="password"
             placeholder="••••••••"
             value={form.password}
             onChange={handleChange}
           />
-          <InputPrimary
+          <Input
             label="Confirm Password"
+            title="Confirm signup password"
             type="password"
             placeholder="••••••••"
             value={form.confirmPassword}
@@ -84,9 +88,9 @@ function SignupCard() {
           />
         </div>
 
+<<<<<<< HEAD
         <BtnPrimary type="submit" disabled={status === "loading"}>
-          {status === "loading" ? "Creating Account..." : "Create Account"}
-        </BtnPrimary>
+<Btn type="submit">Create Account</Btn>
       </form>
 
       <div className="auth-footer">

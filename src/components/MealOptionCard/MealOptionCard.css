@@ -19,7 +19,11 @@
 }
 
 .daily-option.selected {
+<<<<<<< HEAD
   border: 2px solid var(--color-text);
+=======
+  border: 2px solid var(--color-primary);
+>>>>>>> origin/dev
 }
 
 .daily-option-image {
@@ -112,7 +116,11 @@
 }
 
 .quantity-stepper button {
+<<<<<<< HEAD
   background: var(--color-surface-muted);
+=======
+  background: none;
+>>>>>>> origin/dev
   border: none;
   border-radius: var(--radius-md);
   width: 32px;

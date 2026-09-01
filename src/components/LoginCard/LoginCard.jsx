@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import InputPrimary from "../ui/InputPrimary";
-import BtnPrimary from "../ui/BtnPrimary";
+import Input from "../ui/Input";
+import Btn from "../ui/Btn";
 import "../../Auth.css";
 import "./LoginCard.css";
 
@@ -45,15 +45,17 @@ function LoginCard() {
 
       <form className="auth-form" onSubmit={handleSubmit}>
         <div className="input-container">
-          <InputPrimary
+          <Input
             label="Email Address"
+            title="Enter login email"
             type="email"
             placeholder="john@example.com"
             value={form.email}
             onChange={handleChange}
           />
-          <InputPrimary
+          <Input
             label="Password"
+            title="Enter login password"
             type="password"
             placeholder="••••••••"
             value={form.password}
@@ -61,9 +63,9 @@ function LoginCard() {
           />
         </div>
 
+<<<<<<< HEAD
         <BtnPrimary type="submit" disabled={status === "loading"}>
-          {status === "loading" ? "Logging in..." : "Log In"}
-        </BtnPrimary>
+<Btn type="submit">Log In</Btn>
       </form>
 
       <div className="auth-footer">

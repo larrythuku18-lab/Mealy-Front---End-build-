@@ -11,6 +11,13 @@
   top: 0;
   z-index: 100;
   width: 100%;
+<<<<<<< HEAD
+=======
+}
+
+.nav .brand {
+  text-decoration: none;
+>>>>>>> origin/dev
 }
 
 .nav-links {
@@ -37,11 +44,22 @@
   border-bottom: 2px solid var(--color-text);
 }
 
+<<<<<<< HEAD
+=======
+.nav-link.selected::after {
+  content: "";
+  width: 16px;
+  height: 2px;
+  background: var(--color-text);
+}
+
+>>>>>>> origin/dev
 .nav-opts {
   display: flex;
   align-items: center;
   gap: 16px;
   height: 100%;
+<<<<<<< HEAD
 }
 
 .nav-opts .nav-link {
@@ -65,6 +83,8 @@
 .nav-logout:hover {
   background: var(--color-surface-muted);
   color: var(--color-text);
+=======
+>>>>>>> origin/dev
 }
 
 @media (max-width: 600px) {
