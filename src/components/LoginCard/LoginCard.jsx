@@ -8,7 +8,7 @@ import "./LoginCard.css";
 
 function LoginCard() {
   const navigate = useNavigate();
-  const { login, status, error } = useAuth();
+  const { login, error } = useAuth();
   const [form, setForm] = useState({ email: "", password: "" });
 
   const handleChange = (e) => {
@@ -63,9 +63,7 @@ function LoginCard() {
           />
         </div>
 
-<<<<<<< HEAD
-        <BtnPrimary type="submit" disabled={status === "loading"}>
-<Btn type="submit">Log In</Btn>
+        <Btn type="submit">Log In</Btn>
       </form>
 
       <div className="auth-footer">

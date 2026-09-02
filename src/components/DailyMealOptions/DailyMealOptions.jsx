@@ -2,10 +2,7 @@ import { useState } from "react";
 import { useDailyOptions } from "../../contexts/DailyOptionsContext";
 import "./DailyMealOptions.css";
 import MealOptionCard from "../MealOptionCard/MealOptionCard";
-<<<<<<< HEAD
-=======
 import CurrentMealOptionCard from "../CurrentMealOptionCard/CurrentMealOptionCard";
->>>>>>> origin/dev
 
 function DailyMealOptions() {
   const today = new Date();
@@ -47,20 +44,6 @@ function DailyMealOptions() {
         <span className="eyebrow">Today's Selection</span>
         <h1>{dateStr}</h1>
       </div>
-<<<<<<< HEAD
-      <div className="daily-options-grid">
-        {dailyOptions.map((option) => {
-          const qty = selections[option.id] || 0;
-          return (
-            <MealOptionCard
-              key={option.id}
-              option={option}
-              qty={qty}
-              setSelections={setSelections}
-            />
-          );
-        })}
-=======
       <div className="grid-wrapper">
         <CurrentMealOptionCard />
         <div className="daily-options-grid">
@@ -76,7 +59,6 @@ function DailyMealOptions() {
             );
           })}
         </div>
->>>>>>> origin/dev
       </div>
 
       {selectedCount > 0 && (

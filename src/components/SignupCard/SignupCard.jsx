@@ -8,7 +8,7 @@ import "./SignupCard.css";
 
 function SignupCard() {
   const navigate = useNavigate();
-  const { signup, status, error } = useAuth();
+  const { signup, error } = useAuth();
   const [form, setForm] = useState({
     fullName: "",
     email: "",
@@ -88,9 +88,7 @@ function SignupCard() {
           />
         </div>
 
-<<<<<<< HEAD
-        <BtnPrimary type="submit" disabled={status === "loading"}>
-<Btn type="submit">Create Account</Btn>
+        <Btn type="submit">Create Account</Btn>
       </form>
 
       <div className="auth-footer">

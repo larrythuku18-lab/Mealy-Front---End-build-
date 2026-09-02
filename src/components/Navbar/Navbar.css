@@ -11,13 +11,10 @@
   top: 0;
   z-index: 100;
   width: 100%;
-<<<<<<< HEAD
-=======
 }
 
 .nav .brand {
   text-decoration: none;
->>>>>>> origin/dev
 }
 
 .nav-links {
@@ -44,8 +41,7 @@
   border-bottom: 2px solid var(--color-text);
 }
 
-<<<<<<< HEAD
-=======
+
 .nav-link.selected::after {
   content: "";
   width: 16px;
@@ -53,38 +49,12 @@
   background: var(--color-text);
 }
 
->>>>>>> origin/dev
+
 .nav-opts {
   display: flex;
   align-items: center;
   gap: 16px;
   height: 100%;
-<<<<<<< HEAD
-}
-
-.nav-opts .nav-link {
-  display: inline-flex;
-  align-items: center;
-}
-
-.nav-logout {
-  background: transparent;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-pill);
-  padding: 6px 14px;
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: var(--color-text-muted);
-  cursor: pointer;
-  margin-left: 8px;
-  transition: background 0.15s, color 0.15s;
-}
-
-.nav-logout:hover {
-  background: var(--color-surface-muted);
-  color: var(--color-text);
-=======
->>>>>>> origin/dev
 }
 
 @media (max-width: 600px) {

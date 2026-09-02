@@ -1,7 +1,10 @@
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import { Heart, ShoppingBag, User } from "lucide-react";
 import "./Navbar.css";
 
 function Navbar() {
-  const { user, isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, logout } = useAuth();
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const isActive = (path) => pathname === path;
