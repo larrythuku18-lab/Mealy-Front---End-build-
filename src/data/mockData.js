@@ -329,6 +329,160 @@ export const meals = [
       "https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=400&h=300&fit=crop",
     available: true,
   },
+  {
+    id: 19,
+    name: "Mandazi & Chai",
+    description: "Freshly fried Swahili mandazi served with spiced chai tea",
+    price: 350,
+    rating: 4.6,
+    category: ["Breakfast", "Snacks"],
+    image:
+      "https://i.pinimg.com/736x/7c/64/c0/7c64c0e4b90852dbc01883044ea4186d.jpg",
+    available: true,
+  },
+  {
+    id: 20,
+    name: "Ugali & Sukuma Wiki",
+    description: "Traditional Kenyan staple of maize meal ugali with sautéed collard greens",
+    price: 500,
+    rating: 4.3,
+    category: ["Whole Meals"],
+    image:
+      "https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?w=400&h=300&fit=crop",
+    available: true,
+  },
+  {
+    id: 21,
+    name: "Matoke & Beef Stew",
+    description: "Steamed green bananas simmered in a rich beef and tomato stew",
+    price: 950,
+    rating: 4.4,
+    category: ["Whole Meals"],
+    image:
+      "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=400&h=300&fit=crop",
+    available: true,
+  },
+  {
+    id: 22,
+    name: "Githeri",
+    description: "Hearty mix of boiled maize and beans garnished with fresh coriander",
+    price: 600,
+    rating: 4.2,
+    category: ["Whole Meals"],
+    image:
+      "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&h=300&fit=crop",
+    available: true,
+  },
+  {
+    id: 23,
+    name: "Chicken Burger",
+    description: "Crispy fried chicken fillet in a toasted sesame bun with coleslaw",
+    price: 1200,
+    rating: 4.5,
+    category: ["Fast Foods"],
+    image:
+      "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop",
+    available: true,
+  },
+  {
+    id: 24,
+    name: "Beef Burger",
+    description: "Flame-grilled beef patty with cheddar, pickles, and smoky BBQ sauce",
+    price: 1350,
+    rating: 4.7,
+    category: ["Fast Foods"],
+    image:
+      "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop",
+    available: true,
+  },
+  {
+    id: 25,
+    name: "Loaded Nachos",
+    description: "Crispy tortilla chips topped with cheese, jalapeños, guacamole, and salsa",
+    price: 950,
+    rating: 4.3,
+    category: ["Snacks", "Fast Foods"],
+    image:
+      "https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?w=400&h=300&fit=crop",
+    available: true,
+  },
+  {
+    id: 26,
+    name: "Spring Rolls (4pcs)",
+    description: "Crispy vegetable spring rolls served with sweet chili dipping sauce",
+    price: 550,
+    rating: 4.1,
+    category: ["Snacks"],
+    image:
+      "https://images.unsplash.com/photo-1526315251371-db0f1cb4d6e5?w=400&h=300&fit=crop",
+    available: true,
+  },
+  {
+    id: 27,
+    name: "Fresh Mango Juice",
+    description: "Freshly squeezed ripe mango juice served ice cold",
+    price: 350,
+    rating: 4.8,
+    category: ["Drinks"],
+    image:
+      "https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=400&h=300&fit=crop",
+    available: true,
+  },
+  {
+    id: 28,
+    name: "Passion Fruit Juice",
+    description: "Tangy and refreshing passion fruit juice with a hint of sweetness",
+    price: 350,
+    rating: 4.6,
+    category: ["Drinks"],
+    image:
+      "https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=400&h=300&fit=crop",
+    available: true,
+  },
+  {
+    id: 29,
+    name: "Espresso Coffee",
+    description: "Double shot espresso brewed from premium Kenyan AA coffee beans",
+    price: 300,
+    rating: 4.7,
+    category: ["Drinks", "Breakfast"],
+    image:
+      "https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?w=400&h=300&fit=crop",
+    available: true,
+  },
+  {
+    id: 30,
+    name: "Mango Lassi",
+    description: "Creamy yogurt-based mango smoothie with a touch of cardamom",
+    price: 400,
+    rating: 4.5,
+    category: ["Drinks"],
+    image:
+      "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=400&h=300&fit=crop",
+    available: true,
+  },
+  {
+    id: 31,
+    name: "Irio",
+    description: "Mashed green peas, potatoes, and corn — a classic Kikuyu dish",
+    price: 600,
+    rating: 4.3,
+    category: ["Whole Meals"],
+    image:
+      "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&h=300&fit=crop",
+    available: true,
+  },
+  {
+    id: 32,
+    name: "Chicken Shawarma",
+    description: "Spiced grilled chicken wrapped in pita with tahini sauce and pickled veggies",
+    price: 1100,
+    rating: 4.6,
+    category: ["Fast Foods"],
+    image:
+      "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=400&h=300&fit=crop",
+    available: true,
+  },
 ];
 
 export const initialOrders = [
