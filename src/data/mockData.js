@@ -40,18 +40,8 @@ export const dailyOptions = [
     price: 1050,
     rating: 4.5,
     image:
-      "https://i.pinimg.com/736x/fc/a4/03/fca4039903d2b6f0b4a553d33c85e513.jpg",
+      "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=400&h=300&fit=crop",
   },
-  //{
-  //id: "d2",
-  //name: "Chicken with Fries",
-  //description:
-  //"Grilled chicken breast accompanied by sweet potato fries and herb aioli.",
-  //price: 1050,
-  //rating: 4.5,
-  //image:
-  //"https://i.pinimg.com/736x/a7/aa/ce/a7aace04c023adb95039697c0a1f4528.jpg",
-  //},
   {
     id: "d3",
     name: "Veggie Pasta",
@@ -60,7 +50,7 @@ export const dailyOptions = [
     price: 1200,
     rating: 4.1,
     image:
-      "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400&h=300&fit=crop",
   },
   {
     id: "d4",
@@ -70,7 +60,7 @@ export const dailyOptions = [
     price: 2000,
     rating: 4.6,
     image:
-      "https://i.pinimg.com/736x/53/2f/79/532f79cad4cbc4632ebb841a119af048.jpg",
+      "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop",
   },
   {
     id: "d5",
@@ -80,7 +70,7 @@ export const dailyOptions = [
     price: 1300,
     rating: 3.9,
     image:
-      "https://i.pinimg.com/736x/45/b6/db/45b6db250dd2b0b8928b09af7c72cac3.jpg",
+      "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&h=300&fit=crop",
   },
   {
     id: "d6",
@@ -100,7 +90,7 @@ export const dailyOptions = [
     price: 1100,
     rating: 3.6,
     image:
-      "https://i.pinimg.com/1200x/20/31/2b/20312b036bb9fb978032f75bddcc3656.jpg",
+      "https://images.unsplash.com/photo-1534604973900-c439d46a407f?w=400&h=300&fit=crop",
   },
   {
     id: "d8",
@@ -110,17 +100,17 @@ export const dailyOptions = [
     price: 1400,
     rating: 4.8,
     image:
-      "https://i.pinimg.com/736x/91/33/4f/91334f98a2a4535c4a7c0afb76b9543a.jpg",
+      "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=400&h=300&fit=crop",
   },
   {
     id: "d9",
     name: "Masala Chai",
     description:
-      "Freshly fried Swahili mandazi served with spiced masala chai tea.",
+      "Freshly brewed spiced chai tea with aromatic Indian spices.",
     price: 450,
     rating: 5.0,
     image:
-      "https://i.pinimg.com/736x/7c/64/c0/7c64c0e4b90852dbc01883044ea4186d.jpg",
+      "https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=400&h=300&fit=crop",
   },
 ];
 
@@ -155,7 +145,7 @@ export const meals = [
     rating: 4.6,
     category: ["Whole Meals"],
     image:
-      "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?w=400&h=300&fit=crop",
     available: true,
   },
   {
@@ -337,7 +327,7 @@ export const meals = [
     rating: 4.6,
     category: ["Breakfast", "Snacks"],
     image:
-      "https://i.pinimg.com/736x/7c/64/c0/7c64c0e4b90852dbc01883044ea4186d.jpg",
+      "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=300&fit=crop",
     available: true,
   },
   {
@@ -359,7 +349,7 @@ export const meals = [
     rating: 4.4,
     category: ["Whole Meals"],
     image:
-      "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&h=300&fit=crop",
     available: true,
   },
   {
@@ -381,7 +371,7 @@ export const meals = [
     rating: 4.5,
     category: ["Fast Foods"],
     image:
-      "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=400&h=300&fit=crop",
     available: true,
   },
   {
@@ -414,7 +404,7 @@ export const meals = [
     rating: 4.1,
     category: ["Snacks"],
     image:
-      "https://images.unsplash.com/photo-1526315251371-db0f1cb4d6e5?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1607305387299-a3d9611cd469?w=400&h=300&fit=crop",
     available: true,
   },
   {
@@ -436,7 +426,7 @@ export const meals = [
     rating: 4.6,
     category: ["Drinks"],
     image:
-      "https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?w=400&h=300&fit=crop",
     available: true,
   },
   {
@@ -469,7 +459,7 @@ export const meals = [
     rating: 4.3,
     category: ["Whole Meals"],
     image:
-      "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1574484284002-952d92456975?w=400&h=300&fit=crop",
     available: true,
   },
   {
