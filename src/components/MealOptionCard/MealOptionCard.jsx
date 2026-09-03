@@ -52,7 +52,11 @@ function MealOptionCard({ option, qty, setSelections }) {
             fill={favorited ? "#ef4444" : "none"}
           />
         </button>
-        <img src={option.image} alt={option.name} />
+        {option.image ? (
+          <img src={option.image} alt={option.name} />
+        ) : (
+          <div className="daily-option-image-placeholder" />
+        )}
       </div>
       <div className="daily-option-body">
         <p className="meal-name">{option.name}</p>
@@ -61,12 +65,14 @@ function MealOptionCard({ option, qty, setSelections }) {
       <div className="daily-option-footer">
         <div className="daily-option-footer-l">
           <span className="meal-price">
-            KSh {option.price.toLocaleString()}
+            KSh {Number(option.price || 0).toLocaleString()}
           </span>
-          <div className="meal-rating">
-            <Star size={12} strokeWidth={2.5} />
-            <p>{option.rating}</p>
-          </div>
+          {option.rating != null && (
+            <div className="meal-rating">
+              <Star size={12} strokeWidth={2.5} />
+              <p>{option.rating}</p>
+            </div>
+          )}
         </div>
         {qty === 0 ? (
           <Btn

@@ -1,23 +1,84 @@
-import { useState } from "react";
-import { meals, categories } from "../../data/mockData";
+import { useEffect, useMemo, useState } from "react";
+import { apiListCategories, apiListMealOptions } from "../../api";
 import "./FullMenu.css";
 import MealOptionCard from "../MealOptionCard/MealOptionCard";
 import { ChevronDown } from "lucide-react";
 import Input from "../ui/Input";
 import Btn from "../ui/Btn";
 
+/** Meal options may hold a single category string or an array. */
+function toCategoryList(option) {
+  const cat = option?.category;
+  if (!cat) return [];
+  return Array.isArray(cat) ? cat : [cat];
+}
+
 function FullMenu() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [selections, setSelections] = useState({});
+  const [meals, setMeals] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [status, setStatus] = useState("loading");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [ratingSort, setRatingSort] = useState("");
+  const [priceSort, setPriceSort] = useState("");
 
-  const filteredMeals =
-    activeCategory === "All"
-      ? meals
-      : meals.filter((meal) => meal.category.includes(activeCategory));
+  useEffect(() => {
+    let cancelled = false;
+    Promise.all([apiListMealOptions(), apiListCategories()])
+      .then(([mealsData, catsData]) => {
+        if (cancelled) return;
+        setMeals(mealsData.mealOptions || []);
+        const cats = (catsData.categories || []).filter((cat) => cat && cat.name);
+        setCategories([{ id: 0, name: "All" }, ...cats]);
+        setStatus("succeeded");
+      })
+      .catch(() => {
+        if (cancelled) return;
+        setStatus("failed");
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const filteredMeals = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
+
+    const byCategory =
+      activeCategory === "All"
+        ? meals
+        : meals.filter((meal) => toCategoryList(meal).includes(activeCategory));
+
+    const byQuery = query
+      ? byCategory.filter((meal) =>
+          [meal.name, meal.description, ...toCategoryList(meal)]
+            .filter(Boolean)
+            .some((text) => text.toLowerCase().includes(query))
+        )
+      : byCategory;
+
+    const direction = (value) => (value === "desc" ? -1 : 1);
+
+    return [...byQuery].sort((a, b) => {
+      if (ratingSort) {
+        const diff =
+          (Number(a.rating) || 0) - (Number(b.rating) || 0);
+        if (diff !== 0) return diff * direction(ratingSort);
+      }
+      if (priceSort) {
+        const diff =
+          (Number(a.price) || 0) - (Number(b.price) || 0);
+        if (diff !== 0) return diff * direction(priceSort);
+      }
+      return 0;
+    });
+  }, [meals, activeCategory, searchQuery, ratingSort, priceSort]);
 
   return (
     <section className="full-menu">
       <h2>Full Menu</h2>
+
       <div className="filter-search-wrapper">
         <div className="filters">
           <div className="category-bar">
@@ -28,25 +89,33 @@ function FullMenu() {
                 onClick={() => setActiveCategory(cat.name)}
                 className={`category-btn ${activeCategory === cat.name ? "is-active" : ""}`}
               >
-                <img src={cat.icon} />
+                {cat.icon && <img src={cat.icon} alt="" />}
                 {cat.name}
               </button>
             ))}
           </div>
           <div className="sort-bar">
             <div className="select-wrapper">
-              <select>
-                <option>Rating</option>
-                <option>Ascending</option>
-                <option>Descending</option>
+              <select
+                aria-label="Sort by rating"
+                value={ratingSort}
+                onChange={(e) => setRatingSort(e.target.value)}
+              >
+                <option value="">Rating</option>
+                <option value="asc">Rating: Low to High</option>
+                <option value="desc">Rating: High to Low</option>
               </select>
               <ChevronDown className="select-icon" />
             </div>
             <div className="select-wrapper">
-              <select>
-                <option>Price</option>
-                <option>Ascending</option>
-                <option>Descending</option>
+              <select
+                aria-label="Sort by price"
+                value={priceSort}
+                onChange={(e) => setPriceSort(e.target.value)}
+              >
+                <option value="">Price</option>
+                <option value="asc">Price: Low to High</option>
+                <option value="desc">Price: High to Low</option>
               </select>
               <ChevronDown className="select-icon" />
             </div>
@@ -58,28 +127,50 @@ function FullMenu() {
             title="Search meals input"
             id="search-meals"
             placeholder="Search meals..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <Btn title="Search meals button" type="submit">
-            Search
+          <Btn
+            title="Clear search"
+            type="button"
+            onClick={() => setSearchQuery("")}
+          >
+            Clear
           </Btn>
         </div>
       </div>
 
-      {filteredMeals.length > 0 ? (
-        <div className="meal-list">
-          {filteredMeals.map((meal) => (
-            <MealOptionCard
-              key={meal.id}
-              option={meal}
-              qty={selections[meal.id] || 0}
-              setSelections={setSelections}
-            />
-          ))}
-        </div>
-      ) : (
+      {status === "loading" && <p>Loading menu...</p>}
+      {status === "failed" && (
         <div className="empty-state">
-          <p>No meals available in this category.</p>
+          <p>Could not load the menu. Please try again later.</p>
         </div>
+      )}
+      {status === "succeeded" && meals.length === 0 && (
+        <div className="empty-state">
+          <p>No meals in the menu yet. Check back soon!</p>
+        </div>
+      )}
+
+      {status === "succeeded" && meals.length > 0 && (
+        <>
+          {filteredMeals.length > 0 ? (
+            <div className="meal-list">
+              {filteredMeals.map((meal) => (
+                <MealOptionCard
+                  key={meal.id}
+                  option={meal}
+                  qty={selections[meal.id] || 0}
+                  setSelections={setSelections}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="empty-state">
+              <p>No meals match your search or filters.</p>
+            </div>
+          )}
+        </>
       )}
     </section>
   );
