@@ -5,7 +5,11 @@
  * available and provides typed helper methods for every endpoint.
  */
 
-const API_BASE = import.meta.env.VITE_API_URL || "/api";
+// Strip a trailing slash so `${API_BASE}${path}` (path always starts with
+// "/") can't collapse into a double slash — which Vercel/Flask redirect,
+// and browsers refuse to follow a redirect on a CORS preflight request.
+const rawApiBase = import.meta.env.VITE_API_URL || "/api";
+const API_BASE = rawApiBase.endsWith("/") ? rawApiBase.slice(0, -1) : rawApiBase;
 
 export const TOKEN_STORAGE_KEY = "mealy_token";
 
