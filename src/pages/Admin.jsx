@@ -14,7 +14,6 @@ import {
   Clock,
   CheckCircle,
   ShoppingBag,
-  ChevronDown,
   Search,
   Menu,
   CheckCircle as CheckIcon,
@@ -89,7 +88,6 @@ function Admin() {
 
   const totalMeals = menuMeals.length;
   const availableMeals = menuMeals.filter((m) => m.available).length;
-  const totalCategories = [...new Set(menuMeals.flatMap((m) => m.category))].length;
   const allCategories = [...new Set(menuMeals.flatMap((m) => m.category))].sort();
 
   const handleChange = (e) => {

@@ -57,6 +57,29 @@
   height: 100%;
 }
 
+.nav-opts .nav-link {
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-logout {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  margin-left: 8px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.nav-logout:hover {
+  background: var(--color-surface-muted);
+  color: var(--color-text);
+}
+
 @media (max-width: 600px) {
   .nav {
     flex-wrap: wrap;
