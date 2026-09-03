@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import Input from "../ui/Input";
 import Btn from "../ui/Btn";
@@ -97,7 +97,7 @@ function SignupCard() {
 
       <div className="auth-footer">
         <span>Already have an account?</span>
-        <a href="/login">Log In</a>
+        <Link to="/login">Log In</Link>
       </div>
     </div>
   );
