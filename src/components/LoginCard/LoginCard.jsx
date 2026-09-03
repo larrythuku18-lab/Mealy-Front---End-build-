@@ -8,11 +8,15 @@ import "./LoginCard.css";
 
 function LoginCard() {
   const navigate = useNavigate();
-  const { login, error } = useAuth();
+  const { login, logout, isAuthenticated, user, error } = useAuth();
   const [form, setForm] = useState({ email: "", password: "" });
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleLogout = async () => {
+    await logout();
   };
 
   const handleSubmit = async (e) => {
@@ -40,6 +44,17 @@ function LoginCard() {
         <h1>Welcome back</h1>
         <p>Log in to manage or order your meals.</p>
       </div>
+
+      {isAuthenticated && (
+        <div className="auth-session">
+          <p>
+            Signed in as <strong>{user?.name || user?.email}</strong>
+          </p>
+          <Btn variant="secondary" title="Log out of Mealy" onClick={handleLogout}>
+            Log Out
+          </Btn>
+        </div>
+      )}
 
       {error && <p className="auth-error">{error}</p>}
 

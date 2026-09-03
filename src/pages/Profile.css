@@ -89,3 +89,11 @@
 .profile-actions .btn-save {
   width: auto;
 }
+
+.profile-logout {
+  width: 100%;
+  border-top: 1px solid var(--color-border);
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+}

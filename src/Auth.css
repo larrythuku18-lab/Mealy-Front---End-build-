@@ -64,3 +64,25 @@
   font-weight: 600;
   text-decoration: underline;
 }
+
+.auth-session {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--color-surface-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 12px 16px;
+  width: 100%;
+}
+
+.auth-session p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+.auth-session strong {
+  color: var(--color-text);
+}

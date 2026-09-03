@@ -1,11 +1,15 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
 import Btn from "../components/ui/Btn";
 import Input from "../components/ui/Input";
+import { useAuth } from "../context/AuthContext";
 import { currentUser } from "../data/mockData";
 import "./Profile.css";
 
 function Profile() {
+  const navigate = useNavigate();
+  const { isAuthenticated, logout } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
   const [form, setForm] = useState({
     name: currentUser.name,
@@ -22,6 +26,11 @@ function Profile() {
     e.preventDefault();
     // TODO: integrate with backend API
     setIsEditing(false);
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/login");
   };
 
   return (
@@ -102,6 +111,14 @@ function Profile() {
                   </Btn>
                 </div>
               </form>
+            )}
+
+            {isAuthenticated && (
+              <div className="profile-logout">
+                <Btn variant="secondary" title="Log out of Mealy" onClick={handleLogout}>
+                  Log Out
+                </Btn>
+              </div>
             )}
           </div>
         </div>
