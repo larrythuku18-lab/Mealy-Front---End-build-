@@ -58,6 +58,7 @@ function SignupCard() {
             label="Full Name"
             title="Enter full name"
             type="text"
+            id="fullName"
             placeholder="e.g. Jane Smith"
             value={form.fullName}
             onChange={handleChange}
@@ -66,6 +67,7 @@ function SignupCard() {
             label="Email Address"
             title="Enter signup email"
             type="email"
+            id="email"
             placeholder="john@example.com"
             value={form.email}
             onChange={handleChange}
@@ -74,6 +76,7 @@ function SignupCard() {
             label="Password"
             title="Enter signup password"
             type="password"
+            id="password"
             placeholder="••••••••"
             value={form.password}
             onChange={handleChange}
@@ -82,6 +85,7 @@ function SignupCard() {
             label="Confirm Password"
             title="Confirm signup password"
             type="password"
+            id="confirmPassword"
             placeholder="••••••••"
             value={form.confirmPassword}
             onChange={handleChange}

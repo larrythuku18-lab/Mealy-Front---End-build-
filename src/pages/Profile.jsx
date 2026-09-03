@@ -1,31 +1,60 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
 import Btn from "../components/ui/Btn";
 import Input from "../components/ui/Input";
 import { useAuth } from "../context/AuthContext";
-import { currentUser } from "../data/mockData";
+import { apiGetProfile, apiUpdateProfile } from "../api";
 import "./Profile.css";
 
 function Profile() {
   const navigate = useNavigate();
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, user, updateUser, logout } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState(null);
   const [form, setForm] = useState({
-    name: currentUser.name,
-    email: currentUser.email,
-    phone: currentUser.phone,
-    address: currentUser.address,
+    name: user?.name || "",
+    email: user?.email || "",
+    phone: user?.phone || "",
+    address: user?.address || "",
   });
+
+  useEffect(() => {
+    apiGetProfile()
+      .then((data) => {
+        updateUser(data.user);
+        setForm({
+          name: data.user.name || "",
+          email: data.user.email || "",
+          phone: data.user.phone || "",
+          address: data.user.address || "",
+        });
+      })
+      .catch(() => {
+        // Fall back to whatever the auth context already has.
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSave = (e) => {
+  const handleSave = async (e) => {
     e.preventDefault();
-    // TODO: integrate with backend API
-    setIsEditing(false);
+    if (saving) return;
+    setSaving(true);
+    setError(null);
+    try {
+      const data = await apiUpdateProfile(form);
+      updateUser(data.user);
+      setIsEditing(false);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setSaving(false);
+    }
   };
 
   const handleLogout = async () => {
@@ -35,7 +64,7 @@ function Profile() {
 
   return (
     <div className="page">
-      <Navbar user={currentUser} />
+      <Navbar />
       <main className="profile-page">
         <div className="profile-container">
           <div className="profile-header">
@@ -45,8 +74,10 @@ function Profile() {
 
           <div className="profile-card">
             <div className="profile-avatar">
-              <span>{currentUser.name ? currentUser.name.charAt(0) : "?"}</span>
+              <span>{form.name ? form.name.charAt(0) : "?"}</span>
             </div>
+
+            {error && <p className="auth-error">{error}</p>}
 
             {!isEditing ? (
               <div className="profile-info">
@@ -68,7 +99,11 @@ function Profile() {
                 </div>
                 <div className="profile-field">
                   <label>Member Since</label>
-                  <span>{currentUser.joinedDate}</span>
+                  <span>
+                    {user?.joinedDate
+                      ? new Date(user.joinedDate).toLocaleDateString()
+                      : "—"}
+                  </span>
                 </div>
                 <div className="profile-actions">
                   <Btn onClick={() => setIsEditing(true)}>Edit Profile</Btn>
@@ -107,7 +142,7 @@ function Profile() {
                     Cancel
                   </Btn>
                   <Btn variant="save" type="submit">
-                    Save Changes
+                    {saving ? "Saving..." : "Save Changes"}
                   </Btn>
                 </div>
               </form>

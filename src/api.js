@@ -7,7 +7,14 @@
 
 const API_BASE = import.meta.env.VITE_API_URL || "/api";
 
-let _token = null;
+export const TOKEN_STORAGE_KEY = "mealy_token";
+
+// Read synchronously at module load (not in a useEffect) so the token is
+// already attached to the very first request any provider fires on mount —
+// otherwise providers that fetch on mount (e.g. DailyOptionsContext) can run
+// before AuthContext's effect restores it, sending an unauthenticated first
+// request even for an already-logged-in user reloading the page.
+let _token = localStorage.getItem(TOKEN_STORAGE_KEY);
 
 /** Set or clear the auth token used for all subsequent requests. */
 export function setToken(token) {
@@ -40,10 +47,19 @@ async function request(path, options = {}) {
     headers,
   });
 
-  const body = await res.json();
+  // Responses may be empty (e.g. 204) or, if the API host is unreachable
+  // or misconfigured, non-JSON (an HTML/plain-text error page). Don't let
+  // JSON parsing itself throw an opaque SyntaxError.
+  let body = null;
+  try {
+    body = await res.json();
+  } catch {
+    // Non-JSON or empty body — leave `body` as null.
+  }
 
   if (!res.ok) {
-    const message = body.error || body.message || `Request failed (${res.status})`;
+    const message =
+      body?.error || body?.message || `Request failed (${res.status})`;
     throw new Error(message);
   }
 
@@ -96,36 +112,36 @@ export async function apiUpdateProfile({ name, email, phone, address }) {
 // ─── Meal Options ────────────────────────────────────────────────────────────
 
 export async function apiListMealOptions() {
-  return request("/menu/");
+  return request("/menus/");
 }
 
 export async function apiCreateMealOption({ name, description, price, category, image, catererId }) {
-  return request("/menu/", {
+  return request("/menus/", {
     method: "POST",
     body: JSON.stringify({ name, description, price, category, image, catererId }),
   });
 }
 
 export async function apiUpdateMealOption(id, { name, description, price, category, image, catererId }) {
-  return request(`/menu/${id}`, {
+  return request(`/menus/${id}`, {
     method: "PUT",
     body: JSON.stringify({ name, description, price, category, image, catererId }),
   });
 }
 
 export async function apiDeleteMealOption(id) {
-  return request(`/menu/${id}`, { method: "DELETE" });
+  return request(`/menus/${id}`, { method: "DELETE" });
 }
 
 // ─── Today's Menu ────────────────────────────────────────────────────────────
 
 export async function apiGetTodaysMenu() {
-  return request("/menu/today");
+  return request("/menus/today");
 }
 
 export async function apiPublishMenu(mealOptionIds) {
   const date = new Date().toISOString().slice(0, 10);
-  return request("/menu/publish", {
+  return request("/menus/publish", {
     method: "POST",
     body: JSON.stringify({ mealOptionIds, date }),
   });

@@ -64,6 +64,7 @@ function LoginCard() {
             label="Email Address"
             title="Enter login email"
             type="email"
+            id="email"
             placeholder="john@example.com"
             value={form.email}
             onChange={handleChange}
@@ -72,6 +73,7 @@ function LoginCard() {
             label="Password"
             title="Enter login password"
             type="password"
+            id="password"
             placeholder="••••••••"
             value={form.password}
             onChange={handleChange}

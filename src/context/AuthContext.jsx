@@ -5,6 +5,7 @@ import {
   apiLogout,
   apiGetMe,
   setToken,
+  TOKEN_STORAGE_KEY,
 } from "../api";
 
 const AuthContext = createContext(null);
@@ -23,7 +24,7 @@ export function AuthProvider({ children }) {
   });
   const [token, setTokenState] = useState(() => {
     // Restore token from localStorage on load
-    return localStorage.getItem("mealy_token") || null;
+    return localStorage.getItem(TOKEN_STORAGE_KEY) || null;
   });
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState(null);
@@ -32,7 +33,7 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     if (token) {
       setToken(token);
-      localStorage.setItem("mealy_token", token);
+      localStorage.setItem(TOKEN_STORAGE_KEY, token);
 
       // Fetch fresh user data from API
       apiGetMe()
@@ -45,14 +46,14 @@ export function AuthProvider({ children }) {
           setTokenState(null);
           setToken(null);
           setUser(null);
-          localStorage.removeItem("mealy_token");
+          localStorage.removeItem(TOKEN_STORAGE_KEY);
           localStorage.removeItem("mealy_user");
         });
     } else {
       setToken(null);
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setUser(null);
-      localStorage.removeItem("mealy_token");
+      localStorage.removeItem(TOKEN_STORAGE_KEY);
       localStorage.removeItem("mealy_user");
     }
   }, [token]);
@@ -102,7 +103,7 @@ export function AuthProvider({ children }) {
     setUser(null);
     setStatus("idle");
     setError(null);
-    localStorage.removeItem("mealy_token");
+    localStorage.removeItem(TOKEN_STORAGE_KEY);
     localStorage.removeItem("mealy_user");
   };
 
