@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { apiListCategories, apiListMealOptions } from "../../api";
+import { useAuth } from "../../context/AuthContext";
 import "./FullMenu.css";
 import MealOptionCard from "../MealOptionCard/MealOptionCard";
 import { ChevronDown } from "lucide-react";
@@ -14,6 +15,7 @@ function toCategoryList(option) {
 }
 
 function FullMenu() {
+  const { isAuthenticated } = useAuth();
   const [activeCategory, setActiveCategory] = useState("All");
   const [selections, setSelections] = useState({});
   const [meals, setMeals] = useState([]);
@@ -23,8 +25,19 @@ function FullMenu() {
   const [ratingSort, setRatingSort] = useState("");
   const [priceSort, setPriceSort] = useState("");
 
+  // Meal options require auth on the backend. This component fetches once
+  // per mount and doesn't remount across login/logout, so without tying
+  // the fetch to isAuthenticated, a stale/invalid token on first load (or
+  // simply loading the page logged out) would fail once and never retry
+  // even after a successful login.
   useEffect(() => {
+    if (!isAuthenticated) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setStatus("failed");
+      return;
+    }
     let cancelled = false;
+    setStatus("loading");
     Promise.all([apiListMealOptions(), apiListCategories()])
       .then(([mealsData, catsData]) => {
         if (cancelled) return;
@@ -40,7 +53,7 @@ function FullMenu() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [isAuthenticated]);
 
   const filteredMeals = useMemo(() => {
     const query = searchQuery.trim().toLowerCase();
