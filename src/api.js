@@ -96,37 +96,38 @@ export async function apiUpdateProfile({ name, email, phone, address }) {
 // ─── Meal Options ────────────────────────────────────────────────────────────
 
 export async function apiListMealOptions() {
-  return request("/menus/");
+  return request("/menu/");
 }
 
 export async function apiCreateMealOption({ name, description, price, category, image, catererId }) {
-  return request("/menus/", {
+  return request("/menu/", {
     method: "POST",
     body: JSON.stringify({ name, description, price, category, image, catererId }),
   });
 }
 
 export async function apiUpdateMealOption(id, { name, description, price, category, image, catererId }) {
-  return request(`/menus/${id}`, {
+  return request(`/menu/${id}`, {
     method: "PUT",
     body: JSON.stringify({ name, description, price, category, image, catererId }),
   });
 }
 
 export async function apiDeleteMealOption(id) {
-  return request(`/menus/${id}`, { method: "DELETE" });
+  return request(`/menu/${id}`, { method: "DELETE" });
 }
 
 // ─── Today's Menu ────────────────────────────────────────────────────────────
 
 export async function apiGetTodaysMenu() {
-  return request("/menus/today");
+  return request("/menu/today");
 }
 
 export async function apiPublishMenu(mealOptionIds) {
-  return request("/menus/publish", {
+  const date = new Date().toISOString().slice(0, 10);
+  return request("/menu/publish", {
     method: "POST",
-    body: JSON.stringify({ mealOptionIds }),
+    body: JSON.stringify({ mealOptionIds, date }),
   });
 }
 
