@@ -1,9 +1,10 @@
 import Btn from "../ui/Btn";
 import "./MealOptionCard.css";
-import { Heart, MessageSquare, Star } from "lucide-react";
+import { Heart, MessageSquare } from "lucide-react";
 import { useState } from "react";
 import { useFavorites } from "../../context/FavoritesContext";
 import ReviewsModal from "../ReviewsModal/ReviewsModal";
+import MealRating from "../MealRating/MealRating";
 
 function MealOptionCard({ option, qty, setSelections }) {
   const { isFavorite, toggleFavorite } = useFavorites();
@@ -69,12 +70,7 @@ function MealOptionCard({ option, qty, setSelections }) {
           <span className="meal-price">
             KSh {Number(option.price || 0).toLocaleString()}
           </span>
-          {option.rating != null && (
-            <div className="meal-rating">
-              <Star size={12} strokeWidth={2.5} />
-              <p>{option.rating}</p>
-            </div>
-          )}
+          <MealRating mealId={option.id} />
           <button
             type="button"
             className="review-link"
