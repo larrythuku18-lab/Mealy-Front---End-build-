@@ -27,12 +27,12 @@ function SignupCard() {
       return;
     }
     try {
-      await signup({
+      const data = await signup({
         name: form.fullName,
         email: form.email,
         password: form.password,
       });
-      navigate("/");
+      navigate(data.user?.role === "admin" ? "/admin" : "/");
     } catch {
       // Error is already set in AuthContext
     }
