@@ -1,12 +1,14 @@
 import Btn from "../ui/Btn";
 import "./MealOptionCard.css";
-import { Heart, Star } from "lucide-react";
+import { Heart, MessageSquare, Star } from "lucide-react";
 import { useState } from "react";
 import { useFavorites } from "../../context/FavoritesContext";
+import ReviewsModal from "../ReviewsModal/ReviewsModal";
 
 function MealOptionCard({ option, qty, setSelections }) {
   const { isFavorite, toggleFavorite } = useFavorites();
   const [isHovered, setIsHovered] = useState(false);
+  const [showReviews, setShowReviews] = useState(false);
   const favorited = isFavorite(option.id);
   const handleAdd = (optionId) => {
     setSelections((prev) => ({
@@ -73,6 +75,16 @@ function MealOptionCard({ option, qty, setSelections }) {
               <p>{option.rating}</p>
             </div>
           )}
+          <button
+            type="button"
+            className="review-link"
+            title="Read and write reviews"
+            aria-label={`Reviews for ${option.name}`}
+            onClick={() => setShowReviews(true)}
+          >
+            <MessageSquare size={13} />
+            Reviews
+          </button>
         </div>
         {qty === 0 ? (
           <Btn
@@ -103,6 +115,12 @@ function MealOptionCard({ option, qty, setSelections }) {
           </div>
         )}
       </div>
+      {showReviews && (
+        <ReviewsModal
+          mealOption={option}
+          onClose={() => setShowReviews(false)}
+        />
+      )}
     </article>
   );
 }

@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Star } from "lucide-react";
 import { useDailyOptions } from "../../contexts/DailyOptionsContext";
 import { useAuth } from "../../context/AuthContext";
+import ReviewsModal from "../ReviewsModal/ReviewsModal";
 import "./DailyMealOptionCard.css";
 
 /* ─── Toast ─────────────────────────────────────────────────────────────────── */
@@ -102,7 +104,7 @@ function CartModal({
 }
 
 /* ─── Order Confirmation Screen ─────────────────────────────────────────────── */
-function OrderConfirmation({ order, onContinue }) {
+function OrderConfirmation({ order, onContinue, onRate }) {
   return (
     <div className="order-confirm">
       <div className="order-confirm__icon">
@@ -129,7 +131,19 @@ function OrderConfirmation({ order, onContinue }) {
       <div className="order-confirm__details">
         {order.items.map((item, i) => (
           <div key={i} className="order-confirm__item">
-            <span>{item.name}</span>
+            <span className="order-confirm__item-name">
+              {item.name}
+              {onRate && (
+                <button
+                  type="button"
+                  className="order-confirm__rate"
+                  onClick={() => onRate({ id: item.id, name: item.name })}
+                >
+                  <Star size={11} />
+                  Rate
+                </button>
+              )}
+            </span>
             <span>
               ×{item.quantity} — KSh{" "}
               {(item.price * item.quantity).toLocaleString()}
@@ -172,6 +186,7 @@ function DailyMealOptionCard() {
   const [cartOpen, setCartOpen] = useState(false);
   const [isPlacing, setIsPlacing] = useState(false);
   const [toast, setToast] = useState(null);
+  const [reviewTarget, setReviewTarget] = useState(null);
 
   const showToast = (message, type = "error") => {
     setToast({ message, type });
@@ -244,7 +259,14 @@ function DailyMealOptionCard() {
           onContinue={() => {
             clearLastOrder();
           }}
+          onRate={setReviewTarget}
         />
+        {reviewTarget && (
+          <ReviewsModal
+            mealOption={reviewTarget}
+            onClose={() => setReviewTarget(null)}
+          />
+        )}
       </section>
     );
   }
@@ -383,6 +405,14 @@ function DailyMealOptionCard() {
           onClearSelection={handleClearSelection}
           onClose={() => setCartOpen(false)}
           isPlacing={isPlacing}
+        />
+      )}
+
+      {/* Reviews modal */}
+      {reviewTarget && (
+        <ReviewsModal
+          mealOption={reviewTarget}
+          onClose={() => setReviewTarget(null)}
         />
       )}
     </section>

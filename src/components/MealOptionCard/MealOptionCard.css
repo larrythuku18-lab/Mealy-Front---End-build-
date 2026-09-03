@@ -120,6 +120,24 @@
   margin: 0;
 }
 
+.review-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: none;
+  background: none;
+  padding: 2px 4px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.review-link:hover {
+  color: var(--color-text);
+}
+
 .quantity-stepper {
   display: flex;
   align-items: center;
