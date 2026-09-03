@@ -10,10 +10,12 @@ import {
   apiListMealOptions,
   apiCreateOrder,
 } from "../api";
+import { useAuth } from "../context/AuthContext";
 
 const DailyOptionsContext = createContext(null);
 
 export function DailyOptionsProvider({ children }) {
+  const { isAuthenticated } = useAuth();
   const [options, setOptions] = useState([]);
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState(null);
@@ -71,11 +73,21 @@ export function DailyOptionsProvider({ children }) {
   /** Clear the last order (e.g. when dismissing the confirmation). */
   const clearLastOrder = () => setLastOrder(null);
 
-  // Fetch on mount
+  // Fetch whenever authentication becomes available (on mount for an
+  // already-logged-in session, and again on a fresh login/logout — the
+  // provider itself never remounts across those, so without this the
+  // very first, unauthenticated mount-time fetch would 401 and nothing
+  // would ever retry once a token exists).
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (!isAuthenticated) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setStatus("idle");
+      setError(null);
+      setOptions([]);
+      return;
+    }
     void fetchDailyOptions();
-  }, [fetchDailyOptions]);
+  }, [isAuthenticated, fetchDailyOptions]);
 
   const value = {
     options,
