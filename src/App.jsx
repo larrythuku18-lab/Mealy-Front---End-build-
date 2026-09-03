@@ -7,6 +7,7 @@ import Profile from "./pages/Profile";
 import Orders from "./pages/Orders";
 import Favorites from "./pages/Favorites";
 import { useAuth } from "./context/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
 /**
  * Home gate: admins land on /admin when they open the site root,
@@ -35,9 +36,11 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/admin" element={<Admin />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/orders" element={<Orders />} />
-        <Route path="/favorites" element={<Favorites />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/favorites" element={<Favorites />} />
+        </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
