@@ -372,6 +372,11 @@
   color: #ca8a04;
 }
 
+.order-status--confirmed {
+  background: #ede9fe;
+  color: #6d28d9;
+}
+
 /* Category stats */
 .category-stats {
   display: flex;
@@ -986,6 +991,84 @@
 
 .orders-grid .order-card {
   animation: fadeSlideUp 0.4s ease both;
+}
+
+/* ── Today's menu picker ───────────────────────────────── */
+
+.today-menu-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.today-menu-actions .page-count {
+  margin-right: auto;
+}
+
+.today-menu-actions .btn-add {
+  padding: 10px 20px;
+  border: none;
+}
+
+.today-menu-actions .btn-add:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ── Order card extras ─────────────────────────────────── */
+
+.status-badge--confirmed {
+  background: #ede9fe;
+  color: #6d28d9;
+}
+
+.order-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+.order-status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-border);
+}
+
+.order-status-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.order-status-select {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text);
+  background: var(--color-surface);
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.order-status-select:focus {
+  border-color: var(--color-text);
+}
+
+.order-status-select:disabled {
+  opacity: 0.6;
+  cursor: wait;
 }
 
 .orders-grid .order-card:nth-child(1) { animation-delay: 0ms; }

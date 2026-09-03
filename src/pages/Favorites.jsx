@@ -1,10 +1,10 @@
 import Navbar from "../components/Navbar/Navbar";
 import { Heart } from "lucide-react";
+import { useFavorites } from "../context/FavoritesContext";
 import "./Favorites.css";
 
 function Favorites() {
-  // TODO: integrate with backend / context to load real favorites
-  const favorites = [];
+  const { items: favorites, removeFavorite } = useFavorites();
 
   return (
     <div className="page">
@@ -20,12 +20,35 @@ function Favorites() {
             <div className="favorites-list">
               {favorites.map((meal) => (
                 <div key={meal.id} className="favorite-card">
-                  <img src={meal.image} alt={meal.name} className="favorite-card-img" />
+                  {meal.image ? (
+                    <img
+                      src={meal.image}
+                      alt={meal.name}
+                      className="favorite-card-img"
+                    />
+                  ) : (
+                    <div className="favorite-card-img favorite-card-img--placeholder">
+                      {meal.name?.charAt(0) || "?"}
+                    </div>
+                  )}
                   <div className="favorite-card-info">
-                    <span className="favorite-card-name">{meal.name}</span>
-                    <span className="favorite-card-price">
-                      KSh {meal.price.toLocaleString()}
-                    </span>
+                    <div className="favorite-card-text">
+                      <span className="favorite-card-name">{meal.name}</span>
+                      {meal.price != null && (
+                        <span className="favorite-card-price">
+                          KSh {Number(meal.price).toLocaleString()}
+                        </span>
+                      )}
+                    </div>
+                    <button
+                      type="button"
+                      className="favorite-remove"
+                      aria-label={`Remove ${meal.name} from favorites`}
+                      title="Remove from favorites"
+                      onClick={() => removeFavorite(meal.id)}
+                    >
+                      <Heart size={16} fill="currentColor" />
+                    </button>
                   </div>
                 </div>
               ))}

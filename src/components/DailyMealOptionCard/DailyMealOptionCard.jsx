@@ -251,8 +251,6 @@ function DailyMealOptionCard() {
 
   return (
     <section className="daily-options">
-      <h2>Daily Options</h2>
-
       {/* Toast */}
       {toast && (
         <Toast
@@ -262,37 +260,43 @@ function DailyMealOptionCard() {
         />
       )}
 
-      {/* Loading / error states */}
+      {/* Loading / error / empty states */}
       {status === "loading" && <p>Loading today's menu...</p>}
       {status === "failed" && <p>Could not load today's menu.</p>}
+      {status === "succeeded" && dailyOptions.length === 0 && (
+        <div className="dmc-empty">
+          <p>No meals have been published for today yet — check back later.</p>
+        </div>
+      )}
 
       {/* Meal option cards */}
-      <div className="daily-options-grid">
+      {dailyOptions.length > 0 && (
+      <div className="dmc-grid">
         {dailyOptions.map((option) => {
           const qty = selections[option.id] || 0;
           return (
             <article
               key={option.id}
-              className={`daily-option ${qty > 0 ? "selected" : ""}`}
+              className={`dmc-card ${qty > 0 ? "dmc-card--selected" : ""}`}
             >
-              <div className="daily-option-body">
-                <p className="meal-name">{option.name}</p>
-                <p className="meal-description">{option.description}</p>
+              <div className="dmc-card-body">
+                <p className="dmc-card-name">{option.name}</p>
+                <p className="dmc-card-description">{option.description}</p>
               </div>
-              <div className="daily-option-footer">
-                <span className="meal-price">
+              <div className="dmc-card-footer">
+                <span className="dmc-card-price">
                   KSh {option.price.toLocaleString()}
                 </span>
                 {qty === 0 ? (
                   <button
                     type="button"
-                    className="add-meal-btn"
+                    className="dmc-add-btn"
                     onClick={() => handleAdd(option.id)}
                   >
                     Add Meal
                   </button>
                 ) : (
-                  <div className="quantity-stepper">
+                  <div className="dmc-stepper">
                     <button
                       type="button"
                       aria-label="Decrease quantity"
@@ -300,7 +304,7 @@ function DailyMealOptionCard() {
                     >
                       −
                     </button>
-                    <span className="qty-value">{qty}</span>
+                    <span className="dmc-qty">{qty}</span>
                     <button
                       type="button"
                       aria-label="Increase quantity"
@@ -315,6 +319,7 @@ function DailyMealOptionCard() {
           );
         })}
       </div>
+      )}
 
       {/* Inline selection summary */}
       {selectedCount > 0 && (

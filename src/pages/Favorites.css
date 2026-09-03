@@ -47,23 +47,65 @@
   object-fit: cover;
 }
 
+.favorite-card-img--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface-muted);
+  color: var(--color-text-placeholder);
+  font-size: 56px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
 .favorite-card-info {
   padding: 14px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 12px;
+}
+
+.favorite-card-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
 }
 
 .favorite-card-name {
   font-size: 15px;
   font-weight: 600;
   color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .favorite-card-price {
   font-size: 14px;
   font-weight: 700;
   color: var(--color-text);
+}
+
+.favorite-remove {
+  flex-shrink: 0;
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e11d48;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.favorite-remove:hover {
+  background: #fef2f2;
+  color: #be123c;
 }
 
 /* Empty state */

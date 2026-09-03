@@ -1,15 +1,26 @@
 import Navbar from "../components/Navbar/Navbar";
-import DailyMealOptions from "../components/DailyMealOptions/DailyMealOptions";
-import { currentUser } from "../data/mockData";
+import DailyMealOptionCard from "../components/DailyMealOptionCard/DailyMealOptionCard";
 import "./Menu.css";
 import FullMenu from "../components/FullMenu/FullMenu";
 
 function Menu() {
+  const today = new Date();
+  const dateStr = today.toLocaleDateString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
   return (
     <div className="page">
-      <Navbar user={currentUser} />
+      <Navbar />
       <main className="menu-main">
-        <DailyMealOptions />
+        <div className="menu-header">
+          <span className="eyebrow">Today's Selection</span>
+          <h1>{dateStr}</h1>
+        </div>
+        <DailyMealOptionCard />
         <FullMenu />
       </main>
     </div>

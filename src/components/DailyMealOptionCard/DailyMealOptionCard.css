@@ -4,22 +4,30 @@
   gap: 16px;
 }
 
-.daily-options h2 {
-  font-size: 18px;
-  font-weight: 700;
-  margin: 0;
-}
-
 /* ─── Meal Option Grid ─────────────────────────────────────────────────────── */
 
-.daily-options-grid {
+.dmc-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 16px;
   min-height: 300px;
 }
 
-.daily-option {
+.dmc-empty {
+  background: var(--color-surface);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 32px 24px;
+  text-align: center;
+}
+
+.dmc-empty p {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.dmc-card {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
@@ -30,27 +38,15 @@
   transition: border-color 0.15s, box-shadow 0.15s;
 }
 
-.daily-option:hover {
+.dmc-card:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
-.daily-option.selected {
+.dmc-card--selected {
   border: 2px solid var(--color-text);
 }
 
-.daily-option-image {
-  height: 140px;
-  overflow: hidden;
-  background: var(--color-surface-muted);
-}
-
-.daily-option-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.daily-option-body {
+.dmc-card-body {
   padding: 14px 16px;
   display: flex;
   flex-direction: column;
@@ -58,14 +54,14 @@
   flex: 1;
 }
 
-.daily-option .meal-name {
+.dmc-card-name {
   font-size: 15px;
   font-weight: 700;
   color: var(--color-text);
   margin: 0;
 }
 
-.daily-option .meal-description {
+.dmc-card-description {
   font-size: 12px;
   color: var(--color-text-muted);
   margin: 0;
@@ -76,7 +72,7 @@
   overflow: hidden;
 }
 
-.daily-option-footer {
+.dmc-card-footer {
   padding: 0 16px 14px;
   display: flex;
   align-items: center;
@@ -84,13 +80,13 @@
   gap: 8px;
 }
 
-.daily-option .meal-price {
+.dmc-card-price {
   font-size: 15px;
   font-weight: 700;
   color: var(--color-text);
 }
 
-.daily-option .add-meal-btn {
+.dmc-add-btn {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: 8px 16px;
@@ -103,17 +99,17 @@
   transition: background 0.15s;
 }
 
-.daily-option .add-meal-btn:hover {
+.dmc-add-btn:hover {
   background: var(--color-surface-muted);
 }
 
-.quantity-stepper {
+.dmc-stepper {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.quantity-stepper button {
+.dmc-stepper button {
   background: var(--color-surface-muted);
   border: none;
   border-radius: var(--radius-md);
@@ -129,11 +125,11 @@
   transition: background 0.15s;
 }
 
-.quantity-stepper button:hover {
+.dmc-stepper button:hover {
   background: var(--color-surface-hover);
 }
 
-.qty-value {
+.dmc-qty {
   font-size: 14px;
   font-weight: 700;
   min-width: 20px;
@@ -203,6 +199,7 @@
     opacity: 0;
     transform: translateX(-50%) translateY(16px);
   }
+
   to {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
@@ -613,44 +610,40 @@
 /* ─── Responsive ───────────────────────────────────────────────────────────── */
 
 @media (max-width: 900px) {
-  .daily-options-grid {
+  .dmc-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 540px) {
-  .daily-options-grid {
+  .dmc-grid {
     grid-template-columns: 1fr 1fr;
     gap: 12px;
   }
 
-  .daily-option-image {
-    height: 110px;
-  }
-
-  .daily-option-body {
+  .dmc-card-body {
     padding: 10px 12px;
   }
 
-  .daily-option .meal-name {
+  .dmc-card-name {
     font-size: 14px;
   }
 
-  .daily-option .meal-description {
+  .dmc-card-description {
     font-size: 11px;
     -webkit-line-clamp: 2;
   }
 
-  .daily-option-footer {
+  .dmc-card-footer {
     padding: 0 12px 12px;
   }
 
-  .daily-option .add-meal-btn {
+  .dmc-add-btn {
     padding: 6px 10px;
     font-size: 12px;
   }
 
-  .quantity-stepper button {
+  .dmc-stepper button {
     width: 28px;
     height: 28px;
     font-size: 14px;

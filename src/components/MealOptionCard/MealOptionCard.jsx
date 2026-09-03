@@ -2,9 +2,12 @@ import Btn from "../ui/Btn";
 import "./MealOptionCard.css";
 import { Heart, Star } from "lucide-react";
 import { useState } from "react";
+import { useFavorites } from "../../context/FavoritesContext";
 
 function MealOptionCard({ option, qty, setSelections }) {
+  const { isFavorite, toggleFavorite } = useFavorites();
   const [isHovered, setIsHovered] = useState(false);
+  const favorited = isFavorite(option.id);
   const handleAdd = (optionId) => {
     setSelections((prev) => ({
       ...prev,
@@ -33,11 +36,22 @@ function MealOptionCard({ option, qty, setSelections }) {
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="daily-option-image">
-        <Heart
-          aria-label="Add to favorites"
-          className={`favorite-icon ${isHovered ? "" : "hidden"}`}
-          color="white"
-        />
+        <button
+          type="button"
+          aria-label={favorited ? "Remove from favorites" : "Add to favorites"}
+          title={favorited ? "Remove from favorites" : "Add to favorites"}
+          className={`favorite-toggle ${isHovered || favorited ? "" : "favorite-toggle--hidden"}`}
+          onClick={(e) => {
+            e.stopPropagation();
+            toggleFavorite(option);
+          }}
+        >
+          <Heart
+            size={18}
+            color={favorited ? "#ef4444" : "white"}
+            fill={favorited ? "#ef4444" : "none"}
+          />
+        </button>
         <img src={option.image} alt={option.name} />
       </div>
       <div className="daily-option-body">

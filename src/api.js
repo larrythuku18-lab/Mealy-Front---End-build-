@@ -184,3 +184,23 @@ export async function apiCreateCategory(name) {
     body: JSON.stringify({ name }),
   });
 }
+
+// ─── Favorites ───────────────────────────────────────────────────────────────
+// NOTE: favorites persist locally (localStorage) so they work without a backend.
+// These calls are used opportunistically — if the backend doesn't support them
+// yet, the UI silently keeps working from local storage.
+
+export async function apiListFavorites() {
+  return request("/favorites/");
+}
+
+export async function apiAddFavorite(mealOptionId) {
+  return request("/favorites/", {
+    method: "POST",
+    body: JSON.stringify({ meal_option_id: mealOptionId }),
+  });
+}
+
+export async function apiRemoveFavorite(mealOptionId) {
+  return request(`/favorites/${mealOptionId}`, { method: "DELETE" });
+}

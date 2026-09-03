@@ -35,7 +35,9 @@ function App() {
         <Route path="/" element={<HomeGate />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/admin" element={<Admin />} />
+        <Route element={<ProtectedRoute roles={["admin"]} />}>
+          <Route path="/admin" element={<Admin />} />
+        </Route>
         <Route element={<ProtectedRoute />}>
           <Route path="/profile" element={<Profile />} />
           <Route path="/orders" element={<Orders />} />
