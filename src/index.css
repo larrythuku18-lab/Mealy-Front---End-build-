@@ -177,3 +177,31 @@ body {
 .input-primary input::placeholder {
   color: var(--color-text-placeholder);
 }
+
+.input-password-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.input-password-wrapper input {
+  padding-right: 40px;
+}
+
+.input-password-toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+
+.input-password-toggle:hover {
+  color: var(--color-text);
+}
