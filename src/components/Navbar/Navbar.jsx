@@ -35,6 +35,11 @@ function Navbar() {
             Admin Panel
           </Link>
         )}
+        {!isAuthenticated && (
+          <Link to="/signup" className={`nav-link ${isActive("/signup") ? "selected" : ""}`}>
+            Sign Up
+          </Link>
+        )}
       </div>
 
       <div className="nav-opts">
@@ -65,10 +70,14 @@ function Navbar() {
         </Link>
       </div>
 
-      {isAuthenticated && (
+      {isAuthenticated ? (
         <button className="nav-link nav-logout" onClick={handleLogout}>
           Logout
         </button>
+      ) : (
+        <Link to="/login" className="nav-link nav-login" title="Log In" aria-label="Log In">
+          Log In
+        </Link>
       )}
     </nav>
   );

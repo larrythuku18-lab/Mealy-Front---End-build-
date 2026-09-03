@@ -62,7 +62,8 @@
   align-items: center;
 }
 
-.nav-logout {
+.nav-logout,
+.nav-login {
   background: transparent;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-pill);
@@ -73,9 +74,11 @@
   cursor: pointer;
   margin-left: 8px;
   transition: background 0.15s, color 0.15s;
+  text-decoration: none;
 }
 
-.nav-logout:hover {
+.nav-logout:hover,
+.nav-login:hover {
   background: var(--color-surface-muted);
   color: var(--color-text);
 }
