@@ -120,14 +120,15 @@ function extractKeywords(name, description) {
     [/\bpancake/, "pancakes stack maple syrup"],
     [/\bwaffle\b/, "waffles breakfast"],
     [/\bavocado\s*toast\b/, "avocado toast breakfast"],
-    [/\bbacon\b/, "bacon eggs breakfast"],
+    [/\bbacon\s+(and\s+)?eggs?\b/, "bacon eggs breakfast"],
     [/\btoast\b/, "toast breakfast plate"],
-    [/\bomelette|omelet\b/, "omelette eggs breakfast"],
+    [/\bomelett?e?\b/, "omelette eggs breakfast"],
+    [/\bburrito\b/, "burrito wrap food"],
     [/\bscrambled\s*egg/, "scrambled eggs breakfast"],
+    [/\byogurt\s*parfait\b|\bparfait\b/, "yogurt parfait berries breakfast"],
     [/\begg(s)?\b/, "eggs breakfast plate"],
     [/\bgranola\b/, "granola bowl breakfast"],
     [/\bporridge\b/, "porridge oats bowl"],
-    [/\byogurt\s*parfait\b|\bparfait\b/, "yogurt parfait berries breakfast"],
 
     // Handheld / assembled dishes (checked before generic protein matches)
     [/\bnachos?\b/, "nachos snack food"],
@@ -140,10 +141,9 @@ function extractKeywords(name, description) {
     [/\bmargherita\b/, "margherita pizza food"],
     [/\bpizza\b/, "pizza food"],
     [/\bsushi\b/, "sushi food"],
-    [/\btaco\b/, "taco food"],
+    [/\btacos?\b/, "taco food"],
     [/\bhummus\b/, "hummus pita food"],
     [/\bstir[\s-]?fry\b/, "stir fry vegetables food"],
-    [/\bburrito\b/, "burrito food"],
     [/\bsweet\s*potato\s*fries?\b/, "sweet potato fries food"],
     [/\bfries\b/, "french fries food"],
     [/\bpopcorn\s*chicken\b/, "popcorn chicken food"],
@@ -158,6 +158,16 @@ function extractKeywords(name, description) {
     [/\bnoodle\b/, "noodles bowl"],
     [/\bmacaroni\b/, "macaroni pasta"],
     [/\b(bread|roti|naan)\b/, "flatbread bread"],
+
+    // Compound protein dishes — checked before the generic "curry" pattern
+    // just below (and the generic proteins further down), for the same
+    // reason as the sections above: "Butter Chicken" needs to match here,
+    // not fall into plain "curry" or plain "chicken"
+    [/\bbutter\s*chicken\b/, "butter chicken curry"],
+    [/\btikka\b/, "tikka chicken"],
+    [/\bkorma\b/, "korma curry"],
+    [/\bmasala\b/, "masala dish spiced"],
+    [/\bkeema\b/, "keema minced meat"],
 
     // Prepared savoury dishes (also before generic protein matches)
     [/\bsoup\b/, "soup bowl hot"],
@@ -174,21 +184,18 @@ function extractKeywords(name, description) {
     // "chicken")
     [/\b(beef|nyama)\b/, "beef meat dish"],
     [/\b(chicken|kuku|murgi)\b/, "chicken dish food"],
+    [/\bbacon\b/, "bacon strips food"],
     [/\bgoat\b/, "goat meat grilled"],
     [/\b(lamb|mutton)\b/, "lamb meat dish"],
     [/\bsteak\b/, "grilled steak"],
     [/\bkebab\b/, "kebab grilled meat"],
-    [/\bkeema\b/, "keema minced meat"],
-    [/\bmasala\b/, "masala dish spiced"],
-    [/\btikka\b/, "tikka chicken"],
-    [/\bbutter\s*chicken\b/, "butter chicken curry"],
-    [/\bkorma\b/, "korma curry"],
 
-    // Fish dishes
-    [/\b(fish|samaki)\b/, "fish dish plate"],
+    // Fish dishes — specific species checked before the generic "fish"
+    // pattern, so e.g. "Grilled Tilapia ... fish ..." matches "tilapia"
     [/\bsalmon\b/, "grilled salmon"],
-    [/\btilapia\b/, "tilapia fish"],
-    [/\bprawn|shrimp\b/, "prawn shrimp dish"],
+    [/\btilapia\b/, "grilled tilapia plate"],
+    [/\b(prawn|shrimp)\b/, "prawn shrimp dish"],
+    [/\b(fish|samaki)\b/, "fish dish plate"],
 
     // Vegetables
     [/\bvegetable\b/, "vegetable dish plate"],
