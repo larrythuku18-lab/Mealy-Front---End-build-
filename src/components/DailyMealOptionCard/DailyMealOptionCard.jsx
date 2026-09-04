@@ -301,6 +301,13 @@ function DailyMealOptionCard() {
               key={option.id}
               className={`dmc-card ${qty > 0 ? "dmc-card--selected" : ""}`}
             >
+              <div className="dmc-card-image">
+                {option.image ? (
+                  <img src={option.image} alt={option.name} />
+                ) : (
+                  <div className="dmc-card-image-placeholder" />
+                )}
+              </div>
               <div className="dmc-card-body">
                 <p className="dmc-card-name">{option.name}</p>
                 <p className="dmc-card-description">{option.description}</p>
