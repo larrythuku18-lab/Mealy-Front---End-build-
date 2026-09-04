@@ -59,7 +59,11 @@ loadCache();
 // ── Request Queue ──────────────────────────────────────────────────────────
 
 let inflight = 0;
-const MAX_CONCURRENT = 3;
+// Was 3 — noticeably slow to resolve the tail of a 40-item catalog (later
+// entries wait behind ~13 queue rounds). Pexels' free tier is limited by
+// hourly/monthly quota, not a documented per-second cap, so this is safe
+// to raise as the catalog grows.
+const MAX_CONCURRENT = 6;
 const pendingQueue = [];
 
 function enqueue(fn) {
