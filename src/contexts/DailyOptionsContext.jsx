@@ -11,6 +11,7 @@ import {
   apiCreateOrder,
 } from "../api";
 import { useAuth } from "../context/AuthContext";
+import { prefetchFoodImages } from "../utils/pexelsImages";
 
 const DailyOptionsContext = createContext(null);
 
@@ -39,6 +40,7 @@ export function DailyOptionsProvider({ children }) {
       const allOptions = allData.mealOptions || [];
       const published = allOptions.filter((mo) => ids.includes(mo.id));
       setOptions(published);
+      prefetchFoodImages(published);
       setStatus("succeeded");
     } catch (err) {
       setStatus("failed");

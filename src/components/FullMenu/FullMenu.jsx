@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { apiListCategories, apiListMealOptions } from "../../api";
 import { useAuth } from "../../context/AuthContext";
+import { prefetchFoodImages } from "../../utils/pexelsImages";
 import "./FullMenu.css";
 import MealOptionCard from "../MealOptionCard/MealOptionCard";
 import { ChevronDown } from "lucide-react";
@@ -41,7 +42,9 @@ function FullMenu() {
     Promise.all([apiListMealOptions(), apiListCategories()])
       .then(([mealsData, catsData]) => {
         if (cancelled) return;
-        setMeals(mealsData.mealOptions || []);
+        const mealList = mealsData.mealOptions || [];
+        setMeals(mealList);
+        prefetchFoodImages(mealList);
         const cats = (catsData.categories || []).filter((cat) => cat && cat.name);
         setCategories([{ id: 0, name: "All" }, ...cats]);
         setStatus("succeeded");
