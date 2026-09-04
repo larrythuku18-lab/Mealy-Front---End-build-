@@ -99,14 +99,14 @@ function extractKeywords(name, description) {
   const keywordMap = [
     // Kenyan staples
     [/\bugali\b/, "ugali african food"],
-    [/\bsukuma\s*wiki\b/, "sukuma wiki kale greens african"],
+    [/\bsukuma\s*wiki\b/, "sauteed kale greens"],
     [/\bnyama\s*choma\b/, "nyama choma grilled meat kenyan"],
-    [/\bpilau\b/, "pilau rice african spiced"],
+    [/\bpilau\b/, "pilau spiced rice dish"],
     [/\bbiryani\b/, "biryani rice"],
     [/\bjollof\s*rice\b/, "jollof rice west african"],
     [/\bchapati\b/, "chapati flatbread african"],
     [/\bmandazi\b/, "mandazi african doughnut"],
-    [/\bmatoke\b/, "matoke plantain east african"],
+    [/\bmatoke\b/, "cooked plantains dish"],
     [/\bgitheri\b/, "githeri beans corn kenyan"],
     [/\birio\b/, "irio mashed food kenyan"],
     [/\bmukimo\b/, "mukimo mashed greens kenyan"],
@@ -120,6 +120,7 @@ function extractKeywords(name, description) {
     [/\bpancake/, "pancakes stack maple syrup"],
     [/\bwaffle\b/, "waffles breakfast"],
     [/\bavocado\s*toast\b/, "avocado toast breakfast"],
+    [/\bbacon\b/, "bacon eggs breakfast"],
     [/\btoast\b/, "toast breakfast plate"],
     [/\bomelette|omelet\b/, "omelette eggs breakfast"],
     [/\bscrambled\s*egg/, "scrambled eggs breakfast"],
@@ -130,6 +131,8 @@ function extractKeywords(name, description) {
 
     // Handheld / assembled dishes (checked before generic protein matches)
     [/\bnachos?\b/, "nachos snack food"],
+    [/\bwing(s)?\b/, "chicken wings food"],
+    [/\bfalafel\b/, "falafel food"],
     [/\bwrap\b/, "wrap sandwich food"],
     [/\bclub\s*sandwich\b/, "club sandwich food"],
     [/\bsandwich\b/, "sandwich food"],
@@ -141,6 +144,9 @@ function extractKeywords(name, description) {
     [/\bhummus\b/, "hummus pita food"],
     [/\bstir[\s-]?fry\b/, "stir fry vegetables food"],
     [/\bburrito\b/, "burrito food"],
+    [/\bsweet\s*potato\s*fries?\b/, "sweet potato fries food"],
+    [/\bfries\b/, "french fries food"],
+    [/\bpopcorn\s*chicken\b/, "popcorn chicken food"],
 
     // Carbs (checked before generic protein matches, so e.g. a chicken
     // pasta dish matches "pasta" rather than just "chicken")
@@ -194,10 +200,14 @@ function extractKeywords(name, description) {
     // Drinks (specific combos before the generic "tea"/"juice"/"coffee"
     // they contain)
     [/\biced\s*tea\b|\blemon\s*tea\b/, "iced tea lemon glass"],
+    [/\bginger\s*tea\b/, "ginger tea cup hot"],
+    [/\bpassion\s*fruit\b/, "passion fruit juice"],
+    [/\bwatermelon\b/, "watermelon juice fresh"],
     [/\bmango\b/, "mango juice fresh fruit"],
     [/\bjuice\b/, "fresh juice glass"],
     [/\bsmoothie\b/, "smoothie glass fruit"],
     [/\btea\b/, "tea cup hot"],
+    [/\bmocha\b/, "mocha coffee chocolate"],
     [/\bcappuccino|espresso|latte\b/, "cappuccino coffee cup"],
     [/\bcoffee\b/, "coffee cup"],
     [/\bsoda\b/, "cold drink glass"],
