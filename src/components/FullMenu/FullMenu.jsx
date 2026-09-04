@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import { apiListCategories, apiListMealOptions } from "../../api";
 import { useAuth } from "../../context/AuthContext";
 import { prefetchFoodImages } from "../../utils/pexelsImages";
@@ -34,7 +35,7 @@ function FullMenu() {
   useEffect(() => {
     if (!isAuthenticated) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
-      setStatus("failed");
+      setStatus("unauthenticated");
       return;
     }
     let cancelled = false;
@@ -157,6 +158,13 @@ function FullMenu() {
       </div>
 
       {status === "loading" && <p>Loading menu...</p>}
+      {status === "unauthenticated" && (
+        <div className="empty-state">
+          <p>
+            <Link to="/login">Log in</Link> to see the menu.
+          </p>
+        </div>
+      )}
       {status === "failed" && (
         <div className="empty-state">
           <p>Could not load the menu. Please try again later.</p>

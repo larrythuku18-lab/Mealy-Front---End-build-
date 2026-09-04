@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Heart, Star } from "lucide-react";
 import { useDailyOptions } from "../../contexts/DailyOptionsContext";
 import { useAuth } from "../../context/AuthContext";
@@ -287,6 +287,11 @@ function DailyMealOptionCard() {
 
       {/* Loading / error / empty states */}
       {status === "loading" && <p>Loading today's menu...</p>}
+      {status === "idle" && (
+        <p>
+          <Link to="/login">Log in</Link> to see today's menu.
+        </p>
+      )}
       {status === "failed" && <p>Could not load today's menu.</p>}
       {status === "succeeded" && dailyOptions.length === 0 && (
         <div className="dmc-empty">
