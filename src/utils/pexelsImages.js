@@ -262,40 +262,57 @@ function extractKeywords(name, description) {
  * Fetch a food image URL from Pexels for the given meal name/description.
  * Returns null if no API key is configured or the request fails.
  */
+// In-flight requests keyed by query, so concurrent callers for the same
+// dish (DailyOptionsContext's prefetch, FullMenu's prefetch, and each
+// card's own useFoodImage hook can all ask for "pasta dish" within the
+// same render pass) share one network request instead of each firing
+// their own — cache.has() alone only dedupes against *completed* fetches.
+const inflightRequests = new Map();
+
 export async function fetchFoodImage(name, description) {
   if (!API_KEY) return null;
 
   const query = extractKeywords(name, description);
 
-  // Return cached result if available
   if (cache.has(query)) {
     return cache.get(query);
   }
 
-  try {
-    const data = await enqueue(() =>
-      fetch(`${PEXELS_BASE}?query=${encodeURIComponent(query)}&per_page=1&orientation=landscape`, {
-        headers: {
-          Authorization: API_KEY,
-        },
-      }).then((res) => {
-        if (!res.ok) throw new Error(`Pexels API ${res.status}`);
-        return res.json();
-      })
-    );
-
-    const photo = data.photos?.[0];
-    if (!photo) return null;
-
-    const url = photo.src?.medium || photo.src?.small || photo.src?.original || null;
-    if (url) {
-      cache.set(query, url);
-      scheduleSave();
-    }
-    return url;
-  } catch {
-    return null;
+  if (inflightRequests.has(query)) {
+    return inflightRequests.get(query);
   }
+
+  const promise = (async () => {
+    try {
+      const data = await enqueue(() =>
+        fetch(`${PEXELS_BASE}?query=${encodeURIComponent(query)}&per_page=1&orientation=landscape`, {
+          headers: {
+            Authorization: API_KEY,
+          },
+        }).then((res) => {
+          if (!res.ok) throw new Error(`Pexels API ${res.status}`);
+          return res.json();
+        })
+      );
+
+      const photo = data.photos?.[0];
+      if (!photo) return null;
+
+      const url = photo.src?.medium || photo.src?.small || photo.src?.original || null;
+      if (url) {
+        cache.set(query, url);
+        scheduleSave();
+      }
+      return url;
+    } catch {
+      return null;
+    } finally {
+      inflightRequests.delete(query);
+    }
+  })();
+
+  inflightRequests.set(query, promise);
+  return promise;
 }
 
 // ── Batch Prefetch ─────────────────────────────────────────────────────────
