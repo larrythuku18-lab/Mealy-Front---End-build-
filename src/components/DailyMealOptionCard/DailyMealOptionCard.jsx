@@ -237,6 +237,7 @@ function DailyMealOptionCard() {
       await placeOrder(selections);
       setSelections({});
       setCartOpen(false);
+      showToast("Order placed successfully!", "success");
       // lastOrder will be set by context — the confirmation screen renders via `lastOrder`
     } catch (err) {
       showToast(err.message, "error");
@@ -257,6 +258,13 @@ function DailyMealOptionCard() {
   if (lastOrder) {
     return (
       <section className="daily-options">
+        {toast && (
+          <Toast
+            message={toast.message}
+            type={toast.type}
+            onClose={() => setToast(null)}
+          />
+        )}
         <OrderConfirmation
           order={lastOrder}
           onContinue={() => {
