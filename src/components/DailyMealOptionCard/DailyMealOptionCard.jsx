@@ -4,6 +4,7 @@ import { Star } from "lucide-react";
 import { useDailyOptions } from "../../contexts/DailyOptionsContext";
 import { useAuth } from "../../context/AuthContext";
 import ReviewsModal from "../ReviewsModal/ReviewsModal";
+import FoodIllustration from "../ui/FoodIllustration";
 import "./DailyMealOptionCard.css";
 
 /* ─── Toast ─────────────────────────────────────────────────────────────────── */
@@ -305,7 +306,11 @@ function DailyMealOptionCard() {
                 {option.image ? (
                   <img src={option.image} alt={option.name} />
                 ) : (
-                  <div className="dmc-card-image-placeholder" />
+                  <FoodIllustration
+                    name={option.name}
+                    description={option.description}
+                    className="dmc-card-image-placeholder"
+                  />
                 )}
               </div>
               <div className="dmc-card-body">

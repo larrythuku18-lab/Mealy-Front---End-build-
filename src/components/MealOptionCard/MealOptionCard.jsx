@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useFavorites } from "../../context/FavoritesContext";
 import ReviewsModal from "../ReviewsModal/ReviewsModal";
 import MealRating from "../MealRating/MealRating";
+import FoodIllustration from "../ui/FoodIllustration";
 
 function MealOptionCard({ option, qty, setSelections }) {
   const { isFavorite, toggleFavorite } = useFavorites();
@@ -58,7 +59,11 @@ function MealOptionCard({ option, qty, setSelections }) {
         {option.image ? (
           <img src={option.image} alt={option.name} />
         ) : (
-          <div className="daily-option-image-placeholder" />
+          <FoodIllustration
+            name={option.name}
+            description={option.description}
+            className="daily-option-image-placeholder"
+          />
         )}
       </div>
       <div className="daily-option-body">

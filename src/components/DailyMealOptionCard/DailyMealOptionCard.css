@@ -64,6 +64,10 @@
   background: linear-gradient(135deg, var(--color-surface-muted), var(--color-surface-hover));
 }
 
+.dmc-card-image .food-illustration {
+  display: block;
+}
+
 .dmc-card-body {
   padding: 14px 16px;
   display: flex;

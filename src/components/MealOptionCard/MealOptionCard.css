@@ -66,6 +66,11 @@
   background: linear-gradient(135deg, var(--color-surface-muted), var(--color-surface-hover));
 }
 
+.daily-option-image .food-illustration {
+  display: block;
+  border-radius: inherit;
+}
+
 .daily-option-body {
   padding: 12px;
   display: flex;
