@@ -192,6 +192,19 @@ export async function apiGetReviews(mealOptionId) {
   return request(`/reviews/${mealOptionId}`);
 }
 
+// ─── Payments (M-Pesa) ───────────────────────────────────────────────────────
+
+export async function apiInitiateSTKPush({ orderId, phoneNumber }) {
+  return request("/payments/stk-push", {
+    method: "POST",
+    body: JSON.stringify({ order_id: orderId, phone_number: phoneNumber }),
+  });
+}
+
+export async function apiGetPaymentStatus(paymentId) {
+  return request(`/payments/${paymentId}`);
+}
+
 // ─── Categories ──────────────────────────────────────────────────────────────
 
 export async function apiListCategories() {

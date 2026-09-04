@@ -6,6 +6,7 @@ import { useAuth } from "../../context/AuthContext";
 import { useFavorites } from "../../context/FavoritesContext";
 import ReviewsModal from "../ReviewsModal/ReviewsModal";
 import FoodIllustration from "../ui/FoodIllustration";
+import MpesaPayment from "../MpesaPayment/MpesaPayment";
 import "./DailyMealOptionCard.css";
 
 /* ─── Toast ─────────────────────────────────────────────────────────────────── */
@@ -152,6 +153,11 @@ function OrderConfirmation({ order, onContinue, onRate }) {
           Your caterer will start preparing shortly.
         </span>
       </div>
+
+      <MpesaPayment
+        orderId={parseInt(String(order.id).replace(/\D/g, ""), 10)}
+        amount={order.total || 0}
+      />
 
       <button className="order-confirm__btn" onClick={onContinue}>
         Continue Ordering

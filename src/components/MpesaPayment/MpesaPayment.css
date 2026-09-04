@@ -1,0 +1,125 @@
+.mpesa-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #16a34a;
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.mpesa-trigger:hover {
+  background: #15803d;
+}
+
+.mpesa-panel {
+  width: 100%;
+  max-width: 360px;
+  margin: 8px auto 0;
+  padding: 16px;
+  background: var(--color-surface-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mpesa-panel--status {
+  align-items: center;
+  text-align: center;
+  padding: 24px 16px;
+}
+
+.mpesa-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.mpesa-input {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  padding: 10px 16px;
+  font-size: 14px;
+  color: var(--color-text);
+  background: var(--color-surface);
+}
+
+.mpesa-error {
+  font-size: 13px;
+  color: #dc2626;
+  margin: 0;
+}
+
+.mpesa-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #16a34a;
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.mpesa-submit:hover:not(:disabled) {
+  background: #15803d;
+}
+
+.mpesa-submit:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.mpesa-status-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.mpesa-status-text {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.mpesa-icon--success {
+  color: #16a34a;
+}
+
+.mpesa-icon--failed {
+  color: #dc2626;
+}
+
+.mpesa-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: mpesa-spin 0.7s linear infinite;
+}
+
+.mpesa-spinner--lg {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--color-surface-hover);
+  border-top-color: #16a34a;
+}
+
+@keyframes mpesa-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
