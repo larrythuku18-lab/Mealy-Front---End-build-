@@ -1,6 +1,7 @@
 import Navbar from "../components/Navbar/Navbar";
 import { Heart } from "lucide-react";
 import { useFavorites } from "../context/FavoritesContext";
+import FoodIllustration from "../components/ui/FoodIllustration";
 import "./Favorites.css";
 
 function Favorites() {
@@ -27,9 +28,11 @@ function Favorites() {
                       className="favorite-card-img"
                     />
                   ) : (
-                    <div className="favorite-card-img favorite-card-img--placeholder">
-                      {meal.name?.charAt(0) || "?"}
-                    </div>
+                    <FoodIllustration
+                      name={meal.name}
+                      description={meal.description}
+                      className="favorite-card-img"
+                    />
                   )}
                   <div className="favorite-card-info">
                     <div className="favorite-card-text">

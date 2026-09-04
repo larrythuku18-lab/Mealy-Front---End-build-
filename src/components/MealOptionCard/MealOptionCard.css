@@ -51,7 +51,9 @@
 }
 
 .favorite-toggle--hidden {
-  opacity: 0;
+  /* Not fully hidden: opacity 0 would make it invisible (but still
+     tappable) on touch devices, which have no hover state to reveal it. */
+  opacity: 0.55;
 }
 
 .daily-option-image img {

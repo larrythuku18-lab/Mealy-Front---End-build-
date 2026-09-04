@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Star } from "lucide-react";
+import { Heart, Star } from "lucide-react";
 import { useDailyOptions } from "../../contexts/DailyOptionsContext";
 import { useAuth } from "../../context/AuthContext";
+import { useFavorites } from "../../context/FavoritesContext";
 import ReviewsModal from "../ReviewsModal/ReviewsModal";
 import FoodIllustration from "../ui/FoodIllustration";
 import "./DailyMealOptionCard.css";
@@ -182,6 +183,7 @@ function DailyMealOptionCard() {
     clearLastOrder,
   } = useDailyOptions();
   const { isAuthenticated } = useAuth();
+  const { isFavorite, toggleFavorite } = useFavorites();
 
   const [selections, setSelections] = useState({});
   const [cartOpen, setCartOpen] = useState(false);
@@ -297,12 +299,29 @@ function DailyMealOptionCard() {
       <div className="dmc-grid">
         {dailyOptions.map((option) => {
           const qty = selections[option.id] || 0;
+          const favorited = isFavorite(option.id);
           return (
             <article
               key={option.id}
               className={`dmc-card ${qty > 0 ? "dmc-card--selected" : ""}`}
             >
               <div className="dmc-card-image">
+                <button
+                  type="button"
+                  aria-label={favorited ? "Remove from favorites" : "Add to favorites"}
+                  title={favorited ? "Remove from favorites" : "Add to favorites"}
+                  className="dmc-favorite-toggle"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleFavorite(option);
+                  }}
+                >
+                  <Heart
+                    size={18}
+                    color={favorited ? "#ef4444" : "white"}
+                    fill={favorited ? "#ef4444" : "none"}
+                  />
+                </button>
                 {option.image ? (
                   <img src={option.image} alt={option.name} />
                 ) : (

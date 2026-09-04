@@ -47,17 +47,6 @@
   object-fit: cover;
 }
 
-.favorite-card-img--placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--color-surface-muted);
-  color: var(--color-text-placeholder);
-  font-size: 56px;
-  font-weight: 800;
-  text-transform: uppercase;
-}
-
 .favorite-card-info {
   padding: 14px 16px;
   display: flex;
