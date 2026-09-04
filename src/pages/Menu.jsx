@@ -1,5 +1,6 @@
 import Navbar from "../components/Navbar/Navbar";
 import DailyMealOptionCard from "../components/DailyMealOptionCard/DailyMealOptionCard";
+import DishSlideshow from "../components/DishSlideshow/DishSlideshow";
 import "./Menu.css";
 import FullMenu from "../components/FullMenu/FullMenu";
 
@@ -16,6 +17,7 @@ function Menu() {
     <div className="page">
       <Navbar />
       <main className="menu-main">
+        <DishSlideshow />
         <div className="menu-header">
           <span className="eyebrow">Today's Selection</span>
           <h1>{dateStr}</h1>
