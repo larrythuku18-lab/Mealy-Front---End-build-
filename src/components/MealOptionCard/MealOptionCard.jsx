@@ -7,30 +7,11 @@ import ReviewsModal from "../ReviewsModal/ReviewsModal";
 import MealRating from "../MealRating/MealRating";
 import FoodIllustration from "../ui/FoodIllustration";
 
-function MealOptionCard({ option, qty, setSelections }) {
+function MealOptionCard({ option, qty, onAdd, onDecrease }) {
   const { isFavorite, toggleFavorite } = useFavorites();
   const [isHovered, setIsHovered] = useState(false);
   const [showReviews, setShowReviews] = useState(false);
   const favorited = isFavorite(option.id);
-  const handleAdd = (optionId) => {
-    setSelections((prev) => ({
-      ...prev,
-      [optionId]: (prev[optionId] || 0) + 1,
-    }));
-  };
-
-  const handleDecrease = (optionId) => {
-    setSelections((prev) => {
-      const current = prev[optionId] || 0;
-      if (current <= 1) {
-
-        // eslint-disable-next-line no-unused-vars
-        const { [optionId]: _, ...rest } = prev;
-        return rest;
-      }
-      return { ...prev, [optionId]: current - 1 };
-    });
-  };
 
   return (
     <article
@@ -92,7 +73,7 @@ function MealOptionCard({ option, qty, setSelections }) {
             type="button"
             title="Add meal button"
             variant="tertiary"
-            onClick={() => handleAdd(option.id)}
+            onClick={() => onAdd(option)}
           >
             Add Meal
           </Btn>
@@ -101,7 +82,7 @@ function MealOptionCard({ option, qty, setSelections }) {
             <button
               type="button"
               aria-label="Decrease quantity"
-              onClick={() => handleDecrease(option.id)}
+              onClick={() => onDecrease(option.id)}
             >
               −
             </button>
@@ -109,7 +90,7 @@ function MealOptionCard({ option, qty, setSelections }) {
             <button
               type="button"
               aria-label="Increase quantity"
-              onClick={() => handleAdd(option.id)}
+              onClick={() => onAdd(option)}
             >
               +
             </button>

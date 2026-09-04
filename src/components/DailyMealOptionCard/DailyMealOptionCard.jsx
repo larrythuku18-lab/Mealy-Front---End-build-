@@ -21,20 +21,8 @@ function Toast({ message, type, onClose }) {
 }
 
 /* ─── Cart Review Modal ─────────────────────────────────────────────────────── */
-function CartModal({
-  selections,
-  dailyOptions,
-  onConfirm,
-  onClearSelection,
-  onClose,
-  isPlacing,
-}) {
-  const items = Object.entries(selections)
-    .map(([id, qty]) => {
-      const option = dailyOptions.find((o) => o.id === Number(id));
-      return option ? { ...option, quantity: qty } : null;
-    })
-    .filter(Boolean);
+function CartModal({ cart, onConfirm, onClearSelection, onClose, isPlacing }) {
+  const items = Object.values(cart);
 
   const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
@@ -178,6 +166,10 @@ function DailyMealOptionCard() {
   const {
     options: dailyOptions,
     status,
+    cart,
+    addToCart,
+    decrementCartItem,
+    clearCart,
     placeOrder,
     lastOrder,
     clearLastOrder,
@@ -185,7 +177,6 @@ function DailyMealOptionCard() {
   const { isAuthenticated } = useAuth();
   const { isFavorite, toggleFavorite } = useFavorites();
 
-  const [selections, setSelections] = useState({});
   const [cartOpen, setCartOpen] = useState(false);
   const [isPlacing, setIsPlacing] = useState(false);
   const [toast, setToast] = useState(null);
@@ -196,28 +187,8 @@ function DailyMealOptionCard() {
     setTimeout(() => setToast(null), 4000);
   };
 
-  /* ── Quantity controls ─────────────────────────────────────────────────── */
-  const handleAdd = (optionId) => {
-    setSelections((prev) => ({
-      ...prev,
-      [optionId]: (prev[optionId] || 0) + 1,
-    }));
-  };
-
-  const handleDecrease = (optionId) => {
-    setSelections((prev) => {
-      const current = prev[optionId] || 0;
-      if (current <= 1) {
-        // eslint-disable-next-line no-unused-vars
-        const { [optionId]: _, ...rest } = prev;
-        return rest;
-      }
-      return { ...prev, [optionId]: current - 1 };
-    });
-  };
-
   const handleClearSelection = () => {
-    setSelections({});
+    clearCart();
     setCartOpen(false);
   };
 
@@ -234,8 +205,7 @@ function DailyMealOptionCard() {
   const handleConfirmOrder = async () => {
     setIsPlacing(true);
     try {
-      await placeOrder(selections);
-      setSelections({});
+      await placeOrder();
       setCartOpen(false);
       showToast("Order placed successfully!", "success");
       // lastOrder will be set by context — the confirmation screen renders via `lastOrder`
@@ -247,10 +217,12 @@ function DailyMealOptionCard() {
   };
 
   /* ── Derived values ────────────────────────────────────────────────────── */
-  const selectedCount = Object.values(selections).reduce((a, b) => a + b, 0);
-  const selectedTotal = dailyOptions
-    .filter((o) => selections[o.id])
-    .reduce((sum, o) => sum + o.price * selections[o.id], 0);
+  const cartItems = Object.values(cart);
+  const selectedCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  const selectedTotal = cartItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
 
   /* ── Render ────────────────────────────────────────────────────────────── */
 
@@ -311,7 +283,7 @@ function DailyMealOptionCard() {
       {dailyOptions.length > 0 && (
       <div className="dmc-grid">
         {dailyOptions.map((option) => {
-          const qty = selections[option.id] || 0;
+          const qty = cart[option.id]?.quantity || 0;
           const favorited = isFavorite(option.id);
           return (
             <article
@@ -357,7 +329,7 @@ function DailyMealOptionCard() {
                   <button
                     type="button"
                     className="dmc-add-btn"
-                    onClick={() => handleAdd(option.id)}
+                    onClick={() => addToCart(option)}
                   >
                     Add Meal
                   </button>
@@ -366,7 +338,7 @@ function DailyMealOptionCard() {
                     <button
                       type="button"
                       aria-label="Decrease quantity"
-                      onClick={() => handleDecrease(option.id)}
+                      onClick={() => decrementCartItem(option.id)}
                     >
                       −
                     </button>
@@ -374,7 +346,7 @@ function DailyMealOptionCard() {
                     <button
                       type="button"
                       aria-label="Increase quantity"
-                      onClick={() => handleAdd(option.id)}
+                      onClick={() => addToCart(option)}
                     >
                       +
                     </button>
@@ -443,8 +415,7 @@ function DailyMealOptionCard() {
       {/* Cart review modal */}
       {cartOpen && (
         <CartModal
-          selections={selections}
-          dailyOptions={dailyOptions}
+          cart={cart}
           onConfirm={handleConfirmOrder}
           onClearSelection={handleClearSelection}
           onClose={() => setCartOpen(false)}

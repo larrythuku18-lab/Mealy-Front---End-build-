@@ -22,6 +22,13 @@ export function DailyOptionsProvider({ children }) {
   const [error, setError] = useState(null);
   const [lastOrder, setLastOrder] = useState(null);
 
+  // Shared cart for both the Today's Selection and Full Menu sections, so
+  // items picked from either combine into one order. Keyed by meal option
+  // id; each entry carries the meal's own details (not just an id) so the
+  // cart/checkout UI can display Full Menu items too, which aren't part of
+  // `options` above (that list is scoped to today's published subset).
+  const [cart, setCart] = useState({});
+
   /** Fetch today's published menu and resolve full meal option details. */
   const fetchDailyOptions = useCallback(async () => {
     setStatus("loading");
@@ -48,27 +55,66 @@ export function DailyOptionsProvider({ children }) {
     }
   }, []);
 
-  /** Place an order and return the created order object. */
-  const placeOrder = async (selections) => {
-    const mealOptionIds = Object.keys(selections).map(Number);
-    const quantities = mealOptionIds.map((id) => selections[id]);
+  /** Add one of a meal option to the cart (or increment if already there). */
+  const addToCart = useCallback((option) => {
+    setCart((prev) => {
+      const existing = prev[option.id];
+      return {
+        ...prev,
+        [option.id]: {
+          id: option.id,
+          name: option.name,
+          price: option.price,
+          image: option.image,
+          description: option.description,
+          quantity: (existing?.quantity || 0) + 1,
+        },
+      };
+    });
+  }, []);
+
+  /** Decrement a cart entry's quantity, removing it once it reaches zero. */
+  const decrementCartItem = useCallback((mealOptionId) => {
+    setCart((prev) => {
+      const existing = prev[mealOptionId];
+      if (!existing) return prev;
+      if (existing.quantity <= 1) {
+        // eslint-disable-next-line no-unused-vars
+        const { [mealOptionId]: _, ...rest } = prev;
+        return rest;
+      }
+      return {
+        ...prev,
+        [mealOptionId]: { ...existing, quantity: existing.quantity - 1 },
+      };
+    });
+  }, []);
+
+  /** Empty the cart (e.g. the customer clears it before checking out). */
+  const clearCart = useCallback(() => setCart({}), []);
+
+  /** Place an order from the current cart and return the created order. */
+  const placeOrder = async () => {
+    const mealOptionIds = Object.keys(cart).map(Number);
+    const quantities = mealOptionIds.map((id) => cart[id].quantity);
 
     const data = await apiCreateOrder({ mealOptionIds, quantities });
     const order = data.order;
 
     // Attach resolved meal names/quantities to the order for the confirmation screen
-    const items = mealOptionIds.map((id, i) => {
-      const option = options.find((o) => o.id === id);
+    const items = mealOptionIds.map((id) => {
+      const item = cart[id];
       return {
         id,
-        name: option?.name || `Meal #${id}`,
-        price: option?.price || 0,
-        quantity: quantities[i],
+        name: item?.name || `Meal #${id}`,
+        price: item?.price || 0,
+        quantity: item?.quantity || 0,
       };
     });
 
     const enrichedOrder = { ...order, items };
     setLastOrder(enrichedOrder);
+    setCart({});
     return enrichedOrder;
   };
 
@@ -96,7 +142,11 @@ export function DailyOptionsProvider({ children }) {
     status,
     error,
     lastOrder,
+    cart,
     fetchDailyOptions,
+    addToCart,
+    decrementCartItem,
+    clearCart,
     placeOrder,
     clearLastOrder,
   };

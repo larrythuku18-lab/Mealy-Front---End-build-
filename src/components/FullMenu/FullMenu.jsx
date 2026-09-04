@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { apiListCategories, apiListMealOptions } from "../../api";
 import { useAuth } from "../../context/AuthContext";
+import { useDailyOptions } from "../../contexts/DailyOptionsContext";
 import { prefetchFoodImages } from "../../utils/pexelsImages";
 import "./FullMenu.css";
 import MealOptionCard from "../MealOptionCard/MealOptionCard";
@@ -18,8 +19,8 @@ function toCategoryList(option) {
 
 function FullMenu() {
   const { isAuthenticated } = useAuth();
+  const { cart, addToCart, decrementCartItem } = useDailyOptions();
   const [activeCategory, setActiveCategory] = useState("All");
-  const [selections, setSelections] = useState({});
   const [meals, setMeals] = useState([]);
   const [categories, setCategories] = useState([]);
   const [status, setStatus] = useState("loading");
@@ -184,8 +185,9 @@ function FullMenu() {
                 <MealOptionCard
                   key={meal.id}
                   option={meal}
-                  qty={selections[meal.id] || 0}
-                  setSelections={setSelections}
+                  qty={cart[meal.id]?.quantity || 0}
+                  onAdd={addToCart}
+                  onDecrease={decrementCartItem}
                 />
               ))}
             </div>
