@@ -92,6 +92,10 @@ function enqueue(fn) {
 function extractKeywords(name, description) {
   const text = `${name || ""} ${description || ""}`.toLowerCase();
 
+  // Ordered from most to least specific, since the first match wins —
+  // a compound dish (e.g. "Grilled Chicken Pasta", "Chicken Wrap") needs
+  // its actual dish/carb type checked before a generic single-ingredient
+  // pattern like "chicken" swallows it and returns a plain-chicken photo.
   const keywordMap = [
     // Kenyan staples
     [/\bugali\b/, "ugali african food"],
@@ -111,12 +115,50 @@ function extractKeywords(name, description) {
     [/\bsamosa\b/, "samosa fried pastry"],
     [/\bmahamri\b/, "mahamri swahili doughnut"],
 
-    // Rice dishes
+    // Breakfast dishes (checked before generic "egg"/protein matches)
+    [/\bpancake/, "pancakes stack maple syrup"],
+    [/\bwaffle\b/, "waffles breakfast"],
+    [/\bavocado\s*toast\b/, "avocado toast breakfast"],
+    [/\btoast\b/, "toast breakfast plate"],
+    [/\bomelette|omelet\b/, "omelette eggs breakfast"],
+    [/\bscrambled\s*egg/, "scrambled eggs breakfast"],
+    [/\begg(s)?\b/, "eggs breakfast plate"],
+    [/\bgranola\b/, "granola bowl breakfast"],
+    [/\bporridge\b/, "porridge oats bowl"],
+
+    // Handheld / assembled dishes (checked before generic protein matches)
+    [/\bwrap\b/, "wrap sandwich food"],
+    [/\bsandwich\b/, "sandwich food"],
+    [/\bburger\b/, "burger food"],
+    [/\bpizza\b/, "pizza food"],
+    [/\bsushi\b/, "sushi food"],
+    [/\btaco\b/, "taco food"],
+    [/\bburrito\b/, "burrito food"],
+
+    // Carbs (checked before generic protein matches, so e.g. a chicken
+    // pasta dish matches "pasta" rather than just "chicken")
     [/\bjollof\b/, "jollof rice"],
     [/\bplain\s*rice\b/, "white rice plate"],
     [/\bfried\s*rice\b/, "fried rice asian"],
+    [/\bpasta\b/, "pasta dish"],
+    [/\bspaghetti\b/, "spaghetti pasta"],
+    [/\bnoodle\b/, "noodles bowl"],
+    [/\bmacaroni\b/, "macaroni pasta"],
+    [/\b(bread|roti|naan)\b/, "flatbread bread"],
 
-    // Meat dishes
+    // Prepared savoury dishes (also before generic protein matches)
+    [/\bsoup\b/, "soup bowl hot"],
+    [/\bstew\b/, "stew bowl"],
+    [/\bcurry\b/, "curry bowl"],
+    [/\bbroth\b/, "broth soup"],
+    [/\bmashed\b/, "mashed food"],
+    [/\bsalad\b/, "fresh salad bowl"],
+    [/\bkachumbari\b/, "tomato onion salad african"],
+
+    // Generic proteins — checked last among savoury dishes, since these
+    // are the most generic and would otherwise swallow more specific
+    // matches above (a "chicken wrap" or "chicken pasta" isn't just
+    // "chicken")
     [/\b(beef|nyama)\b/, "beef meat dish"],
     [/\b(chicken|kuku|murgi)\b/, "chicken dish food"],
     [/\bgoat\b/, "goat meat grilled"],
@@ -135,38 +177,25 @@ function extractKeywords(name, description) {
     [/\btilapia\b/, "tilapia fish"],
     [/\bprawn|shrimp\b/, "prawn shrimp dish"],
 
-    // Soups & stews
-    [/\bsoup\b/, "soup bowl hot"],
-    [/\bstew\b/, "stew bowl"],
-    [/\bcurry\b/, "curry bowl"],
-    [/\bbroth\b/, "broth soup"],
-    [/\bmashed\b/, "mashed food"],
-
     // Vegetables
     [/\bvegetable\b/, "vegetable dish plate"],
     [/\b(spinach|managu)\b/, "spinach greens plate"],
     [/\bcabbage\b/, "cabbage dish"],
     [/\bbroccoli\b/, "broccoli dish"],
     [/\bcarrot\b/, "carrots vegetable"],
-    [/\bsalad\b/, "fresh salad bowl"],
-    [/\bkachumbari\b/, "tomato onion salad african"],
 
-    // Bread & carbs
-    [/\b(bread|roti|naan)\b/, "flatbread bread"],
-    [/\bpasta\b/, "pasta dish"],
-    [/\bspaghetti\b/, "spaghetti pasta"],
-    [/\bnoodle\b/, "noodles bowl"],
-    [/\bmacaroni\b/, "macaroni pasta"],
-
-    // Drinks
+    // Drinks (specific combos before the generic "tea"/"juice" they contain)
+    [/\biced\s*tea\b|\blemon\s*tea\b/, "iced tea lemon glass"],
     [/\bjuice\b/, "fresh juice glass"],
-    [/\bsmoothie\b/, "smoothie glass"],
+    [/\bsmoothie\b/, "smoothie glass fruit"],
     [/\btea\b/, "tea cup hot"],
     [/\bcoffee\b/, "coffee cup"],
     [/\bsoda\b/, "cold drink glass"],
     [/\blassi\b/, "lassi yogurt drink"],
 
     // Desserts & sweets
+    [/\benergy\s*bites?\b|\benergy\s*balls?\b/, "energy balls healthy snack"],
+    [/\bgranola\s*bar/, "granola bar snack"],
     [/\bcake\b/, "cake dessert"],
     [/\bpie\b/, "pie dessert"],
     [/\bpastry\b/, "pastry dessert"],
