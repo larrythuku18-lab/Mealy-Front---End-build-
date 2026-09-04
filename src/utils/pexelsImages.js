@@ -116,6 +116,7 @@ function extractKeywords(name, description) {
     [/\bmahamri\b/, "mahamri swahili doughnut"],
 
     // Breakfast dishes (checked before generic "egg"/protein matches)
+    [/\bfrench\s*toast\b/, "french toast syrup breakfast"],
     [/\bpancake/, "pancakes stack maple syrup"],
     [/\bwaffle\b/, "waffles breakfast"],
     [/\bavocado\s*toast\b/, "avocado toast breakfast"],
@@ -125,14 +126,20 @@ function extractKeywords(name, description) {
     [/\begg(s)?\b/, "eggs breakfast plate"],
     [/\bgranola\b/, "granola bowl breakfast"],
     [/\bporridge\b/, "porridge oats bowl"],
+    [/\byogurt\s*parfait\b|\bparfait\b/, "yogurt parfait berries breakfast"],
 
     // Handheld / assembled dishes (checked before generic protein matches)
+    [/\bnachos?\b/, "nachos snack food"],
     [/\bwrap\b/, "wrap sandwich food"],
+    [/\bclub\s*sandwich\b/, "club sandwich food"],
     [/\bsandwich\b/, "sandwich food"],
     [/\bburger\b/, "burger food"],
+    [/\bmargherita\b/, "margherita pizza food"],
     [/\bpizza\b/, "pizza food"],
     [/\bsushi\b/, "sushi food"],
     [/\btaco\b/, "taco food"],
+    [/\bhummus\b/, "hummus pita food"],
+    [/\bstir[\s-]?fry\b/, "stir fry vegetables food"],
     [/\bburrito\b/, "burrito food"],
 
     // Carbs (checked before generic protein matches, so e.g. a chicken
@@ -184,11 +191,14 @@ function extractKeywords(name, description) {
     [/\bbroccoli\b/, "broccoli dish"],
     [/\bcarrot\b/, "carrots vegetable"],
 
-    // Drinks (specific combos before the generic "tea"/"juice" they contain)
+    // Drinks (specific combos before the generic "tea"/"juice"/"coffee"
+    // they contain)
     [/\biced\s*tea\b|\blemon\s*tea\b/, "iced tea lemon glass"],
+    [/\bmango\b/, "mango juice fresh fruit"],
     [/\bjuice\b/, "fresh juice glass"],
     [/\bsmoothie\b/, "smoothie glass fruit"],
     [/\btea\b/, "tea cup hot"],
+    [/\bcappuccino|espresso|latte\b/, "cappuccino coffee cup"],
     [/\bcoffee\b/, "coffee cup"],
     [/\bsoda\b/, "cold drink glass"],
     [/\blassi\b/, "lassi yogurt drink"],
